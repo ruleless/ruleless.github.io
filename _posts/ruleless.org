@@ -1,0 +1,981 @@
+* Schedule
+
+** Schedule For Job
+
+*** 2016/01
+
+**** DONE <2016-01-04 周一> [100%]
+	 CLOSED: [2016-01-10 周日 09:51]
+	 - State "DONE"       from "TODO"       [2016-01-10 周日 09:51]
+***** DONE 挖矿经常出现冷却中，有的时候挖矿会没有动作，所以需要向自动挂机一样，
+	  做一个标识
+	  CLOSED: [2016-01-05 周二 17:18]
+	  - State "DONE"       from "TODO"       [2016-01-05 周二 17:18]
+***** DONE 微客户端模式下法师火墙特效无法显示
+	  CLOSED: [2016-01-04 周一 16:10]
+	  - State "DONE"       from "TODO"       [2016-01-04 周一 16:10]
+
+**** DONE <2016-01-11 周一> [100%]
+	 CLOSED: [2016-01-17 周日 14:09]
+	 - State "DONE"       from "TODO"       [2016-01-17 周日 14:09]
+***** DONE 使用一个单例后台进程管理（或称代理）所有本机微客户端的资源下载
+	  CLOSED: [2016-01-17 周日 14:09]
+	  - State "DONE"       from "PROCESSING" [2016-01-17 周日 14:09]
+	  - State "PROCESSING" from "TODO"       [2016-01-11 周一 10:04]
+
+**** DONE <2016-01-18 周一> [100%]
+	 CLOSED: [2016-01-24 周日 17:16]
+	 - State "DONE"       from "TODO"       [2016-01-24 周日 17:16]
+***** DONE 后台进程在空闲时根据资源列表下载所有资源
+	  CLOSED: [2016-01-21 周四 17:22]
+	  - State "DONE"       from "DONE"       [2016-01-24 周日 17:16]
+***** DONE 微客户端下载提示
+	  CLOSED: [2016-01-20 周三 09:41]
+	  - State "DONE"       from "TODO"       [2016-01-20 周三 09:41]
+
+**** DONE <2016-01-25 周一> [100%]
+	 CLOSED: [2016-02-01 周一 09:55]
+	 - State "DONE"       from "TODO"       [2016-02-01 周一 09:55]
+***** DONE 广播角色进入消息时也将其朝向信息同步下去
+	  CLOSED: [2016-01-25 周一 14:41]
+	  - State "DONE"       from "DONE"       [2016-02-01 周一 09:55]
+***** DONE 设定焦点目标
+	  CLOSED: [2016-01-27 周三 17:29]
+	  - State "DONE"       from "TODO"       [2016-01-27 周三 17:29]
+
+*** 2016/02
+
+**** DONE <2016-02-01 周一> [100%]
+	 CLOSED: [2016-02-03 周三 12:12]
+	 - State "DONE"       from "TODO"       [2016-02-03 周三 12:12]
+***** DONE 生死考验奖励：鼠标第一次移至奖励图标，tips没有置顶，被大窗口覆盖
+	  CLOSED: [2016-02-03 周三 12:12]
+	  - State "DONE"       from "TODO"       [2016-02-03 周三 12:12]
+
+**** DONE <2016-02-19 周五> [100%]
+	 CLOSED: [2016-02-20 周六 16:58]
+	 - State "DONE"       from "TODO"       [2016-02-20 周六 16:58]
+***** DONE 国战竞猜按钮风格不一致
+	  CLOSED: [2016-02-20 周六 16:58]
+	  - State "DONE"       from "TODO"       [2016-02-20 周六 16:58]
+
+**** DONE <2016-02-22 周一> [100%]
+	 CLOSED: [2016-02-28 周日 20:16]
+	 - State "DONE"       from "TODO"       [2016-02-28 周日 20:16]
+***** DONE 通过技能轨迹系统播放死亡击碎特效
+	  CLOSED: [2016-02-24 周三 17:02]
+	  - State "DONE"       from "TODO"       [2016-02-24 周三 17:02]
+***** DONE NPC 头顶喊话窗口抖动
+	  CLOSED: [2016-02-24 周三 17:03]
+	  - State "DONE"       from "TODO"       [2016-02-24 周三 17:03]
+***** DONE 微客户端代理进程通过共享内存方式向微客户端进程通知监听端口
+	  CLOSED: [2016-02-22 周一 17:02]
+	  - State "DONE"       from "TODO"       [2016-02-22 周一 17:02]
+
+*** 2016/03
+
+**** DONE <2016-02-29 周一> [100%]
+	 CLOSED: [2016-03-06 周日 18:26]
+	 - State "DONE"       from "TODO"       [2016-03-06 周日 18:26]
+***** DONE 移植远征寄售系统
+	  CLOSED: [2016-03-06 周日 18:25]
+	  - State "DONE"       from "TODO"       [2016-03-06 周日 18:25]
+
+	  已完成移植，接下来重点调试优化。
+
+**** DONE <2016-03-07 周一> [100%]
+	 CLOSED: [2016-03-14 周一 10:03]
+	 - State "DONE"       from "TODO"       [2016-03-14 周一 10:03]
+***** DONE 寄售系统移植及优化 [3/4]
+	  CLOSED: [2016-03-14 周一 10:03]
+	  - State "DONE"       from "TODO"       [2016-03-14 周一 10:03]
+
+	  * [X] 寄售物品浏览界面重构
+	  * [X] 玩家寄售界面重构
+	  * [ ] 购买对话框重构
+	  * [X] 寄售购买流程梳理
+
+**** DONE <2016-03-14 周一> [100%]
+	 CLOSED: [2016-03-21 周一 10:37]
+	 - State "DONE"       from "TODO"       [2016-03-21 周一 10:37]
+
+***** DONE 寄售系统跟踪优化
+	  CLOSED: [2016-03-21 周一 10:37]
+	  - State "DONE"       from "TODO"       [2016-03-21 周一 10:37]
+
+**** DONE <2016-03-21 周一> [100%]
+	 CLOSED: [2016-03-28 周一 10:20]
+	 - State "DONE"       from "TODO"       [2016-03-28 周一 10:20]
+***** DONE 整理微端多线程
+	  CLOSED: [2016-03-21 周一 18:03]
+	  - State "DONE"       from "TODO"       [2016-03-21 周一 18:03]
+***** DONE 寄售跟进优化
+	  CLOSED: [2016-03-28 周一 10:20]
+	  - State "DONE"       from "TODO"       [2016-03-28 周一 10:20]
+
+*** 2016/04
+
+**** DONE <2016-03-28 周一> [100%]
+	 CLOSED: [2016-04-04 周一 18:53]
+	 - State "DONE"       from "TODO"       [2016-04-04 周一 18:53]
+
+***** DONE 寄售跟进
+	  CLOSED: [2016-04-04 周一 18:52]
+	  - State "DONE"       from "DONE"       [2016-04-04 周一 18:52]
+	  - State "DONE"       from "TODO"       [2016-04-04 周一 18:52]
+***** DONE 微客户端资源下载改用 libcurl 库
+	  CLOSED: [2016-04-04 周一 18:52]
+	  - State "DONE"       from "TODO"       [2016-04-04 周一 18:52]
+
+	  暂且观望
+
+**** TODO <2016-04-04 周一> [0%]
+***** PROCESSING 微客户端代理进程智能限速
+	  - State "PROCESSING" from "TODO"       [2016-04-04 周一 18:53]
+***** TODO 微客户端代理进程宕机时生成转储文件，并可通过邮件获取
+**** TODO 微客户端报错修复
+**** TODO 微客户端后台下载策略优化
+**** TODO 微客户端bug修复 [1/4]
+
+	 1. [x] 通过fileindex.csv推送的下载列表若出错，游戏是否还能正常显示
+		结论：推送的列表出错不会引起逻辑错误，顶多浪费下带宽，报几个错误
+
+	 2. [-] 有些资源不能通过网络异步加载
+		1. [x] 音效资源
+		2. [x] ui纹理资源
+		3. [ ] 场景纹理资源
+
+	 4. [ ] 道士蛊毒咒技能没有特效
+
+*** bug trace
+
+**** todo 边境任务如果最后一轮是偷马任务，完成偷马后任务追踪里头偷马任务不消失。（偶尔）
+
+** schedule for career
+
+*** 2016/01
+
+**** done <2016-01-04 周一> [100%]
+	 closed: [2016-01-10 周日 09:52]
+	 - state "done"       from "todo"       [2016-01-10 周日 09:52]
+***** done 读：《tcp/ip协议详解》
+	  closed: [2016-01-10 周日 09:52]
+	  - state "done"       from "todo"       [2016-01-10 周日 09:52]
+	  * 广播与多播
+	  * igmp组管理协议
+
+**** done <2016-01-11 周一> [100%]
+	 closed: [2016-01-18 周一 10:39]
+	 - state "done"       from "todo"       [2016-01-18 周一 10:39]
+***** done 利用 sigar 收集和显示系统信息
+	  closed: [2016-01-18 周一 10:38]
+	  - state "done"       from "processing" [2016-01-18 周一 10:38]
+	  - state "processing" from "todo"       [2016-01-11 周一 10:14]
+	  - cpu命令
+	  - mem命令
+	  - update命令
+***** done 应用程序主循环设计
+	  closed: [2016-01-14 周四 16:06]
+	  - state "done"       from "todo"       [2016-01-14 周四 16:06]
+***** done c++使用继承时子对象的内存布局
+	  closed: [2016-01-12 周二 22:53]
+	  - state "done"       from "todo"       [2016-01-12 周二 22:53]
+***** done snail跨平台编译
+	  closed: [2016-01-17 周日 14:11]
+	  - state "done"       from "todo"       [2016-01-17 周日 14:11]
+***** done snail新增trace支持
+	  closed: [2016-01-17 周日 14:11]
+	  - state "done"       from "todo"       [2016-01-17 周日 14:11]
+
+**** done <2016-01-18 周一> [100%]
+	 closed: [2016-01-25 周一 10:34]
+	 - state "done"       from "todo"       [2016-01-25 周一 10:34]
+***** done tcp 连接的建立和终止
+	  closed: [2016-01-18 周一 22:55]
+	  - state "done"       from "done"       [2016-01-25 周一 10:34]
+***** done tcp 交互数据流
+	  closed: [2016-01-21 周四 18:30]
+	  - state "done"       from "todo"       [2016-01-21 周四 18:30]
+***** done tcp 成块数据流
+	  closed: [2016-01-21 周四 18:30]
+	  - state "done"       from "todo"       [2016-01-21 周四 18:30]
+***** done tcp 的超时和重传机制
+	  closed: [2016-01-24 周日 17:17]
+	  - state "done"       from "todo"       [2016-01-24 周日 17:17]
+
+**** done <2016-01-25 周一> [100%]
+	 closed: [2016-02-01 周一 09:57]
+	 - state "done"       from "todo"       [2016-02-01 周一 09:57]
+***** done 实现基于共享内存的主从式消息订阅/发布模型
+	  closed: [2016-02-01 周一 09:56]
+	  - state "done"       from "todo"       [2016-02-01 周一 09:56]
+***** done tcp 坚持定时器
+	  closed: [2016-01-26 周二 10:53]
+	  - state "done"       from "done"       [2016-02-01 周一 09:57]
+***** done tcp 保活定时器(keep alive)
+	  closed: [2016-01-26 周二 10:53]
+	  - state "done"       from "todo"       [2016-01-26 周二 10:53]
+
+*** 2016/02
+
+**** done <2016-02-01 周一> [100%]
+	 closed: [2016-02-19 周五 09:38]
+	 - state "done"       from "todo"       [2016-02-19 周五 09:38]
+***** done 调整和改善centos配置的makefile
+	  closed: [2016-02-02 周二 15:58]
+	  - state "done"       from "todo"       [2016-02-02 周二 15:58]
+***** done linux 基本命令总结
+	  closed: [2016-02-02 周二 15:41]
+	  - state "done"       from "todo"       [2016-02-02 周二 15:41]
+***** done centos 7 systemd服务简介
+	  closed: [2016-02-19 周五 09:37]
+	  - state "done"       from "todo"       [2016-02-19 周五 09:37]
+
+**** done <2016-02-19 周五> [100%]
+	 closed: [2016-02-25 周四 09:50]
+	 - state "done"       from "todo"       [2016-02-25 周四 09:50]
+***** done 网络服务器开发总结：http://my.oschina.net/u/181613/blog/596022?fromerr=u59ofnaj
+	  closed: [2016-02-19 周五 19:14]
+	  - state "done"       from "todo"       [2016-02-19 周五 19:14]
+
+**** done <2016-02-22 周一> [100%]
+	 closed: [2016-02-28 周日 20:22]
+	 - state "done"       from "todo"       [2016-02-28 周日 20:22]
+***** done 读 zmq 文档
+	  closed: [2016-02-28 周日 20:18]
+	  - state "done"       from "todo"       [2016-02-28 周日 20:18]
+****** done zmq基础
+	   closed: [2016-02-28 周日 20:18]
+	   - state "done"       from "todo"       [2016-02-28 周日 20:18]
+****** done zmq进阶
+	   closed: [2016-02-28 周日 20:18]
+	   - state "done"       from "todo"       [2016-02-28 周日 20:18]
+***** done 读 《游戏引擎架构》 [7/7]
+	  closed: [2016-02-28 周日 20:22]
+	  - state "done"       from "todo"       [2016-02-28 周日 20:22]
+	  - [x] 专业工具
+	  - [x] 软件工程基础
+	  - [x] 游戏所需的 3d 数学
+	  - [x] 游戏支持系统
+	  - [x] 游戏循环及实时模拟
+	  - [x] 人体接口学设备
+	  - [x] 调试及开发工具
+
+*** 2016/03
+
+**** done <2016-02-29 周一> [100%]
+	 closed: [2016-03-06 周日 18:24]
+	 - state "done"       from "todo"       [2016-03-06 周日 18:24]
+***** done wireshark网络包分析攻击/bpf包过滤语言
+	  closed: [2016-03-06 周日 18:23]
+	  - state "done"       from "todo"       [2016-03-06 周日 18:23]
+
+	  一条完整的 bpf 包过滤规则的构成是 ` *proto dir type* id'。例如
+	  `ip dst port 21', `icmp dst host 192.168.1.1', `tcp src port 22' 等，都是
+	  完整的包过滤规则。另外，我们可以通过与/或关系将这些规则组合起来形成强大的
+	  bpf 包过滤语言。至于解析实现，采用与/或树将是不错的选择：整棵树由与节点、
+	  或节点以及包含完整过滤规则的叶子节点构成。
+
+***** done 阅读 《游戏引擎架构》 [1/1]
+	  closed: [2016-03-06 周日 18:13]
+	  - state "done"       from "todo"       [2016-03-06 周日 18:13]
+	  * [x] 渲染引擎
+***** done 《取悦的工序--如何理解游戏》
+	  closed: [2016-03-06 周日 18:12]
+	  - state "done"       from "todo"       [2016-03-06 周日 18:12]
+
+**** done <2016-03-07 周一> [100%]
+	 closed: [2016-03-14 周一 11:14]
+	 - state "done"       from "todo"       [2016-03-14 周一 11:14]
+***** done 完成《游戏引擎架构》的阅读
+	  closed: [2016-03-14 周一 11:14]
+	  - state "done"       from "todo"       [2016-03-14 周一 11:14]
+
+	  * [x] 动画系统
+	  * [ ] 物理系统
+	  * [ ] 游戏性
+
+***** done redmine 安装指引
+	  closed: [2016-03-14 周一 11:14]
+	  - state "done"       from "todo"       [2016-03-14 周一 11:14]
+***** done mysql命令整理
+	  closed: [2016-03-10 周四 10:52]
+	  - state "done"       from "todo"       [2016-03-10 周四 10:52]
+
+**** done <2016-03-14 周一> [100%]
+	 closed: [2016-03-21 周一 09:46]
+	 - state "done"       from "todo"       [2016-03-21 周一 09:46]
+***** done 从业经验总结
+	  closed: [2016-03-17 周四 10:23]
+	  - state "done"       from "todo"       [2016-03-17 周四 10:23]
+***** done python 语法总结
+	  closed: [2016-03-18 周五 11:41]
+	  - state "done"       from "todo"       [2016-03-18 周五 11:41]
+***** done my tetris
+	  closed: [2016-03-21 周一 09:45]
+	  - state "done"       from "todo"       [2016-03-21 周一 09:45]
+
+	  重新使用 2d 平移、旋转方程实现
+**** done <2016-03-21 周一> [100%]
+	 closed: [2016-03-28 周一 10:22]
+	 - state "done"       from "todo"       [2016-03-28 周一 10:22]
+
+***** done the bsd packet filter
+	  closed: [2016-03-24 周四 14:30]
+	  - state "done"       from "todo"       [2016-03-24 周四 14:30]
+
+	  包过滤可用布尔表达式树或控制流图(cfg)实现，bpf 利用 cfg 实现。
+***** done tcp 的性能和未来
+	  closed: [2016-03-24 周四 09:33]
+	  - state "done"       from "todo"       [2016-03-24 周四 09:33]
+***** done c++ template（编译器泛型技术）
+	  closed: [2016-03-22 周二 19:53]
+	  - state "done"       from "todo"       [2016-03-22 周二 19:53]
+***** done linux 平台下的调试工具：strace
+	  closed: [2016-03-22 周二 14:46]
+	  - state "done"       from "done"       [2016-03-28 周一 10:22]
+	  - state "done"       from "todo"       [2016-03-22 周二 14:46]
+
+	  linux 平台下的系统调用追踪和分析工具，可显示一个 linux 进程的全部系统调用信息及其性能统计。
+	  例：
+	  #+begin_src sh
+        $ strace -h # 显示帮助
+        $ strace -c cd ~
+        $ strace -p 2210
+	  #+end_src
+
+*** 2016/04
+**** DONE <2016-03-28 周一> [100%]
+	 CLOSED: [2016-04-04 周一 18:51]
+	 - State "DONE"       from "TODO"       [2016-04-04 周一 18:51]
+***** DONE 红黑树
+	  CLOSED: [2016-04-04 周一 18:51]
+	  - State "DONE"       from "TODO"       [2016-04-04 周一 18:51]
+	  根据红黑树算法实现了简单的红黑树容器，包含插入和删除，但不能迭代元素。
+***** DONE 仿函数
+	  CLOSED: [2016-03-29 周二 15:47]
+	  - State "DONE"       from "TODO"       [2016-03-29 周二 15:47]
+***** DONE stl iterator 设计
+	  CLOSED: [2016-03-28 周一 10:24]
+	  - State "DONE"       from "DONE"       [2016-04-04 周一 18:51]
+	  - State "DONE"       from "TODO"       [2016-03-28 周一 10:24]
+**** TODO <2016-04-04 周一> [%]
+**** TODO stl allocate
+**** TODO 堆
+**** TODO 算法
+**** TODO 适配器
+**** TODO 调试 Nginx
+**** TODO DNS 域名解析协议
+**** TODO Linux 平台下的性能分析工具：Valgrind
+**** TODO skynet 消息队列同步操作方式
+**** TODO 熟悉 AsyncNet 库
+**** TODO My Direct UI Library
+**** TODO 浏览 jemalloc 源码，给出 jemalloc 的设计图
+**** TODO 无锁队列
+**** TODO [[LINK_KBE_STARTUP][KBE启动和执行流程]]
+**** TODO AI [0%]
+	 * [ ] [[http://www.cnblogs.com/fingerpass/p/discussion-about-game-ai.html][漫谈游戏中的人工智能]]
+     * [ ] 决策树
+	 * [ ] 行为树
+	   腾讯开源行为树实现 https://github.com/ruleless/behaviac
+**** PROCESSING [[LINK_QUATERNION][四元数]]
+	 - STATE "PROCESSING" FROM "TODO"       [2015-10-19 周一 19:56]
+
+** Summary
+
+*** Be Skilled In
+
+	* 擅长基于Unix平台的应用开发
+	* 了解TCP/IP协议模型，及其工作原理
+	* 熟悉中心拓扑结构的MMOG服务器架构
+
+*** Work Exp
+
+**** OG
+
+***** 服务器架构
+
+***** 技能
+
+	  用状态模式来管理技能的释放流程。比如，我们可以抽象这么几种状态：正常状态、
+	  蓄气状态、瞬发攻击状态、引导攻击状态。正常状态可以迁移到蓄气和两个攻击状
+	  态；进入蓄气状态表示玩家释放蓄气技能，蓄气成功的话进入瞬发攻击状态；瞬发
+	  攻击状态最常用，玩家大部分技能释放时都是进入该状态，对于非移动施法技能该
+	  状态必须否决玩家的行走行为；引导攻击状态对应的玩家的读秒技能。
+
+***** AI
+
+****** 我们的解决方案
+
+	   我们用事件/条件/行为规则来模拟怪物的一类条件发射，我们再将这样的规则用一
+	   条决策封装起来。怪物有一组决策数组，在有事件发生的时候，通过轮训这个决策
+	   数组就能模拟简单的怪物智能了。比如我们可以给“惹事怪”编辑这样一条决策：
+	   当有玩家进入我的视野时，直接攻击；可以给“和平怪”编辑决策：当有玩家打我
+	   时，逃跑。
+
+***** 玩法
+
+***** 微端模式支持
+
+	  微端模式实际就是将本地文件放置网络读取。我们独立出一个 I/O 接口，游戏逻辑
+	  中的所有 I/O 操作都通过该接口完成。该 I/O 接口支持异步模式，大端模式下，
+	  调用本地 I/O 方法；微端模式下，调用网络 I/O 方法。
+
+	  另外需要实现一个微端长连接服务器来管理所有的微端玩家。微端服务器的主要功能
+	  有：推送资源地址；通过分析微端玩家的下载行为智能推送下载列表。
+
+* Notes
+
+** GAE(Google App Engine)
+
+** Apache
+
+*** Apache的配置文件http.conf参数含义详解
+
+**** 基本配置
+
+	 #+begin_src sh
+       ServerRoot "/mnt/software/apache2" #你的apache软件安装的位置。其它指定的目录如果没有指定绝对路径，则目录是相对于该目录。
+       PidFile logs/httpd.pid #第一个httpd进程(所有其他进程的父进程)的进程号文件位置。
+       Listen 80 #服务器监听的端口号。
+       ServerName www.clusting.com:80 #主站点名称（网站的主机名）。
+       ServerAdmin admin@clusting.com #管理员的邮件地址。
+       DocumentRoot "/mnt/web/clusting" #主站点的网页存储位置。
+	 #+end_src
+
+	 目录访问控制配置
+
+	 #+begin_src html
+       <Directory "D:/xampp/cgi-bin">
+         Options FollowSymLinks
+         AllowOverride None
+         Order allow,deny
+         Allow from all
+       </Directory>
+	 #+end_src
+
+	 在上面这段目录属性配置中，主要有下面的选项：
+
+	 1. Options：配置在特定目录使用哪些特性，常用的值和基本含义如下：
+
+	    1. ExecCGI: 在该目录下允许执行CGI脚本。
+		2. FollowSymLinks: 在该目录下允许文件系统使用符号连接。
+		3. Indexes: 当用户访问该目录时，如果用户找不到DirectoryIndex指定的主页文件(例如index.html),则返回该目录下的文件列表给用户。
+		4. SymLinksIfOwnerMatch: 当使用符号连接时，只有当符号连接的文件拥有者与实际文件的拥有者相同时才可以访问。
+
+	    其它可用值和含义请参阅：http://www.clusting.com/Apache/ApacheManual/mod/core.html#options
+
+	 2. AllowOverride：允许存在于.htaccess文件中的指令类型(.htaccess文件名是可以改变的，其文件名由AccessFileName指令决定)：
+
+	    1. None: 当AllowOverride被设置为None时。不搜索该目录下的.htaccess文件（可以减小服务器开销）。
+		2. All: 在.htaccess文件中可以使用所有的指令。
+
+	    其他的可用值及含义(如：Options FileInfo AuthConfig Limit等)，请参看： http://www.clusting.com/Apache/ApacheManual/mod/core.html#AllowOverride
+
+	 3. Order：控制在访问时Allow和Deny两个访问规则哪个优先：
+
+		1. Allow：允许访问的主机列表(可用域名或子网，例如：Allow from 192.168.0.0/16)。
+		2. Deny：拒绝访问的主机列表。
+
+	    更详细的用法可参看：http://www.clusting.com/Apache/ApacheManual/mod/mod_access.html#order
+
+	 #+begin_src sh
+       DirectoryIndex index.html index.htm index.PHP #主页文件的设置（本例将主页文件设置为：index.html,index.htm和index.php）
+	 #+end_src
+
+**** 服务器的优化 (MPM: Multi-Processing Modules)
+
+	 apache2主要的优势就是对多处理器的支持更好，在编译时同过使用–with-mpm选项来决定apache2的工作模式。如果知道当前的apache2使用什么工作机制，可以通过httpd -l命令列出apache的所有模块，就可以知道其工作方式：
+
+	 * prefork：如果httpd -l列出prefork.c，则需要对下面的段进行配置：
+	   1. StartServers 5 #启动apache时启动的httpd进程个数。
+	   2. MinSpareServers 5 #服务器保持的最小空闲进程数。
+	   3. MaxSpareServers 10 #服务器保持的最大空闲进程数。
+	   4. MaxClients 150 #最大并发连接数。
+	   5. MaxRequestsPerChild 1000 #每个子进程被请求服务多少次后被kill掉。0表示不限制，推荐设置为1000。
+	   在该工作模式下，服务器启动后起动5个httpd进程(加父进程共6个，通过ps -ax|grep httpd命令可以看到)。当有用户连接时，apache会使用一个空闲进程为该连接服务，同时父进程会fork一个子进程。直到内存中的空闲进程达到 MaxSpareServers。该模式是为了兼容一些旧版本的程序。我缺省编译时的选项。
+
+	 * worker：如果httpd -l列出worker.c，则需要对下面的段进行配置：
+	   1. StartServers 2 #启动apache时启动的httpd进程个数。
+	   2. MaxClients 150 #最大并发连接数。
+	   3. MinSpareThreads 25 #服务器保持的最小空闲线程数。
+	   4. MaxSpareThreads 75 #服务器保持的最大空闲线程数。
+	   5. ThreadsPerChild 25 #每个子进程的产生的线程数。
+	   6. MaxRequestsPerChild 0 #每个子进程被请求服务多少次后被kill掉。0表示不限制，推荐设置为1000。
+	   该模式是由线程来监听客户的连接。当有新客户连接时，由其中的一个空闲线程接受连接。服务器在启动时启动两个进程，每个进程产生的线程数是固定的 (ThreadsPerChild决定)，因此启动时有50个线程。当50个线程不够用时，服务器自动fork一个进程，再产生25个线程。
+
+	 * perchild：如果httpd -l列出perchild.c，则需要对下面的段进行配置：
+	   1. NumServers 5 #服务器启动时启动的子进程数
+	   2. StartThreads 5 #每个子进程启动时启动的线程数
+	   3. MinSpareThreads 5 #内存中的最小空闲线程数
+	   4. MaxSpareThreads 10 #最大空闲线程数
+	   5. MaxThreadsPerChild 2000 #每个线程最多被请求多少次后退出。0不受限制。
+	   6. MaxRequestsPerChild 10000 #每个子进程服务多少次后被重新fork。0表示不受限制。
+	   该模式下，子进程的数量是固定的，线程数不受限制。当客户端连接到服务器时，又空闲的线程提供服务。 如果空闲线程数不够，子进程自动产生线程来为新的连接服务。该模式用于多站点服务器。
+**** HTTP返回头信息配置
+	 * ServerTokens Prod #该参数设置http头部返回的apache版本信息，可用的值和含义如下：
+	   1. Prod：仅软件名称，例如：apache
+	   2. Major：包括主版本号，例如：apache/2
+	   3. Minor：包括次版本号，例如：apache/2.0
+	   4. Min：仅apache的完整版本号，例如：apache/2.0.54
+	   5. OS：包括操作系统类型，例如：apache/2.0.54（Unix）
+	   6. Full：包括apache支持的模块及模块版本号，例如：Apache/2.0.54 (Unix) mod_ssl/2.0.54 OpenSSL/0.9.7g
+	 * ServerSignature Off #在页面产生错误时是否出现服务器版本信息。推荐设置为Off
+**** 持久性连接设置
+	 * KeepAlive On #开启持久性连接功能。即当客户端连接到服务器，下载完数据后仍然保持连接状态。
+	 * MaxKeepAliveRequests 100 #一个连接服务的最多请求次数。
+	 * KeepAliveTimeout 30 #持续连接多长时间，该连接没有再请求数据，则断开该连接。缺省为15秒。
+**** 别名设置
+	 对于不在DocumentRoot指定的目录内的页面，既可以使用符号连接，也可以使用别名。别名的设置如下：
+	 #+begin_src html
+       Alias /download/ "/var/www/download/" #访问时可以输入:http://www.custing.com/download/
+       #对该目录进行访问控制设置
+       Options Indexes MultiViews
+       AllowOverride AuthConfig
+       Order allow,deny
+       Allow from all
+	 #+end_src
+**** CGI设置
+	 #+begin_src html
+       scrīptAlias /cgi-bin/ "/mnt/software/apache2/cgi-bin/" # 访问时可以：http://www.clusting.com/cgi-bin/ 。但是该目录下的CGI脚本文件要加可执行权限！
+
+       #设置目录属性
+       AllowOverride None
+       Options None
+       Order allow,deny
+       Allow from all
+	 #+end_src
+**** 日志的设置
+	 * 错误日志的设置
+	   #+begin_src sh
+         ErrorLog logs/error_log #日志的保存位置
+         LogLevel warn #日志的级别
+	   #+end_src
+	   显示的格式如下
+	   #+begin_src html
+         [Mon Oct 10 15:54:29 2005] [error] [client 192.168.10.22] access to /download/ failed, reason: user admin not allowed access
+	   #+end_src
+	 * 日志格式设置
+	   日志的缺省格式有如下几种：
+	   #+begin_src html
+         LogFormat "%h %l %u %t "%r" %>s %b "%{Referer}i" "%{User-Agent}i"" combined
+         LogFormat "%h %l %u %t "%r" %>s %b" common #common为日志格式名称
+         LogFormat "%{Referer}i -> %U" referer
+         LogFormat "%{User-agent}i" agent
+         CustomLog logs/access_log common
+	   #+end_src
+	   格式中的各个参数如下：
+	   #+begin_src html
+         %h –客户端的ip地址或主机名
+         %l –The 这是由客户端 identd 判断的RFC 1413身份，输出中的符号 "-" 表示此处信息无效。
+         %u –由HTTP认证系统得到的访问该网页的客户名。有认证时才有效，输出中的符号 "-" 表示此处信息无效。
+         %t –服务器完成对请求的处理时的时间。
+         "%r" –引号中是客户发出的包含了许多有用信息的请求内容。
+         %>s –这个是服务器返回给客户端的状态码。
+         %b –最后这项是返回给客户端的不包括响应头的字节数。
+         "%{Referer}i" –此项指明了该请求是从被哪个网页提交过来的。
+         "%{User-Agent}i" –此项是客户浏览器提供的浏览器识别信息。
+	   #+end_src
+	   下面是一段访问日志的实例：
+	   #+begin_src html
+         192.168.10.22 – bearzhang [10/Oct/2005:16:53:06 +0800] "GET /download/ HTTP/1.1" 200 1228
+         192.168.10.22 – - [10/Oct/2005:16:53:06 +0800] "GET /icons/blank.gif HTTP/1.1" 304 -
+         192.168.10.22 – - [10/Oct/2005:16:53:06 +0800] "GET /icons/back.gif HTTP/1.1" 304 -
+	   #+end_src
+**** 虚拟主机的配置
+	 * 基于IP地址的虚拟主机配置
+	   #+begin_src html
+         Listen 80
+
+         DocumentRoot /www/example1
+         ServerName www.example1.com
+
+         DocumentRoot /www/example2
+         ServerName www.example2.org
+	   #+end_src
+	 * 基于IP和多端口的虚拟主机配置
+	   #+begin_src html
+         Listen 172.20.30.40:80
+         Listen 172.20.30.40:8080
+         Listen 172.20.30.50:80
+         Listen 172.20.30.50:8080
+
+         DocumentRoot /www/example1-80
+         ServerName www.example1.com
+
+         DocumentRoot /www/example1-8080
+         ServerName www.example1.com
+
+         DocumentRoot /www/example2-80
+         ServerName www.example1.org
+
+         DocumentRoot /www/example2-8080
+         ServerName www.example2.org
+	   #+end_src
+	 * 单个IP地址的服务器上基于域名的虚拟主机配置
+	   #+begin_src html
+         # Ensure that Apache listens on port 80
+         Listen 80
+
+         # Listen for virtual host requests on all IP addresses
+         NameVirtualHost *:80
+
+         DocumentRoot /www/example1
+         ServerName www.example1.com
+         ServerAlias example1.com. *.example1.com
+         # Other directives here
+
+         DocumentRoot /www/example2
+         ServerName www.example2.org
+         # Other directives here
+	   #+end_src
+	 * 在多个IP地址的服务器上配置基于域名的虚拟主机：
+	   #+begin_src html
+         Listen 80
+
+         # This is the "main" server running on 172.20.30.40
+         ServerName server.domain.com
+         DocumentRoot /www/mainserver
+
+         # This is the other address
+         NameVirtualHost 172.20.30.50
+
+         DocumentRoot /www/example1
+         ServerName www.example1.com
+         # Other directives here …
+
+         DocumentRoot /www/example2
+         ServerName www.example2.org
+         # Other directives here …
+	   #+end_src
+	 * 在不同的端口上运行不同的站点(基于多端口的服务器上配置基于域名的虚拟主机)
+	   #+begin_src html
+         Listen 80
+         Listen 8080
+
+         NameVirtualHost 172.20.30.40:80
+         NameVirtualHost 172.20.30.40:8080
+
+         ServerName www.example1.com
+         DocumentRoot /www/domain-80
+
+         ServerName www.example1.com
+         DocumentRoot /www/domain-8080
+
+         ServerName www.example2.org
+         DocumentRoot /www/otherdomain-80
+
+         ServerName www.example2.org
+         DocumentRoot /www/otherdomain-8080
+	   #+end_src
+	 * 基于域名和基于IP的混合虚拟主机的配置
+	   #+begin_src html
+         Listen 80
+
+         NameVirtualHost 172.20.30.40
+
+         DocumentRoot /www/example1
+         ServerName www.example1.com
+
+         DocumentRoot /www/example2
+         ServerName www.example2.org
+
+         DocumentRoot /www/example3
+         ServerName www.example3.net
+	   #+end_src
+** Git																	:git:
+*** .git目录结构
+**** .git目录下的重要文件
+     |--------+------------------------+---------------------------------------------------|
+     | 文件名 | 文件内容               | 文件作用                                          |
+     |--------+------------------------+---------------------------------------------------|
+     | config | 远程主机信息；分支信息 | Git配置，用于描述远程主机地址、分支以及子模块信息 |
+     | index  | 二进制文件             | 对应Git的暂存区                                   |
+     | HEAD   | ref: refs/heads/master | 对应当前本地分支（或概念模型中的版本库）          |
+     |--------+------------------------+---------------------------------------------------|
+**** .git目录下的重要目录
+     |----------+--------------------------|
+     | 目录名   | 描述                     |
+     |----------+--------------------------|
+     | refs/    | 该目录有三个子目录：     |
+     |          | *heads* : 本地分支指针   |
+     |          | *remotes* : 远程分支指针 |
+     |          | *tags* :                 |
+     | objects/ | Git对象库                |
+     | logs/    |                          |
+     |----------+--------------------------|
+*** Git远程操作
+**** Git远程命令概览
+	 1. git clone
+	 2. git remote
+	 3. git fetch
+	 4. git pull
+	 5. git push
+**** Git远程仓库与本地仓库的关系图
+	 [[./.Res/Git/GitRepRelation.png]]
+**** git clone
+	 远程操作的第一步，通常是从远程主机克隆一个版本库，这时就要用到git clone命令：
+	 #+BEGIN_SRC sh
+       $ git clone <版本库的网址>
+	 #+END_SRC
+	 比如，克隆jQuery的版本库：
+	 #+BEGIN_SRC sh
+       $ git clone https://github.com/jquery/jquery.git
+	 #+END_SRC
+	 该命令会在本地主机生成一个目录，与远程主机的版本库同名。如果要指定不同的目录名，可以将目录名作为git clone命令的第二个参数：
+	 #+BEGIN_SRC sh
+       $ git clone <版本库的网址> <本地目录名>
+	 #+END_SRC
+	 git clone支持多种协议，除了HTTP(s)以外，还支持SSH、Git、本地文件协议等，下面是一些例子：
+	 #+BEGIN_SRC sh
+       $ git clone http[s]://example.com/path/to/repo.git/
+       $ git clone ssh://example.com/path/to/repo.git/
+       $ git clone git://example.com/path/to/repo.git/
+       $ git clone /opt/git/project.git
+       $ git clone file:///opt/git/project.git
+       $ git clone ftp[s]://example.com/path/to/repo.git/
+       $ git clone rsync://example.com/path/to/repo.git/
+	 #+END_SRC
+	 SSH协议还有另一种写法：
+	 #+BEGIN_SRC sh
+       $ git clone [user@]example.com:path/to/repo.git/
+	 #+END_SRC
+	 通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。
+**** git remote
+     为了便于管理，Git要求每个远程主机都必须指定一个主机名。git remote命令就用于管理主机名。不带选项的时候，git remote命令列出所有远程主机：
+	 #+BEGIN_SRC sh
+       $ git remote
+       origin
+	 #+END_SRC
+	 使用-v选项，可以参看远程主机的网址：
+	 #+BEGIN_SRC sh
+       $ git remote -v
+       origin  git@github.com:jquery/jquery.git (fetch)
+       origin  git@github.com:jquery/jquery.git (push)
+	 #+END_SRC
+	 上面命令表示，当前只有一台远程主机，叫做origin，后面跟随了它的网址。
+	 克隆版本库的时候，所使用的远程主机自动被Git命名为origin。如果想用其他的主机名，需要用git clone命令的-o选项指定：
+	 #+BEGIN_SRC sh
+       $ git clone -o jQuery https://github.com/jquery/jquery.git
+       $ git remote
+       jQuery
+	 #+END_SRC
+	 上面命令表示，克隆的时候，指定远程主机叫做jQuery。
+	 1) git remote show命令加上主机名，可以查看该主机的详细信息。
+		#+BEGIN_SRC sh
+          $ git remote show <主机名>
+		#+END_SRC
+	 2) git remote add命令用于添加远程主机。
+		#+BEGIN_SRC sh
+          $ git remote add <主机名> <网址>
+		#+END_SRC
+	 3) git remote rm命令用于删除远程主机。
+		#+BEGIN_SRC sh
+          $ git remote rm <主机名>
+		#+END_SRC
+	 4) git remote rename命令用于远程主机的改名。
+		#+BEGIN_SRC sh
+          $ git remote rename <原主机名> <新主机名>
+		#+END_SRC
+**** git fetch
+	 此命令的作用是：将远程分支的更新取回本地
+	 #+BEGIN_SRC sh
+       $ git fetch <远程主机名>
+	 #+END_SRC
+	 上面命令将某个远程主机的更新，全部取回本地。
+	 默认情况下，git fetch取回所有分支（branch）的更新。如果只想取回特定分支的更新，可以指定分支名。
+	 #+BEGIN_SRC sh
+       $ git fetch <远程主机名> <分支名>
+	 #+END_SRC
+	 比如，取回origin主机的master分支。
+	 #+BEGIN_SRC sh
+       $ git fetch origin master
+	 #+END_SRC
+	 所取回的更新，在本地主机上要用"远程主机名/分支名"的形式读取。比如origin主机的master，就要用origin/master读取。
+	 git branch命令的-r选项，可以用来查看远程分支，-a选项查看所有分支。
+	 #+BEGIN_SRC sh
+       $ git branch -r
+       origin/master
+       $ git branch -a
+       * master
+       remotes/origin/master
+	 #+END_SRC
+	 上面命令表示，本地主机的当前分支是master，远程分支是origin/master。
+	 取回远程主机的更新以后，可以在它的基础上，使用git checkout命令创建一个新的分支。
+	 #+BEGIN_SRC sh
+       $ git checkout -b newBrach origin/master
+	 #+END_SRC
+	 上面命令表示，在origin/master的基础上，创建一个新分支。
+	 此外，也可以使用git merge命令或者git rebase命令，在本地分支上合并远程分支。
+	 #+BEGIN_SRC sh
+       $ git merge origin/master
+	 #+END_SRC
+	 或者
+	 #+BEGIN_SRC sh
+       $ git rebase origin/master
+	 #+END_SRC
+	 上面命令表示在当前分支上，合并origin/master。
+**** git pull
+     git pull命令的作用是：将远程分支的更新取回本地，再与本地的指定分支合并。它的完整格式稍稍有点复杂。
+	 #+BEGIN_SRC sh
+       $ git pull <远程主机名> <远程分支名>:<本地分支名>
+	 #+END_SRC
+	 比如，取回origin主机的next分支，与本地的master分支合并，需要写成下面这样。
+	 #+BEGIN_SRC sh
+       $ git pull origin next:master
+	 #+END_SRC
+	 如果远程分支是与当前分支合并，则冒号后面的部分可以省略。
+	 #+BEGIN_SRC sh
+       $ git pull origin next
+	 #+END_SRC
+	 上面命令表示，取回origin/next分支，再与当前分支合并。实质上，这等同于先做git fetch，再做git merge。
+	 #+begin_src sh
+       $ git fetch origin
+       $ git merge origin/next
+	 #+end_src
+	 在某些场合，Git会自动在本地分支与远程分支之间，建立一种追踪关系（tracking）。比如，在git clone的时候，所有本地分支默认与远程主机的同名分支，建立追踪关系，也就是说，本地的master分支自动"追踪"origin/master分支。
+	 Git也允许手动建立追踪关系。
+	 #+begin_src sh
+       $ git branch --set-upstream master origin/next
+	 #+end_src
+	 上面命令指定master分支追踪origin/next分支。
+	 如果当前分支与远程分支存在追踪关系，git pull就可以省略远程分支名。
+	 #+begin_src sh
+       $ git pull origin
+	 #+end_src
+	 上面命令表示，本地的当前分支自动与对应的origin主机"追踪分支"（remote-tracking branch）进行合并。
+	 如果当前分支只有一个追踪分支，连远程主机名都可以省略。
+	 #+begin_src sh
+       $ git pull
+	 #+end_src
+	 上面命令表示，当前分支自动与唯一一个追踪分支进行合并。
+	 如果合并需要采用rebase模式，可以使用--rebase选项。
+	 #+begin_src sh
+       $ git pull --rebase <远程主机名> <远程分支名>:<本地分支名>
+	 #+end_src
+	 如果远程主机删除了某个分支，默认情况下，git pull 不会在拉取远程分支的时候，删除对应的本地分支。这是为了防止，由于其他人操作了远程主机，导致git pull不知不觉删除了本地分支。
+	 但是，你可以改变这个行为，加上参数 -p 就会在本地删除远程已经删除的分支。
+	 #+begin_src sh
+       $ git pull -p
+	 #+end_src
+	 它等同于下面的命令：
+	 #+begin_src sh
+       $ git fetch --prune origin
+       $ git fetch -p
+	 #+end_src
+**** git push
+	 git push命令用于将本地分支的更新，推送到远程分支。它的格式与git pull命令相仿。
+	 #+begin_src sh
+       $ git push <远程主机名> <本地分支名>:<远程分支名>
+	 #+end_src
+	 注意，分支推送顺序的写法是<来源地>:<目的地>，所以git pull是<远程分支>:<本地分支>，而git push是<本地分支>:<远程分支>。
+	 如果省略远程分支名，则表示将本地分支推送到与之存在"追踪关系"的远程分支（通常两者同名），如果该远程分支不存在，则会被新建。
+	 #+begin_src sh
+       $ git push origin master
+	 #+end_src
+	 上面命令表示，将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建。
+	 如果省略本地分支名，则表示删除指定的远程分支，因为这等同于推送一个空的本地分支到远程分支。
+	 #+begin_src sh
+       $ git push origin :master
+	 #+end_src
+	 它等同于：
+	 #+begin_src sh
+       $ git push origin --delete master
+	 #+end_src
+	 上面命令表示删除origin主机的master分支。
+	 如果当前分支与远程分支之间存在追踪关系，则本地分支和远程分支都可以省略。
+	 #+begin_src sh
+       $ git push origin
+	 #+end_src
+	 上面命令表示，将当前分支推送到origin主机的对应分支。
+	 如果当前分支只有一个追踪分支，那么主机名都可以省略。
+	 #+begin_src sh
+       $ git push
+	 #+end_src
+	 如果当前分支与多个主机存在追踪关系，则可以使用-u选项指定一个默认主机，这样后面就可以不加任何参数使用git push。
+	 #+begin_src sh
+       $ git push -u origin master
+	 #+end_src
+	 上面命令将本地的master分支推送到origin主机，同时指定origin为默认主机，后面就可以不加任何参数使用git push了。
+	 不带任何参数的git push，默认只推送当前分支，这叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用matching方法，现在改为默认采用simple方式。如果要修改这个设置，可以采用git config命令。
+	 #+begin_src sh
+       $ git config --global push.default matching
+	 #+end_src
+	 或者
+	 #+begin_src sh
+       $ git config --global push.default simple
+	 #+end_src
+	 还有一种情况，就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要使用--all选项。
+	 #+begin_src sh
+       $ git push --all origin
+	 #+end_src
+	 上面命令表示，将所有本地分支都推送到origin主机。
+	 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做git pull合并差异，然后再推送到远程主机。这时，如果你一定要推送，可以使用--force选项。
+	 #+begin_src sh
+       $ git push --force origin
+	 #+end_src
+	 上面命令使用--force选项，结果导致远程主机上更新的版本被覆盖。除非你很确定要这样做，否则应该尽量避免使用--force选项。
+	 最后，git push不会推送标签（tag），除非使用--tags选项。
+	 #+begin_src sh
+       $ git push origin --tags
+	 #+end_src
+**** Fork之后与源同步
+	 可按如下步骤同步源的最新代码：
+	 1. 将源仓库添加到远程仓库列表(git remote add)
+	 2. 从源仓库获取最新代码
+	 3. 将新更新下来的分支合并到master分支
+	 #+BEGIN_SRC c
+       git remote add source git@github.com:source/proj.git
+       git fetch source
+       git merge source/master
+	 #+END_SRC
+*** Git分支
+**** 分支查看
+	 * 查看本地分支
+	   #+BEGIN_SRC sh
+         $ git branch
+         * master
+	   #+END_SRC
+	 * 查看远程分支
+	   #+BEGIN_SRC sh
+         $ git branch -r
+           kbengine/master
+           origin/HEAD -> origin/master
+           origin/master
+	   #+END_SRC
+	 * 查看所有分支
+	   #+BEGIN_SRC sh
+         $ git branch -a
+         * master
+           remotes/kbengine/master
+           remotes/origin/HEAD -> origin/master
+           remotes/origin/master
+	   #+END_SRC
+	 * 创建分支
+	   #+BEGIN_SRC sh
+         $ git branch <分支名>
+	   #+END_SRC
+	 * 删除本地分支
+	   #+BEGIN_SRC sh
+         $ git branch -d <分支名>
+	   #+END_SRC
+	 * 切换分支
+	   #+BEGIN_SRC sh
+         git checkout <分支名>
+	   #+END_SRC
+**** 分支合并
+** Tools
+*** VMware 虚拟机启动脚本
+	#+begin_src sh
+      start /min vmware.exe -x "F:\Virtual Machine\CentOS\CentOS.vmx"
+      ping -n 10 127.0.0.1 >nul 2>nul
+      taskkill /im vmware.exe /f
+      exit
+	#+end_src
+* Articles
+** MMOG
+   * [[https://developer.valvesoftware.com/wiki/Main_Page][Source Engine]]
+
+	 1. [ ] [[https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization][网络延时补偿]]
+	 2. [ ] [[https://developer.valvesoftware.com/wiki/Lag_compensation][Lag compensation]]
+	 3. [ ] [[https://developer.valvesoftware.com/wiki/Source_Multiplayer_Networking][Source Multiplayer Networking]]
