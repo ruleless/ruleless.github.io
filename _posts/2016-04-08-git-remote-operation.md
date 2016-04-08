@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Git 远程操作
-date:
 categories: Git
 ---
 
