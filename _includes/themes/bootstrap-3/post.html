@@ -50,14 +50,14 @@
         <div>
           <p>
             {% if page.previous %}
-            &laquo;Previous:&nbsp;&nbsp; <a href="{{ BASE_PATH }}{{ page.previous.url }}">{{ page.previous.title }}</a>
+            &laquo;Previous:&nbsp;&nbsp; <a href="{{ BASE_PATH }}{{ page.previous.url }}.html">{{ page.previous.title }}</a>
             {% else %}
             &laquo;Previous: None.
             {% endif %}
           </p>
           <p>
             {% if page.next %}
-            &raquo;Next:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ BASE_PATH }}{{ page.next.url }}">{{ page.next.title }}</a>
+            &raquo;Next:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="{{ BASE_PATH }}{{ page.next.url }}.html">{{ page.next.title }}</a>
             {% else %}
             &raquo;Next:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; None.
             {% endif %}

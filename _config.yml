@@ -46,7 +46,7 @@ author :
 #
 production_url : https://ruleless.github.io
 production_sitename : ruleless.github.io
-repository_url: https://github.com/thomaszhao/thomaszhao.github.io/blob/master/
+repository_url: https://github.com/ruleless/ruleless.github.io/blob/master/
 
 #  specify configuration in the pages and posts for your site.
 defaults:
@@ -118,7 +118,7 @@ JB :
   comments :
     provider : duoshuo
     duoshuo:
-            short_name: thomaszhao
+            short_name: ruleless
     #disqus :
     #  short_name : jekyllbootstrap
     #livefyre :
