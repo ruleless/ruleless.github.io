@@ -9,8 +9,7 @@ categories: Git
 
 Git远程仓库与本地仓库的关系图
 
-![]()
-[[./.Res/Git/GitRepRelation.png]]
+![](/images/Git/GitRepRelation.png)
 
 ---
 
