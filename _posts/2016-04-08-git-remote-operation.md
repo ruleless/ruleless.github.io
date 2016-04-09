@@ -8,11 +8,9 @@ categories: Git
 *  目录
 {:toc}
 
-Git远程仓库与本地仓库的关系图
+## Git远程仓库与本地仓库的关系图
 
 ![](/images/Git/GitRepRelation.png)
-
----
 
 ## git clone
 
@@ -44,8 +42,6 @@ SSH协议还有另一种写法：
 
 通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。
 
----
-
 ## git remote
 
 为了便于管理，Git要求每个远程主机都必须指定一个主机名。git remote命令就用于管理主机名。不带选项的时候，git remote命令列出所有远程主机：
@@ -68,22 +64,12 @@ SSH协议还有另一种写法：
 
 上面命令表示，克隆的时候，指定远程主机叫做jQuery。
 
-  1. git remote show命令加上主机名，可以查看该主机的详细信息。
+下面列出 git remote 的一些常用命令
 
-        $ git remote show <主机名>
-
-  2. git remote add命令用于添加远程主机。
-
-        $ git remote add <主机名> <网址>
-
-  3. git remote rm命令用于删除远程主机。
-
-        $ git remote rm <主机名>
-  4. git remote rename命令用于远程主机的改名。
-
-        $ git remote rename <原主机名> <新主机名>
-
----
+  1. git remote show命令加上主机名，可以查看该主机的详细信息。 `$ git remote show <主机名>`
+  2. git remote add命令用于添加远程主机。 `$ git remote add <主机名> <网址>`
+  3. git remote rm命令用于删除远程主机。 `$ git remote rm <主机名>`
+  4. git remote rename命令用于远程主机的改名。 `$ git remote rename <原主机名> <新主机名>`
 
 ## git fetch
 
@@ -128,8 +114,6 @@ git branch命令的-r选项，可以用来查看远程分支，-a选项查看所
     $ git rebase origin/master
 
 上面命令表示在当前分支上，合并origin/master。
-
----
 
 ## git pull
 
@@ -184,8 +168,6 @@ Git也允许手动建立追踪关系。
 
     $ git fetch --prune origin
 	$ git fetch -p
-
----
 
 ## git push
 
@@ -251,8 +233,6 @@ Git 2.0版本之前，默认采用matching方法，现在改为默认采用simpl
 最后，git push不会推送标签（tag），除非使用--tags选项。
 
     $ git push origin --tags
-
----
 
 ## Fork之后与源同步
 
