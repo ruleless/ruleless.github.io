@@ -7,12 +7,12 @@ categories: Git
 *  目录
 {:toc}
 
-# Git远程操作
-
 Git远程仓库与本地仓库的关系图
 
 ![]()
 [[./.Res/Git/GitRepRelation.png]]
+
+---
 
 ## git clone
 
@@ -43,6 +43,8 @@ SSH协议还有另一种写法：
     $ git clone [user@]example.com:path/to/repo.git/
 
 通常来说，Git协议下载速度最快，SSH协议用于需要用户认证的场合。
+
+---
 
 ## git remote
 
@@ -80,6 +82,8 @@ SSH协议还有另一种写法：
   4. git remote rename命令用于远程主机的改名。
 
         $ git remote rename <原主机名> <新主机名>
+
+---
 
 ## git fetch
 
@@ -124,6 +128,8 @@ git branch命令的-r选项，可以用来查看远程分支，-a选项查看所
     $ git rebase origin/master
 
 上面命令表示在当前分支上，合并origin/master。
+
+---
 
 ## git pull
 
@@ -178,6 +184,8 @@ Git也允许手动建立追踪关系。
 
     $ git fetch --prune origin
 	$ git fetch -p
+
+---
 
 ## git push
 
@@ -244,6 +252,8 @@ Git 2.0版本之前，默认采用matching方法，现在改为默认采用simpl
 
     $ git push origin --tags
 
+---
+
 ## Fork之后与源同步
 
 可按如下步骤同步源的最新代码：
@@ -252,6 +262,8 @@ Git 2.0版本之前，默认采用matching方法，现在改为默认采用simpl
   2. 从源仓库获取最新代码
   3. 将新更新下来的分支合并到master分支
 
-        git remote add source git@github.com:source/proj.git
-		git fetch source
-		git merge source/master
+源码如下：
+
+    git remote add source git@github.com:source/proj.git
+	git fetch source
+	git merge source/master
