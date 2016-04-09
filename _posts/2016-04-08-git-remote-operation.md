@@ -3,6 +3,7 @@ layout: post
 title: Git 远程操作
 categories: Git
 ---
+{% include JB/setup %}
 
 *  目录
 {:toc}
