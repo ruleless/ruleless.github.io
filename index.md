@@ -5,7 +5,7 @@ tagline: Try one more time!
 ---
 {% include JB/setup %}
 
-## Latest Posts
+## 最近发表 (共{{site.posts.size}}篇)
 
 <ul class="posts">
   {% for post in site.posts %}
