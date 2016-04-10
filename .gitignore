@@ -26,3 +26,6 @@ _site/
 
 # Ruby
 Gemfile.lock
+
+test.cpp
+test.el

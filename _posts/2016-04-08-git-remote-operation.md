@@ -5,9 +5,6 @@ categories: Git
 ---
 {% include JB/setup %}
 
-*  目录
-{:toc}
-
 ## Git远程仓库与本地仓库的关系图
 
 ![](/images/Git/GitRepRelation.png)
