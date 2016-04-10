@@ -355,3 +355,5 @@ void deleteCase6(NodeType *n)
 	}
 }
 ```
+
+*完整的代码参见： [红黑树示例](https://github.com/ruleless/stl_test/blob/master/RBTree.h)*
