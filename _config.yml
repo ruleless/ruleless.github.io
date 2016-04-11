@@ -13,6 +13,9 @@ excerpt_separator: "<!-- more -->"
 ## safe is false by default in local, this is the flag for known from remote.
 #safe: true
 
+gems: [jekyll-paginate]
+paginate: 15
+
 # conversion
 markdown:    kramdown
 kramdown:
