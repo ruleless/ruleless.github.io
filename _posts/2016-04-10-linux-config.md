@@ -3,7 +3,7 @@ layout: post
 title: "安装 CentOS 后的系统配置及软件安装备忘"
 description: ""
 category: linux
-tags: [linux]
+tags: [linux, 系统运维]
 ---
 {% include JB/setup %}
 
