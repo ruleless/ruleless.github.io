@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Git 远程操作
-categories: Git
+categories: git
 ---
 {% include JB/setup %}
 

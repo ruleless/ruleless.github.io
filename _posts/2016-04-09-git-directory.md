@@ -2,7 +2,7 @@
 layout: post
 title: "git directory"
 description: "Git 目录结构"
-category: Git
+category: git
 ---
 {% include JB/setup %}
 
