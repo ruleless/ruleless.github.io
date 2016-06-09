@@ -98,3 +98,52 @@ int pthread_cleanup_pop(int execute);
 // 清除清理函数。当execute为0时，只清除函数而不调用它，反之，则否。成功返回0，失败返回错误码。
 int pthread_cleanup_push(void* (*pCleanFunc)(void *), void *arg);
 ```
+
+被 `pthread_cleanup_push` 压入的清理函数在下列情况下会被执行：
+
+  * 调用pthread_exit终止线程
+  * 被其他线程通过pthread_cancel终止
+  * 以非0的execute参数调用pthread_cleanup_pop
+
+## 示例程序
+
+打印线程ID
+
+``` c++
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+static void printID() {
+	pid_t pid = getpid();
+	pthread_t tid = pthread_self();
+
+	printf("pid:%u  tid:%u(0x%08x)\n", (unsigned int)pid, (unsigned int)tid, (unsigned int)tid);
+}
+
+static void* threadSink(void *arg) {
+	printID();
+}
+
+int main(int argc, char *argv[]) {
+	pthread_t tid;
+	int res = pthread_create(&tid, NULL, threadSink, NULL);     // 创建线程
+	if (res != 0) {
+		printf("create thread err.\n");
+		exit(1);
+	}
+
+	printID();
+	pthread_join(tid, NULL);  // 阻塞，等待指定线程结束
+
+	exit(0);
+}
+```
+
+在Linux 3.16.0版本下，该函数输出如下：
+
+``` shell
+pid:7104  tid:3075671808(0xb7530700)
+pid:7104  tid:3075668800(0xb752fb40)
+```
