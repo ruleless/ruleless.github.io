@@ -1,28 +1,504 @@
----
-layout: null
-title : Sitemap
----
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 <url>
-	<loc> {{ site.production_url }}/</loc>
-	<lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
-	<changefreq>daily</changefreq>
+  <loc>http://ruleless.github.io/</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
 </url>
-
-{% for page in site.posts %}
 <url>
-	<loc>{{site.production_url}}{{ page.url }}</loc>
-	{% if page.last_updated %}
-	<lastmod>{{ page.last_updated | date: "%Y-%m-%d" }}</lastmod>
-	{% elsif page.date %}
-	<lastmod>{{ page.date | date: "%Y-%m-%d" }}</lastmod>
-	{% else %}
-	<lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
-	{% endif %}
-	<changefreq>monthly</changefreq>
+  <loc>http://ruleless.github.io/search.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
 </url>
-{% endfor %}
-
+<url>
+  <loc>http://ruleless.github.io/2016/06/24/cpp-tempobj.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-sysv-shm.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-posix-shm.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-posix-mq.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-ipc-pipe.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-io-multiplexing.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-io-mode.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-io-funcs.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-epoll.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/09/unix-ipc-basic.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/08/unix-pthread.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/06/asyncnet-structure.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-signal.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-session.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-fileoperator.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/page2/index.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/page3/index.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/page4/index.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/24/cpp-tempobj</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-sysv-shm</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-posix-shm</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-posix-mq</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-ipc-pipe</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-io-multiplexing</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-io-mode</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-io-funcs</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/10/unix-epoll</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/09/unix-ipc-basic</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/08/unix-pthread</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/06/06/asyncnet-structure</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-signal</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-session</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-fileoperator</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-file-introduction.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-dirop.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/process-introduction.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/process-control.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/25/download-tool-for-bbcs.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/13/bpf-syntax.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/07/mem-ibm-slab.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/07/kmem-slab.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/27/c-vs-dll.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/25/ruby-install-rvm.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/20/emacs-centos65-makeerr-fix.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/unix-perm-manager.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/network-tcpip-protocol-field.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/network-tcpip-outline.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/network-tcpip-layer.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/lisp-traverse-directory.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/linux-config.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/concurrent-basic.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/bellman-ford.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-union-find-set.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-trie.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-tarjan.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-tarjan-dcc.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-spfa.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-rbtree.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-primer.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-network-flows.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-km.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-bigraph-match.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/09/nginx-init-script.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/09/git-directory.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/08/git-remote-operation.html</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-file-introduction</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/unix-dirop</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/process-introduction</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/28/process-control</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/25/download-tool-for-bbcs</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/13/bpf-syntax</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/07/mem-ibm-slab</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/05/07/kmem-slab</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/27/c-vs-dll</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/25/ruby-install-rvm</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/20/emacs-centos65-makeerr-fix</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/unix-perm-manager</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/network-tcpip-protocol-field</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/network-tcpip-outline</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/network-tcpip-layer</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/lisp-traverse-directory</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/linux-config</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/concurrent-basic</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/bellman-ford</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-union-find-set</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-trie</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-tarjan</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-tarjan-dcc</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-spfa</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-rbtree</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-primer</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-network-flows</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-km</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/10/algorithm-bigraph-match</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/09/nginx-init-script</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/09/git-directory</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>http://ruleless.github.io/2016/04/08/git-remote-operation</loc>
+  <lastmod>2016-06-25T15:34:42+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
 </urlset>
