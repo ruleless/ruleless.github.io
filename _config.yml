@@ -17,8 +17,8 @@ gems: [jekyll-paginate]
 paginate: 15
 
 # conversion
-markdown: rdiscount
-# markdown: kramdown
+# markdown: rdiscount
+markdown: kramdown
 kramdown:
   input: GFM
   #Insert HTML <br /> tags inside paragraphs where the original Markdown document had newlines (by default, Markdown ignores these newlines). default is true. Github is false.
