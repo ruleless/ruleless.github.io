@@ -9,7 +9,11 @@ tags: []
 
 ## 常用工具汇总
 
-  + ip
+  + **ifconfig**
+
+    此工具包含于 net-tools 中，用于配置网卡设备，已过时。
+
+  + **ip**
 
     显示或管理路由表及网卡的工具。我通常用该工具来管理网卡设备，路由表的管理则用 route。
 	当以最小工具集的方式安装好操作系统后，网络肯定是未连接的。
@@ -25,11 +29,7 @@ tags: []
 	在使用 `ip` 命令的时候会发现，它有很多跟 `ifconfig` 重复的功能，而且还有很多 `ifconfig` 没有功能。
 	事实上，`ifconfig` 是一个过时的工具，`ip` 可以作为它的替代工具来使用。
 
-  + ifconfig
-
-    此工具包含于 net-tools 中，用于配置网卡设备，已过时。
-
-  + ping
+  + **ping**
 
     利用 icmp 回显报文来确定指定主机是否可达的网络检测工具。
 	我们经常听人说，某某台机器ping得通，某某台ping不通。
@@ -40,16 +40,43 @@ tags: []
 	所以，ping命令只能确定主机是否"在线"，而不能确定主机是否"不在线"。
 	当出现ping不通的情况时，我们应利用更为强大的工具来确定主机是否真的"不在线"，例如，nmap。
 
-  + nmap
+  + **nmap**
 
-  + netstat
+  + **netstat**
 
-    用于显示：网络连接、路由表、网卡统计等信息，包含于 net-tools 中。
+    用于显示Linux网络子系统相关的信息，包括：网络连接、路由表、网络统计等。包含于 net-tools 中。
+	已过时。
 
-  + route
+  + **ss**
 
-  + traceroute
+	用于显示和统计sockets信息，是netstat的替代工具。
 
-  + tcpdump
+	不带参数时，ss默认显示已建立连接的TCP管道，ss通常情况下的用到的参数有：
 
-  + nslookup/dig/host
+	  + `-a` 显示监听和非监听sockets
+	  + `-l` 仅显示监听sockets
+	  + `-n` 禁用名字解析
+	  + `-p` 显示关联进程
+	  + `-t` 显示TCP sockets
+	  + `-u` 显示UDP sockets
+	  + `-d` 显示DCCP sockets
+	  + `-w` 显示RAW sockets
+	  + `-x` 显示Unix domain sockets
+	  + `-s` 显示统计信息
+
+    常见用法：
+
+	  + `ss -ant` 显示所有TCP sockets
+	  + `ss -lnt` 仅显示处于LISTEN状态的TCP sockets
+	  + `ss -anu` 显示所有UDP sockets
+	  + `ss -anx` 显示所有Unix domain sockets
+
+  + **route**
+
+    显示和管理路由表。
+
+  + **traceroute**
+
+  + **tcpdump**
+
+  + **nslookup/dig/host**
