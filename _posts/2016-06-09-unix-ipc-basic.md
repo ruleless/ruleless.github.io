@@ -2,7 +2,7 @@
 layout: post
 title: "进程IPC概要"
 description: ""
-category: Unix环境编程
+category: Unix环境编程[进程IPC]
 tags: [进程IPC]
 ---
 {% include JB/setup %}

@@ -2,7 +2,7 @@
 layout: post
 title: "Unix环境下的基础进程知识"
 description: ""
-category: Unix环境编程
+category: Unix环境编程[进程]
 tags: [进程]
 ---
 {% include JB/setup %}

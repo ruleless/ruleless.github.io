@@ -2,7 +2,7 @@
 layout: post
 title: "同步I/O模型"
 description: ""
-category: Unix环境编程
+category: Unix环境编程[I/O]
 tags: [I/O]
 ---
 {% include JB/setup %}

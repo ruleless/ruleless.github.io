@@ -2,7 +2,7 @@
 layout: post
 title: "Unix下的基础线程知识(pthread)"
 description: ""
-category: Unix环境编程
+category: Unix环境编程[Pthread]
 tags: [线程]
 ---
 {% include JB/setup %}
