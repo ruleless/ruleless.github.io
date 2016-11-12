@@ -2,8 +2,8 @@
 layout: post
 title: "I/O多路转接(I/O复用)"
 description: ""
-category: Unix环境编程[I/O]
-tags: [I/O]
+category: Unix环境编程
+tags: [unix i/o]
 ---
 {% include JB/setup %}
 

@@ -2,8 +2,8 @@
 layout: post
 title: "Posix 共享内存区"
 description: ""
-category: Unix环境编程[进程IPC]
-tags: [进程IPC]
+category: Unix环境编程
+tags: [unix ipc]
 ---
 {% include JB/setup %}
 

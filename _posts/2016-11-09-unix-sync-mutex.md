@@ -2,8 +2,8 @@
 layout: post
 title: "互斥锁和条件变量"
 description: ""
-category: Unix环境编程[同步机制]
-tags: [互斥锁, 条件变量]
+category: Unix环境编程
+tags: [互斥锁, 条件变量, unix同步机制]
 ---
 {% include JB/setup %}
 

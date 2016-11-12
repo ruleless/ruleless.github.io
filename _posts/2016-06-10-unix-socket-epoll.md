@@ -2,8 +2,8 @@
 layout: post
 title: "Linux epoll"
 description: ""
-category: Unix环境编程[Socket]
-tags: [I/O]
+category: Unix环境编程
+tags: [bsd socket]
 ---
 {% include JB/setup %}
 

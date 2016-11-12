@@ -2,8 +2,8 @@
 layout: post
 title: "Unix下的基础文件知识"
 description: ""
-category: Unix环境编程[文件]
-tags: [文件]
+category: Unix环境编程
+tags: [unix文件]
 ---
 {% include JB/setup %}
 

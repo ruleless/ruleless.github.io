@@ -2,8 +2,8 @@
 layout: post
 title: "读写锁"
 description: ""
-category: Unix环境编程[同步机制]
-tags: [读写锁]
+category: Unix环境编程
+tags: [读写锁, unix同步机制]
 ---
 {% include JB/setup %}
 

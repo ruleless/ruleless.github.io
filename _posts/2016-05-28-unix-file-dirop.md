@@ -2,8 +2,8 @@
 layout: post
 title: "Unix下的目录操作"
 description: ""
-category: Unix环境编程[文件]
-tags: [文件]
+category: Unix环境编程
+tags: [unix文件]
 ---
 {% include JB/setup %}
 

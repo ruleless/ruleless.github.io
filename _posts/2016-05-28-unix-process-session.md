@@ -2,8 +2,8 @@
 layout: post
 title: "进程会话"
 description: ""
-category: Unix环境编程[进程]
-tags: [进程]
+category: Unix环境编程
+tags: [unix进程]
 ---
 {% include JB/setup %}
 
