@@ -3,7 +3,7 @@ layout: post
 title: "SPFA(Shortest path faster algorithm)"
 description: ""
 category: algorithm
-tags: [算法, spfa]
+tags: []
 ---
 {% include JB/setup %}
 

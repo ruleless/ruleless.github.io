@@ -3,7 +3,7 @@ layout: post
 title: "双连通分量"
 description: ""
 category: algorithm
-tags: [算法, 双连通分量]
+tags: []
 ---
 {% include JB/setup %}
 

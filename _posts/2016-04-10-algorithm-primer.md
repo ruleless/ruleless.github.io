@@ -3,7 +3,7 @@ layout: post
 title: "分享一道关于素数的笔试题"
 description: ""
 category: algorithm
-tags: [算法, 素数]
+tags: []
 ---
 {% include JB/setup %}
 

@@ -3,7 +3,7 @@ layout: post
 title: "红黑树"
 description: ""
 category: algorithm
-tags: [算法, 红黑树]
+tags: []
 ---
 {% include JB/setup %}
 

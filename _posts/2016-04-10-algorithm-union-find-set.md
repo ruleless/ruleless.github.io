@@ -3,7 +3,7 @@ layout: post
 title: "并查集"
 description: ""
 category: algorithm
-tags: [算法, 高级数据结构]
+tags: []
 ---
 {% include JB/setup %}
 

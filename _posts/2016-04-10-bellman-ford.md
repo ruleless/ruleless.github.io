@@ -3,7 +3,7 @@ layout: post
 title: "Bellman-Ford算法求最短路"
 description: ""
 category: algorithm
-tags: [算法, 最短路]
+tags: []
 ---
 {% include JB/setup %}
 

@@ -3,7 +3,7 @@ layout: post
 title: "并发编程基础"
 description: ""
 category: concurrent
-tags: [并发, 原子操作]
+tags: []
 ---
 {% include JB/setup %}
 

@@ -3,7 +3,7 @@ layout: post
 title: "Unix权限管理"
 description: ""
 category: Unix环境编程
-tags: [unix, 权限管理]
+tags: []
 ---
 {% include JB/setup %}
 
