@@ -70,6 +70,15 @@ tags: [linux]
 
 跟 selinux 相关的命令有 getenforce 和 setenforce。具体可查看手册页：man selinux
 
+### openssl加解密工具
+
+**RSA加解密**
+
+  + 生成RSA私钥：`openssl genrsa -des3 -out private.pem 2048`
+  + 生成RSA私钥对应的公钥：`openssl rsa -in private.pem -outform PEM -pubout -out public.pem`
+  + 使用RSA公钥加密文件：`openssl rsautl -encrypt -inkey public.pem -pubin -in file.in -out file.rsa`
+  + 使用RSA私钥解密文件：`openssl rsautl -decrypt -inkey private.pem -in file.rsa -out file.out`
+
 ## 开发工具或命令
 
 ### 编译相关
