@@ -38,23 +38,23 @@ mmap函数把一个文件或一个Posix共享内存区对象映射到调用进�
 mmap参数说明：
 
   + `addr`指定fd所对应的文件应被映射到的进程内空间的起始地址，通常为空。
-	表示由内核自己去选择起始地址。
+    表示由内核自己去选择起始地址。
 
   + `len` 映射到调用进程地址空间的字节数
 
   + `prot` 指定内存映射区的访问权限（常指定为PROT_READ\|PROT_WRITE）。
 
     - `PROT_READ` 数据可读
-	- `PROT_WRITE` 数据可写
-	- `PROT_EXEC` 数据可执行
-	- `PROT_NONE` 数据不可访问
+    - `PROT_WRITE` 数据可写
+    - `PROT_EXEC` 数据可执行
+    - `PROT_NONE` 数据不可访问
 
   + `flags` MAP_SHARED或MAP_PRIVATE必须指定其中一个，并可有选择地或上MAP_FIXED
 
     - `MAP_PRIVATE` 调用进程对内存映射区所作的修改只对该进程可见，不改变底层支撑对象
-	- `MAP_SHARED` 调用进程对内存映射区所作的修改对所有共享底层支撑对象的进程可见，并且映射区的数据更改也会反映到底层支撑对象
-	- `MAP_FIXED` 从移植性上考虑，MAP_FIXED不应该指定。如果没有指定该标志，但addr不是一个空指针，那么addr如何处置取决于实现；
-	  可移植的代码应把addr指定成一个空指针，并且不指定MAP_FIXED
+    - `MAP_SHARED` 调用进程对内存映射区所作的修改对所有共享底层支撑对象的进程可见，并且映射区的数据更改也会反映到底层支撑对象
+    - `MAP_FIXED` 从移植性上考虑，MAP_FIXED不应该指定。如果没有指定该标志，但addr不是一个空指针，那么addr如何处置取决于实现；
+      可移植的代码应把addr指定成一个空指针，并且不指定MAP_FIXED
 
   + `fd` 打开的文件描述符
 
@@ -133,11 +133,11 @@ int fstat(int fd, struct stat *buf); // 成功返回0，失败返回-1
 ``` c++
 struct stat
 {
-	...
-	mode_t st_mode;
-	uid_t st_uid;
-	gid_t st_gid;
-	off_t st_size;
+    ...
+    mode_t st_mode;
+    uid_t st_uid;
+    gid_t st_gid;
+    off_t st_size;
 };
 ```
 
@@ -177,32 +177,32 @@ shmio.cpp(内存映射I/O示例)
 
 int main(int argc, char *argv[])
 {
-	const char *fileName = "tmp";
-	if (argc > 1)
-		fileName = argv[1];
+    const char *fileName = "tmp";
+    if (argc > 1)
+        fileName = argv[1];
 
-	int fd = open(fileName, O_RDWR|O_CREAT, 0644);
-	if (fd < 0)
-		errQuit("open file failed.");
+    int fd = open(fileName, O_RDWR|O_CREAT, 0644);
+    if (fd < 0)
+        errQuit("open file failed.");
 
-	void *ptr = mmap(NULL, MAX_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
-	ftruncate(fd, 0);
+    void *ptr = mmap(NULL, MAX_SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
+    ftruncate(fd, 0);
 
-	int n = 0;
-	int cur = 0;
-	char buff[MAX_SIZE];
-	while ((n=read(STDIN_FILENO, buff, MAX_SIZE)) > 0)
-	{
-		n = min(n, MAX_SIZE-cur);
-		ftruncate(fd, cur+n);
-		memcpy(ptr+cur, buff, n);
-		cur += n;
+    int n = 0;
+    int cur = 0;
+    char buff[MAX_SIZE];
+    while ((n=read(STDIN_FILENO, buff, MAX_SIZE)) > 0)
+    {
+        n = min(n, MAX_SIZE-cur);
+        ftruncate(fd, cur+n);
+        memcpy(ptr+cur, buff, n);
+        cur += n;
 
-		if (cur >= MAX_SIZE)
-			break;
-	}
+        if (cur >= MAX_SIZE)
+            break;
+    }
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -213,11 +213,11 @@ shmcreate.cpp
 
 int main(int argc, char *argv[])
 {
-	int fd = shm_open(SHMNAME, O_RDWR|O_CREAT|O_EXCL, 0644);
-	if (fd < 0)
-		errQuit("open shm failed.");
-	printf("create shm sucess.\n");
-	exit(0);
+    int fd = shm_open(SHMNAME, O_RDWR|O_CREAT|O_EXCL, 0644);
+    if (fd < 0)
+        errQuit("open shm failed.");
+    printf("create shm sucess.\n");
+    exit(0);
 }
 ```
 
@@ -228,8 +228,8 @@ shmunlink.cpp
 
 int main(int argc, char *argv[])
 {
-	shm_unlink(SHMNAME);
-	exit(0);
+    shm_unlink(SHMNAME);
+    exit(0);
 }
 ```
 

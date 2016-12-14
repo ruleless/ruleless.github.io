@@ -28,24 +28,24 @@ System V即通过提供操作计数信号量集的接口来实现信号量。
 
 struct semid_ds
 {
-	struct ipc_perm sem_perm; /* operation permission struct */
-	unsigned long int sem_nsems; /* number of semaphores in set */
-	__time_t sem_ctime; /* last time changed by semctl() */
-	__time_t sem_otime; /* last semop() time */
-	struct sem *sem_base; // 应用程序不可见
-	unsigned long int __unused1;
-	unsigned long int __unused2;
-	unsigned long int __unused3;
-	unsigned long int __unused4;
+    struct ipc_perm sem_perm; /* operation permission struct */
+    unsigned long int sem_nsems; /* number of semaphores in set */
+    __time_t sem_ctime; /* last time changed by semctl() */
+    __time_t sem_otime; /* last semop() time */
+    struct sem *sem_base; // 应用程序不可见
+    unsigned long int __unused1;
+    unsigned long int __unused2;
+    unsigned long int __unused3;
+    unsigned long int __unused4;
 };
 
 // sem结构是内核用于维护某个给定信号量的一组值的内部数据结构，一般至少包含下列成员
 struct sem
 {
-	ushort_t semval; // semaphore value, nonnegative
-	short sempid; // PID of last successful semop(), SETVAL, SETALL
-	ushort_t semncnt; // awaiting semval > current value
-	ushort_t semzcnt; // awaiting semval = 0
+    ushort_t semval; // semaphore value, nonnegative
+    short sempid; // PID of last successful semop(), SETVAL, SETALL
+    ushort_t semncnt; // awaiting semval > current value
+    ushort_t semzcnt; // awaiting semval = 0
 };
 ```
 
@@ -80,9 +80,9 @@ int semop(int semid, struct sembuf *ops, int opcnt); // 成功返回0，失败�
 
 struct sembuf // 操作参数
 {
-	unsigned short int sem_num;   /* semaphore number */
-	short int sem_op;     /* semaphore operation */
-	short int sem_flg;        /* operation flag */
+    unsigned short int sem_num;   /* semaphore number */
+    short int sem_op;     /* semaphore operation */
+    short int sem_flg;        /* operation flag */
 };
 ```
 
@@ -107,12 +107,12 @@ struct sembuf // 操作参数
   2. 如果sem_op是负数，此时的语义可理解为调用者申请sem_op个资源，这相当于P操作
 
      1. 如果semval>=\|sem_op\|，那么执行semval+=sem_op；如果指定了SEM_UNDO标志，那么执行semad-=semadj
-	 2. 如果semval<\|sem_op\|，那么相应的++ semncnt，调用线程被阻塞到semval>=\|sem_op\|之时，到那时也会执行--semncnt；
-	    如果指定了IPC_NOWAIT标志，semop将立即返回EAGAIN错误
+     2. 如果semval<\|sem_op\|，那么相应的++ semncnt，调用线程被阻塞到semval>=\|sem_op\|之时，到那时也会执行--semncnt；
+        如果指定了IPC_NOWAIT标志，semop将立即返回EAGAIN错误
 
   3. 如果sem_op等于0，那么调用者希望semval变为0，如果semval==0，那么立即返回，
      如果semval!=0，相应的semzcnt就加1，等到semval==0之时semop返回，semzcnt减1；
-	 如果指定了IPC_NOWAIT标志，并且semval!=0，semop立即返回EAGAIN错误
+     如果指定了IPC_NOWAIT标志，并且semval!=0，semop立即返回EAGAIN错误
 
 ## 信号量控制
 
@@ -129,11 +129,11 @@ semnum标识信号量集内的某个成员，其仅用于GETVAL、SETVAL、GETNC
 
 ``` c++
 union semun {
-	int val;            /* value for SETVAL */
-	struct semid_ds *buf;   /* buffer for IPC_STAT & IPC_SET */
-	unsigned short *array;  /* array for GETALL & SETALL */
-	struct seminfo *__buf;  /* buffer for IPC_INFO */
-	void *__pad;
+    int val;            /* value for SETVAL */
+    struct semid_ds *buf;   /* buffer for IPC_STAT & IPC_SET */
+    unsigned short *array;  /* array for GETALL & SETALL */
+    struct seminfo *__buf;  /* buffer for IPC_INFO */
+    void *__pad;
 };
 ```
 
@@ -173,9 +173,9 @@ semdef.h
 
 union semun
 {
-	int val;
-	struct semid_ds *buf;
-	unsigned short *array;
+    int val;
+    struct semid_ds *buf;
+    unsigned short *array;
 };
 
 extern void errQuit();
@@ -190,8 +190,8 @@ semdef.cpp
 
 void errQuit()
 {
-	printf("%s\n", strerror(errno));
-	exit(1);
+    printf("%s\n", strerror(errno));
+    exit(1);
 }
 ```
 
@@ -202,20 +202,20 @@ semcreate.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SEM_PATH, 1);
-	if (key < 0)
-		errQuit();
+    key_t key = ftok(SEM_PATH, 1);
+    if (key < 0)
+        errQuit();
 
-	int semnum = 1;
-	if (argc > 1)
-		semnum = atoi(argv[1]);
+    int semnum = 1;
+    if (argc > 1)
+        semnum = atoi(argv[1]);
 
-	if (semget(key, semnum, 0644|IPC_CREAT|IPC_EXCL) < 0)
-		errQuit();
+    if (semget(key, semnum, 0644|IPC_CREAT|IPC_EXCL) < 0)
+        errQuit();
 
-	printf("create sem ok!\n");
+    printf("create sem ok!\n");
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -226,30 +226,30 @@ semsetvals.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SEM_PATH, 1);
-	if (key < 0)
-		errQuit();
+    key_t key = ftok(SEM_PATH, 1);
+    if (key < 0)
+        errQuit();
 
-	int semid = semget(key, 0, 0);
-	if (semid < 0)
-		errQuit();
+    int semid = semget(key, 0, 0);
+    if (semid < 0)
+        errQuit();
 
-	struct semid_ds ds;
-	union semun arg;
-	arg.buf = &ds;
-	if (semctl(semid, 0, IPC_STAT, arg) < 0)
-		errQuit();
+    struct semid_ds ds;
+    union semun arg;
+    arg.buf = &ds;
+    if (semctl(semid, 0, IPC_STAT, arg) < 0)
+        errQuit();
 
-	unsigned short *semarr = new unsigned short[ds.sem_nsems];
-	memset(semarr, 0, sizeof(unsigned short)*ds.sem_nsems);
-	for (int i = 1; i < argc && i-1 < ds.sem_nsems; ++i)
-		semarr[i-1] = atoi(argv[i]);
+    unsigned short *semarr = new unsigned short[ds.sem_nsems];
+    memset(semarr, 0, sizeof(unsigned short)*ds.sem_nsems);
+    for (int i = 1; i < argc && i-1 < ds.sem_nsems; ++i)
+        semarr[i-1] = atoi(argv[i]);
 
-	arg.array = semarr;
-	if (semctl(semid, 0, SETALL, arg) < 0)
-		errQuit();
+    arg.array = semarr;
+    if (semctl(semid, 0, SETALL, arg) < 0)
+        errQuit();
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -260,29 +260,29 @@ semgetvals.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SEM_PATH, 1);
-	if (key < 0)
-		errQuit();
+    key_t key = ftok(SEM_PATH, 1);
+    if (key < 0)
+        errQuit();
 
-	int semid = semget(key, 0, 0);
-	if (semid < 0)
-		errQuit();
+    int semid = semget(key, 0, 0);
+    if (semid < 0)
+        errQuit();
 
-	struct semid_ds ds;
-	union semun arg;
-	arg.buf = &ds;
-	if (semctl(semid, 0, IPC_STAT, arg) < 0)
-		errQuit();
+    struct semid_ds ds;
+    union semun arg;
+    arg.buf = &ds;
+    if (semctl(semid, 0, IPC_STAT, arg) < 0)
+        errQuit();
 
-	unsigned short *semarr = new unsigned short[ds.sem_nsems];
-	arg.array = semarr;
-	if (semctl(semid, 0, GETALL, arg) < 0)
-		errQuit();
+    unsigned short *semarr = new unsigned short[ds.sem_nsems];
+    arg.array = semarr;
+    if (semctl(semid, 0, GETALL, arg) < 0)
+        errQuit();
 
-	for (int i = 0; i < ds.sem_nsems; ++i)
-		printf("sem %d: %d\n", i, semarr[i]);
+    for (int i = 0; i < ds.sem_nsems; ++i)
+        printf("sem %d: %d\n", i, semarr[i]);
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -293,18 +293,18 @@ semrm.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SEM_PATH, 1);
-	if (key < 0)
-		errQuit();
+    key_t key = ftok(SEM_PATH, 1);
+    if (key < 0)
+        errQuit();
 
-	int semid = semget(key, 0, 0);
-	if (semid < 0)
-		errQuit();
+    int semid = semget(key, 0, 0);
+    if (semid < 0)
+        errQuit();
 
-	if (semctl(semid, 0, IPC_RMID) == 0)
-		printf("rm ok.\n");
+    if (semctl(semid, 0, IPC_RMID) == 0)
+        printf("rm ok.\n");
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -315,33 +315,33 @@ semop.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SEM_PATH, 1);
-	if (key < 0)
-		errQuit();
+    key_t key = ftok(SEM_PATH, 1);
+    if (key < 0)
+        errQuit();
 
-	int semid = semget(key, 0, 0);
-	if (semid < 0)
-		errQuit();
+    int semid = semget(key, 0, 0);
+    if (semid < 0)
+        errQuit();
 
-	struct semid_ds ds;
-	union semun arg;
-	arg.buf = &ds;
-	if (semctl(semid, 0, SEM_STAT, arg) < 0)
-		errQuit();
+    struct semid_ds ds;
+    union semun arg;
+    arg.buf = &ds;
+    if (semctl(semid, 0, SEM_STAT, arg) < 0)
+        errQuit();
 
-	static const int N = 10;
-	struct sembuf opBufs[N];
-	int n = 0;
-	for (int i = 1; i < argc; ++i)
-	{
-		opBufs[n].sem_op = atoi(argv[i]);
-		opBufs[n].sem_num = i-1;
-		opBufs[n].sem_flg = 0;
-		++n;
-	}
-	if (semop(semid, opBufs, n) < 0)
-		errQuit();
+    static const int N = 10;
+    struct sembuf opBufs[N];
+    int n = 0;
+    for (int i = 1; i < argc; ++i)
+    {
+        opBufs[n].sem_op = atoi(argv[i]);
+        opBufs[n].sem_num = i-1;
+        opBufs[n].sem_flg = 0;
+        ++n;
+    }
+    if (semop(semid, opBufs, n) < 0)
+        errQuit();
 
-	exit(0);
+    exit(0);
 }
 ```

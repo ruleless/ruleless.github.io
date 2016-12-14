@@ -68,9 +68,9 @@ fcntl函数提供5种功能
 
   + **复制一个现有的描述符(F_DUPFD)**
 
-	`dup(fd)` 等价于 `fcntl(fd, F_DUPFD, 0);`
-	`dup2(fd, newfd)` 等价于 `close(newfd); fcntl(fd, F_DUPFD, newfd);`
-	若成功返回新复制的文件描述符
+    `dup(fd)` 等价于 `fcntl(fd, F_DUPFD, 0);`
+    `dup2(fd, newfd)` 等价于 `close(newfd); fcntl(fd, F_DUPFD, newfd);`
+    若成功返回新复制的文件描述符
 
   + **获得/设置文件描述符标记(F_GETFD/F_SETFD)**
 
@@ -79,7 +79,7 @@ fcntl函数提供5种功能
   + **获得/设置文件状态标志(F_GETFL/F_SETFL)**
 
     F_GETFL：返回当前的文件状态标志
-	F_SETFL：设置文件状态标志，可设置的状态标志包括：
+    F_SETFL：设置文件状态标志，可设置的状态标志包括：
     `O_APPEND、O_NONBLOCK、O_SYNC、O_DSYNC ...`
 
   + **获得/设置异步I/O所有权(F_GETOWN/F_SETOWN)**
@@ -100,14 +100,14 @@ char buff[s_buffSize];
 
 int main(int argc, char* argv[])
 {
-	int n = 0;
-	while ((n=read(STDIN_FILENO, buff, s_buffSize)) > 0)
-	{
-		if (write(STDOUT_FILENO, buff, n) != n)
-		{
-			printf("write error! pid=%d\n", getpid());
-			exit(1);
-		}
-	}
+    int n = 0;
+    while ((n=read(STDIN_FILENO, buff, s_buffSize)) > 0)
+    {
+        if (write(STDOUT_FILENO, buff, n) != n)
+        {
+            printf("write error! pid=%d\n", getpid());
+            exit(1);
+        }
+    }
 }
 ```

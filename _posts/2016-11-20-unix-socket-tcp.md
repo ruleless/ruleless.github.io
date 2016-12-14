@@ -30,20 +30,20 @@ int socket(int family, int type, int protocol);
   + family取值：
 
     - `AF_INET` 对应IPv4地址族
-	- `AF6_INET` 对应IPv6地址族
+    - `AF6_INET` 对应IPv6地址族
 
   + type取值：
 
     - `SOCK_STREAM` 字节流套接字
-	- `SOCK_DGRAM` 数据报套接字
-	- `SOCK_SEQPACKET` 有序分组套接字
-	- `SOCK_RAW` 原始套接字
+    - `SOCK_DGRAM` 数据报套接字
+    - `SOCK_SEQPACKET` 有序分组套接字
+    - `SOCK_RAW` 原始套接字
 
   + protocol取值：
 
     - `IPPROTO_TCP` TCP传输协议
-	- `IPPROTO_UDP` UDP传输协议
-	- `IPPROTO_SCTP` SCTP传输协议
+    - `IPPROTO_UDP` UDP传输协议
+    - `IPPROTO_SCTP` SCTP传输协议
 
 ### 地址绑定函数
 
@@ -144,101 +144,101 @@ static void echoClient(int connfd, const SA *cliaddr, uint32_t addrlen);
 
 int main(int argc, char *argv[])
 {
-	int listenfd = -1;
-	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		errsys("create listen sock err!");
-	}
+    int listenfd = -1;
+    if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        errsys("create listen sock err!");
+    }
 
-	struct sockaddr_in servaddr;
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    struct sockaddr_in servaddr;
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
-	servaddr.sin_port = htons(60000);
-	if (bind(listenfd, (SA*)&servaddr, sizeof(servaddr)) < 0) {
-		errsys("bind addr err!");
-	}
+    servaddr.sin_port = htons(60000);
+    if (bind(listenfd, (SA*)&servaddr, sizeof(servaddr)) < 0) {
+        errsys("bind addr err!");
+    }
 
-	if (listen(listenfd, 5) < 0) {
-		errsys("listen failed!");
-	}
+    if (listen(listenfd, 5) < 0) {
+        errsys("listen failed!");
+    }
 
-	struct sigaction newact, oldact;
-	newact.sa_handler = sigChild;
-	sigemptyset(&newact.sa_mask);
-	newact.sa_flags = SA_INTERRUPT;
-	if (sigaction(SIGCHLD, &newact, &oldact) < 0) {
-		errsys("setup signal failed!");
-	}
+    struct sigaction newact, oldact;
+    newact.sa_handler = sigChild;
+    sigemptyset(&newact.sa_mask);
+    newact.sa_flags = SA_INTERRUPT;
+    if (sigaction(SIGCHLD, &newact, &oldact) < 0) {
+        errsys("setup signal failed!");
+    }
 
-	for (;;) {
-		int connfd = -1;
-		struct sockaddr_in cliaddr;
-		uint32_t addrLen = sizeof(cliaddr);
+    for (;;) {
+        int connfd = -1;
+        struct sockaddr_in cliaddr;
+        uint32_t addrLen = sizeof(cliaddr);
 
-		if ((connfd = accept(listenfd, (SA *)&cliaddr, &addrLen)) < 0) {
-			if (errno == EINTR) {
-				continue;
-			}
-			else {
-				errsys("accept err!");
-			}
-		}
-		else {
-			int pid = -1;
-			if ((pid = fork()) < 0) {
-				errsys("fork err!");
-			}
-			else if (pid == 0) {
-				close(listenfd);
-				echoClient(connfd, (const SA *)&cliaddr, addrLen);
-				exit(0);
-			}
+        if ((connfd = accept(listenfd, (SA *)&cliaddr, &addrLen)) < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            else {
+                errsys("accept err!");
+            }
+        }
+        else {
+            int pid = -1;
+            if ((pid = fork()) < 0) {
+                errsys("fork err!");
+            }
+            else if (pid == 0) {
+                close(listenfd);
+                echoClient(connfd, (const SA *)&cliaddr, addrLen);
+                exit(0);
+            }
 
-			close(connfd);
-		}
-	}
-	exit(0);
+            close(connfd);
+        }
+    }
+    exit(0);
 }
 
 static void errsys(const char *errmsg) {
-	printf("%s\n", errmsg);
-	exit(1);
+    printf("%s\n", errmsg);
+    exit(1);
 }
 
 static void sigChild(int signo) {
-	int status = 0;
-	int pid = wait(&status);
+    int status = 0;
+    int pid = wait(&status);
 
-	static const int s_buffSize = 255;
-	char hintBuff[s_buffSize];
-	snprintf(hintBuff, s_buffSize-1, "child process %d exit status:%d\n", pid, status);
-	write(STDIN_FILENO, hintBuff, strlen(hintBuff));
+    static const int s_buffSize = 255;
+    char hintBuff[s_buffSize];
+    snprintf(hintBuff, s_buffSize-1, "child process %d exit status:%d\n", pid, status);
+    write(STDIN_FILENO, hintBuff, strlen(hintBuff));
 }
 
 static void echoClient(int connfd, const SA *cliaddr, uint32_t addrlen) {
-	static const int s_buffSize = 1024;
-	char buff[s_buffSize] = {0};
+    static const int s_buffSize = 1024;
+    char buff[s_buffSize] = {0};
 
-	for (;;) {
-		int n = 0;
-		if ((n = read(connfd, buff, s_buffSize)) < 0) {
-			if (errno == EINTR) {
-				continue;
-			}
-			else {
-				errsys("server read err!");
-			}
-		}
-		else if (n > 0) {
-			if (write(connfd, buff, n) != n) {
-				errsys("write err!");
-			}
-		}
-		else {
-			close(connfd);
-			break;
-		}
-	}
+    for (;;) {
+        int n = 0;
+        if ((n = read(connfd, buff, s_buffSize)) < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            else {
+                errsys("server read err!");
+            }
+        }
+        else if (n > 0) {
+            if (write(connfd, buff, n) != n) {
+                errsys("write err!");
+            }
+        }
+        else {
+            close(connfd);
+            break;
+        }
+    }
 }
 ```
 
@@ -259,56 +259,56 @@ static void echoClient(int connfd, const SA *cliaddr, uint32_t addrlen) {
 static void errsys(const char *msg);
 
 int main(int argc, char *argv[]) {
-	static const int s_errBuffSize = 256;
-	char errBuff[s_errBuffSize] = {0};
-	if (argc < 2) {
-		errsys("no input param!");
-	}
+    static const int s_errBuffSize = 256;
+    char errBuff[s_errBuffSize] = {0};
+    if (argc < 2) {
+        errsys("no input param!");
+    }
 
-	int cliFD = -1;
-	if ((cliFD = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		errsys("create socket err!");
-	}
+    int cliFD = -1;
+    if ((cliFD = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        errsys("create socket err!");
+    }
 
-	struct sockaddr_in servaddr;
-	servaddr.sin_family = AF_INET;
-	if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0) {
-		errsys("illegal ip addr!");
-	}
-	servaddr.sin_port = htons(60000);
+    struct sockaddr_in servaddr;
+    servaddr.sin_family = AF_INET;
+    if (inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0) {
+        errsys("illegal ip addr!");
+    }
+    servaddr.sin_port = htons(60000);
 
-	if (connect(cliFD, (const SA *)&servaddr, sizeof(servaddr)) < 0) {
-		snprintf(errBuff, s_errBuffSize, "connect err! %s", strerror(errno));
-		errsys(errBuff);
-	}
+    if (connect(cliFD, (const SA *)&servaddr, sizeof(servaddr)) < 0) {
+        snprintf(errBuff, s_errBuffSize, "connect err! %s", strerror(errno));
+        errsys(errBuff);
+    }
 
-	static const int s_buffSize = 1024;
-	char buff[s_buffSize];
-	while (fgets(buff, s_buffSize, stdin) != NULL) {
-		int n = strlen(buff);
-		if (write(cliFD, buff, n) != n) {
-			errsys("write err!");
-		}
+    static const int s_buffSize = 1024;
+    char buff[s_buffSize];
+    while (fgets(buff, s_buffSize, stdin) != NULL) {
+        int n = strlen(buff);
+        if (write(cliFD, buff, n) != n) {
+            errsys("write err!");
+        }
 
-		if ((n = read(cliFD, buff, s_buffSize)) < 0) {
-			errsys("read err!");
-		}
-		else if (n > 0) {
-			write(STDOUT_FILENO, buff, n);
-		}
-		else {
-			snprintf(buff, s_buffSize, "server shutdown!");
-			write(STDOUT_FILENO, buff, strlen(buff));
-			break;
-		}
-	}
+        if ((n = read(cliFD, buff, s_buffSize)) < 0) {
+            errsys("read err!");
+        }
+        else if (n > 0) {
+            write(STDOUT_FILENO, buff, n);
+        }
+        else {
+            snprintf(buff, s_buffSize, "server shutdown!");
+            write(STDOUT_FILENO, buff, strlen(buff));
+            break;
+        }
+    }
 
-	exit(0);
+    exit(0);
 }
 
 static void errsys(const char *errmsg) {
-	printf("%s\n", errmsg);
-	exit(1);
+    printf("%s\n", errmsg);
+    exit(1);
 }
 ```
 

@@ -63,44 +63,44 @@ epoll 是什么？按照 man 手册的说法：是为处理大批量句柄而作
 
   1. 支持一个进程打开大数目的 socket 描述符(fd)
 
-	 select 最不能忍受的是一个进程所打开的 fd 是有一定限制的，由 FD_SETSIZE 设置，默认值是 2048。
-	 对于那些需要支持上万连接数目的 IM 服务器来说显然太少了。
-	 这时候你一是可以选择修改这个宏然后重新编译内核，不过资料也同时指出这样会带来网络效率的下降；
-	 二是可以选择多进程的解决方案(传统的 Apache 方案)，不过虽然 linux 上面创建进程的代价比较小，但仍旧是不可忽视的，
-	 加上进程间数据同步远比不上线程间同步高效，所以这也不是一种完美的方案。
-	 不过 epoll 没有这个限制，它所支持的 fd 上限是最大可以打开文件的数目，这个数字一般远大于 select 所支持的2048。
-	 举个例子，在 1GB 内存的机器上大约是 10 万左右，具体数目可以 cat /proc/sys/fs/file-max 察看，一般来说这个数目和系统内存关系很大。
+     select 最不能忍受的是一个进程所打开的 fd 是有一定限制的，由 FD_SETSIZE 设置，默认值是 2048。
+     对于那些需要支持上万连接数目的 IM 服务器来说显然太少了。
+     这时候你一是可以选择修改这个宏然后重新编译内核，不过资料也同时指出这样会带来网络效率的下降；
+     二是可以选择多进程的解决方案(传统的 Apache 方案)，不过虽然 linux 上面创建进程的代价比较小，但仍旧是不可忽视的，
+     加上进程间数据同步远比不上线程间同步高效，所以这也不是一种完美的方案。
+     不过 epoll 没有这个限制，它所支持的 fd 上限是最大可以打开文件的数目，这个数字一般远大于 select 所支持的2048。
+     举个例子，在 1GB 内存的机器上大约是 10 万左右，具体数目可以 cat /proc/sys/fs/file-max 察看，一般来说这个数目和系统内存关系很大。
 
   2. I/O效率不随 fd 数目增加而线性下降
 
      传统 select/poll 的另一个致命弱点就是当你拥有一个很大的 socket 集合，
-	 由于网络得延时，使得任一时间只有部分的 socket 是"活跃" 的，
-	 而 select/poll 每次调用都会线性扫描全部的集合，导致效率呈现线性下降。
-	 但是 epoll 不存在这个问题，它只会对"活跃"的 socket 进行操作，
-	 这是因为在内核实现中 epoll 是根据每个 fd 上面的 callback 函数实现的。
-	 于是，只有"活跃"的 socket 才会主动去调用 callback 函数，其他 idle 状态的 socket 则不会，
-	 在这点上，epoll实现了一个"伪" AIO，因为这时候推动力在 os 内核。
-	 在一些 benchmark 中，如果所有的 socket 基本上都是活跃的，比如一个高速LAN环境，
-	 epoll 也不比 select/poll 低多少效率，但若过多地调用 epoll_ctl，效率稍微有些下降。
-	 然而一旦使用 idle connections 模拟 WAN 环境，那么 epoll 的效率就远在 select/poll 之上了。
+     由于网络得延时，使得任一时间只有部分的 socket 是"活跃" 的，
+     而 select/poll 每次调用都会线性扫描全部的集合，导致效率呈现线性下降。
+     但是 epoll 不存在这个问题，它只会对"活跃"的 socket 进行操作，
+     这是因为在内核实现中 epoll 是根据每个 fd 上面的 callback 函数实现的。
+     于是，只有"活跃"的 socket 才会主动去调用 callback 函数，其他 idle 状态的 socket 则不会，
+     在这点上，epoll实现了一个"伪" AIO，因为这时候推动力在 os 内核。
+     在一些 benchmark 中，如果所有的 socket 基本上都是活跃的，比如一个高速LAN环境，
+     epoll 也不比 select/poll 低多少效率，但若过多地调用 epoll_ctl，效率稍微有些下降。
+     然而一旦使用 idle connections 模拟 WAN 环境，那么 epoll 的效率就远在 select/poll 之上了。
 
   3. 使用 mmap 加速内核与用户空间的消息传递
 
      这点实际上涉及到 epoll 的具体实现。
-	 无论是 select、poll 还是 epoll 都需要内核把 fd 消息通知给用户空间，
-	 如何避免不必要的内存拷贝就显得很重要，在这点上，epoll 是通过内核于用户空间 mmap 同一块内存实现的。
-	 而如果你像我一样从2.5内核就开始关注 epoll 的话，一定不会忘记手 工 mmap 这一步的。
+     无论是 select、poll 还是 epoll 都需要内核把 fd 消息通知给用户空间，
+     如何避免不必要的内存拷贝就显得很重要，在这点上，epoll 是通过内核于用户空间 mmap 同一块内存实现的。
+     而如果你像我一样从2.5内核就开始关注 epoll 的话，一定不会忘记手 工 mmap 这一步的。
 
   4. 内核微调
 
      这一点其实不算 epoll 的优点，而是整个 linux 平台的优点。
-	 也许你可以怀疑 linux 平台，但是你无法回避 linux 平台赋予你微调内核的能力。
-	 比如，内核 TCP/IP 协议栈使用内存池管理 sk_buff 结构，
-	 可以在运行期间动态地调整这个内存 pool(skb_head_pool) 的大小
-	 （通过 echo XXXX>/proc/sys/net/core/hot_list_length 来完成）。
-	 再比如 listen 函数的第2个参数(TCP完成3次握手的数据包队列长度)，
-	 也可以根据你平台内存大小来动态调整。
-	 甚至可以在一个数据包面数目巨大但同时每个数据包本身大小却很小的特殊系统上尝试最新的 NAPI 网卡驱动架构。
+     也许你可以怀疑 linux 平台，但是你无法回避 linux 平台赋予你微调内核的能力。
+     比如，内核 TCP/IP 协议栈使用内存池管理 sk_buff 结构，
+     可以在运行期间动态地调整这个内存 pool(skb_head_pool) 的大小
+     （通过 echo XXXX>/proc/sys/net/core/hot_list_length 来完成）。
+     再比如 listen 函数的第2个参数(TCP完成3次握手的数据包队列长度)，
+     也可以根据你平台内存大小来动态调整。
+     甚至可以在一个数据包面数目巨大但同时每个数据包本身大小却很小的特殊系统上尝试最新的 NAPI 网卡驱动架构。
 
 ## epoll 的工作模式
 
@@ -255,15 +255,15 @@ epoll 模型主要负责对大量并发用户的请求进行及时处理，完�
   2. 创建与 epoll 关联的接收线程，应用程序可以创建多个接收线程来处理 epoll 上的读通知事件，线程的数量依赖于程序的具体需要。
   3. 创建一个侦听 socket 的描述符 ListenSock，并将该描述符设定为非阻塞模式，
      调用 listen() 函数在该套接字上侦听有无新的连接请求，
-	 在 epoll_event 结构中设置要处理的事件类型 EPOLLIN，
-	 工作方式为 EPOLLET，以提高工作效率，同时使用 epoll_ctl() 来注册事件，
-	 最后启动网络监视线程。
+     在 epoll_event 结构中设置要处理的事件类型 EPOLLIN，
+     工作方式为 EPOLLET，以提高工作效率，同时使用 epoll_ctl() 来注册事件，
+     最后启动网络监视线程。
   4. 网络监视线程启动循环，epoll_wait() 等待 epoll 事件发生。
   5. 如果epoll事件表明有新的连接请求，则调用 accept() 函数，将用户 socket 描述符添加到 epoll_data 联合体，
      同时设定该描述符为非阻塞，并在 epoll_event 结构中设置要处理的事件类型为读和写，工作方式为 EPOLL_ET。
   6. 如果 epoll 事件表明 socket 描述符上有数据可读，则将该 socket 描述符加入可读队列，
      通知接收线程读入数据，并将接收到的数据放入到接收数据的链表中，经逻辑处理后，
-	 将反馈的数据包放入到发送数据链表中，等待由发送线程发送。
+     将反馈的数据包放入到发送数据链表中，等待由发送线程发送。
 
 例子代码：
 
@@ -339,7 +339,7 @@ int main()
                 }
                 setnonblocking(connfd); //把客户端的socket设置为非阻塞方式
                 char *str = inet_ntoa(clientaddr.sin_addr);
-				printf("connect from %s\n", str);
+                printf("connect from %s\n", str);
                 ev.data.fd=connfd; //设置用于读操作的文件描述符
                 ev.events=EPOLLIN | EPOLLET; //设置用于注测的读操作事件
                 epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&ev); //注册ev事件
@@ -356,7 +356,7 @@ int main()
                     }
                     else
                     {
-						printf("readline error\n");
+                        printf("readline error\n");
                     }
                 }
                 else if (n == 0)

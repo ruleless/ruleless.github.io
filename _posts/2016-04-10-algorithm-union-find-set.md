@@ -19,12 +19,12 @@ tags: []
 ``` c++
 int Find(int a)
 {
-	if (parent[a] < 0)
-		return a;
+    if (parent[a] < 0)
+        return a;
 
-	int root = Find(parent[a]);
-	parent[a] = root; // 路径压缩
-	return root;
+    int root = Find(parent[a]);
+    parent[a] = root; // 路径压缩
+    return root;
 }
 ```
 
@@ -33,20 +33,20 @@ int Find(int a)
 ``` c++
 void Union(int a, int b)
 {
-	int rootA = Find(a);
-	int rootB = Find(b);
-	if (rootA == rootB)
-		return;
+    int rootA = Find(a);
+    int rootB = Find(b);
+    if (rootA == rootB)
+        return;
 
-	if (parent[rootA] < parent[rootB])
-	{
-		parent[rootA] += parent[rootB];
-		parent[rootB] = rootA;
-	}
-	else
-	{
-		parent[rootB] += parent[rootA];
-		parent[rootA] = rootB;
-	}
+    if (parent[rootA] < parent[rootB])
+    {
+        parent[rootA] += parent[rootB];
+        parent[rootB] = rootA;
+    }
+    else
+    {
+        parent[rootB] += parent[rootA];
+        parent[rootA] = rootB;
+    }
 }
 ```

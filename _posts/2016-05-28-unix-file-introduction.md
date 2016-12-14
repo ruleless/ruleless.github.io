@@ -14,11 +14,11 @@ Unix系统的大多数文件是普通文件和目录，但也有另外一些文�
   1. **普通文件(regular file)** 这是最常用的文件类型，其类型测试宏为：`S_ISREG`
   2. **目录文件(directory file)**
      对一个目录文件具有读权限的进程可以读该目录的内容，但只有内核可以直接写目录文件。
-	 类型测试宏：`S_ISDIR`
+     类型测试宏：`S_ISDIR`
   3. **块特殊文件(block special file)** 这种类型的文件提供对设备带缓冲的访问。类型测试宏：`S_ISBLK`
   4. **字符特殊文件(character special file)**
      这种类型的文件提供对设备不带缓冲的访问，每次访问长度可变。
-	 系统中的所有设备要么是字符特殊文件，要么是块特殊文件。类型测试宏：`S_ISCHR`
+     系统中的所有设备要么是字符特殊文件，要么是块特殊文件。类型测试宏：`S_ISCHR`
   5. **FIFO(named pipe)有名管道** 通过mkfifo创建，是进程IPC的一种方式。类型测试宏：`S_ISFIFO`
   6. **套接字(socket)** 用于不同主机上的进程通信，也称网络IPC。类型测试宏：`S_ISSOCK`
   7. **符号链接(symbolic link)** 用于指向另一个文件。类型测试宏：`S_ISLINK`
@@ -31,19 +31,19 @@ Unix系统的大多数文件是普通文件和目录，但也有另外一些文�
 // 文件属性结构
 struct stat
 {
-	mode_t st_mode; // 文件模式字，包括：包括设置用户ID位、设置组ID位、文件访问权限等
-	ino_t st_ino; // 文件i节点号
-	dev_t st_dev; // device
-	numberdev_t st_rdev; // device number for special file
-	nlink_t st_nlink; // number of links
-	uid_t st_uid; // 文件所属用户ID
-	gid_t st_gid; // 文件所属组ID
-	off_t st_size; // 文件大小
-	time_t st_atime; // time of last access
-	time_t st_mtime; // time of last modification
-	time_t st_ctime; // time of last file status changeblk
-	size_t st_blksize; // best I/O block size
-	blckcnt_t st_blocks; // numbers of disk blocks allocated
+    mode_t st_mode; // 文件模式字，包括：包括设置用户ID位、设置组ID位、文件访问权限等
+    ino_t st_ino; // 文件i节点号
+    dev_t st_dev; // device
+    numberdev_t st_rdev; // device number for special file
+    nlink_t st_nlink; // number of links
+    uid_t st_uid; // 文件所属用户ID
+    gid_t st_gid; // 文件所属组ID
+    off_t st_size; // 文件大小
+    time_t st_atime; // time of last access
+    time_t st_mtime; // time of last modification
+    time_t st_ctime; // time of last file status changeblk
+    size_t st_blksize; // best I/O block size
+    blckcnt_t st_blocks; // numbers of disk blocks allocated
 };
 ```
 
@@ -115,7 +115,7 @@ mode_t umask(mode_t cmask); // 设置进程的文件模式创建屏蔽字，返�
 
 int chmod(const char *pathname, mode_t mode);
 int fchmod(int fd, mode_t mode);
-	// 以上函数成功返回0，失败返回-1
+    // 以上函数成功返回0，失败返回-1
 ```
 
 注意：umask 只针对 creat 或 open 创建文件时有效，当我们使用 chmod 函数更改文件访问权限位时，将会忽略 umask 的值。
@@ -131,7 +131,7 @@ int fchmod(int fd, mode_t mode);
 int chown(const char *pathname, uid_t uid, gid_t group);
 int fchown(int fd, uid_t uid, gid_t group);
 int lchown(const char *pathname, uid_t uid, gid_t group);
-	// 成功返回0，失败返回-1
+    // 成功返回0，失败返回-1
 ```
 
 lchown 与 chown 的区别是，当 lchown 用于符号链接文件时，lchown 更改的是符号链文件的属主，而非符号链接所指向文件的属主。

@@ -34,60 +34,60 @@ tags: []
 
 typedef struct _DictTree
 {
-	int times;
-	struct _DictTree* child[MAX_TREE_NODE];
+    int times;
+    struct _DictTree* child[MAX_TREE_NODE];
 }DictTree, *DictTreePtr;
 
 static DictTreePtr g_root = NULL;
 
 void insert(const char* str)
 {
-	int i              = 0;
-	int len            = strlen(str);
-	DictTreePtr prePtr = NULL;
-	DictTreePtr nxtPtr = NULL;
+    int i              = 0;
+    int len            = strlen(str);
+    DictTreePtr prePtr = NULL;
+    DictTreePtr nxtPtr = NULL;
 
-	if (!g_root)
-	{
+    if (!g_root)
+    {
         g_root = (DictTreePtr)malloc(sizeof(DictTree));
         memset(g_root, 0, sizeof(DictTree));
-	}
-	prePtr = g_root;
+    }
+    prePtr = g_root;
 
-	for (i = 0; i < len; ++i)
-	{
+    for (i = 0; i < len; ++i)
+    {
         nxtPtr = prePtr->child[str[i]];
         if (!nxtPtr)
         {
-			nxtPtr = (DictTreePtr)malloc(sizeof(DictTree));
-			memset(nxtPtr, 0, sizeof(DictTree));
+            nxtPtr = (DictTreePtr)malloc(sizeof(DictTree));
+            memset(nxtPtr, 0, sizeof(DictTree));
         }
         prePtr->child[str[i]] = nxtPtr;
         prePtr                = nxtPtr;
         if (i == len -1)
-			++(prePtr->times);
-	}
+            ++(prePtr->times);
+    }
 }
 
 int search(const char* str)
 {
-	int i = 0;
-	int len = strlen(str);
-	DictTreePtr prePtr = NULL;
-	DictTreePtr nxtPtr = NULL;
+    int i = 0;
+    int len = strlen(str);
+    DictTreePtr prePtr = NULL;
+    DictTreePtr nxtPtr = NULL;
 
-	if (!g_root)
+    if (!g_root)
         return 0;
-	prePtr = g_root;
+    prePtr = g_root;
 
-	for (i = 0; i < len; ++i)
-	{
+    for (i = 0; i < len; ++i)
+    {
         nxtPtr = prePtr->child[str[i]];
         if (!nxtPtr)
-			return 0;
+            return 0;
         prePtr = nxtPtr;
-	}
+    }
 
-	return prePtr->times;
+    return prePtr->times;
 }
 ```

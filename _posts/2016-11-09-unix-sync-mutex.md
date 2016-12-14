@@ -61,9 +61,9 @@ int pthread_mutexattr_destroy(pthread_mutexattr_t *attr); // 成功返回0，失
 ``` c++
 enum
 {
-	PTHREAD_PROCESS_PRIVATE, // 线程间共享
+    PTHREAD_PROCESS_PRIVATE, // 线程间共享
 #define PTHREAD_PROCESS_PRIVATE PTHREAD_PROCESS_PRIVATE
-	PTHREAD_PROCESS_SHARED // 进程间共享
+    PTHREAD_PROCESS_SHARED // 进程间共享
 #define PTHREAD_PROCESS_SHARED  PTHREAD_PROCESS_SHARED
 };
 
@@ -88,18 +88,18 @@ int pthread_cond_destroy(pthread_cond_t *cond); // 成功返回0，失败返回-
 ``` c++
 typedef union
 {
-	struct
-	{
-		int __lock;
-		unsigned int __futex;
-		__extension__ unsigned long long int __total_seq;
-		__extension__ unsigned long long int __wakeup_seq;
-		__extension__ unsigned long long int __woken_seq;
-		void *__mutex;unsigned int __nwaiters;
-		unsigned int __broadcast_seq;
-	} __data;
-	char __size[__SIZEOF_PTHREAD_COND_T];
-	__extension__ long long int __align;
+    struct
+    {
+        int __lock;
+        unsigned int __futex;
+        __extension__ unsigned long long int __total_seq;
+        __extension__ unsigned long long int __wakeup_seq;
+        __extension__ unsigned long long int __woken_seq;
+        void *__mutex;unsigned int __nwaiters;
+        unsigned int __broadcast_seq;
+    } __data;
+    char __size[__SIZEOF_PTHREAD_COND_T];
+    __extension__ long long int __align;
 } pthread_cond_t;
 ```
 
@@ -153,22 +153,22 @@ SampleDef.h
 
 struct Shared
 {
-	int buff[N];
-	int nput;
-	int nputval;
-	pthread_mutex_t producerMutex;
+    int buff[N];
+    int nput;
+    int nputval;
+    pthread_mutex_t producerMutex;
 
-	int nReady;
-	pthread_mutex_t readyMutex;
-	pthread_cond_t cond;
+    int nReady;
+    pthread_mutex_t readyMutex;
+    pthread_cond_t cond;
 
-	Shared()
-	{
-		memset(buff, -1, sizeof(buff));
-		nput = 0;
-		nputval = 0;
-		nReady = 0;
-	}
+    Shared()
+    {
+        memset(buff, -1, sizeof(buff));
+        nput = 0;
+        nputval = 0;
+        nReady = 0;
+    }
 };
 
 #endif
@@ -189,83 +189,83 @@ void* consumer(void *arg);
 
 int main(int argc, char *argv[])
 {
-	gItems = 1;
-	if (argc > 1)
-		gItems = atoi(argv[1]);
+    gItems = 1;
+    if (argc > 1)
+        gItems = atoi(argv[1]);
 
-	int nProducer = MAX_THREAD;
-	if (argc > 2)
-		nProducer = min(nProducer, atoi(argv[2]));
+    int nProducer = MAX_THREAD;
+    if (argc > 2)
+        nProducer = min(nProducer, atoi(argv[2]));
 
-	pthread_t tidProducers[MAX_THREAD];
-	int execTimes[MAX_THREAD];
-	for (int i = 0; i < nProducer; ++i)
-	{
-		execTimes[i] = 0;
-		pthread_create(&tidProducers[i], NULL, producer, &execTimes[i]);
-	}
+    pthread_t tidProducers[MAX_THREAD];
+    int execTimes[MAX_THREAD];
+    for (int i = 0; i < nProducer; ++i)
+    {
+        execTimes[i] = 0;
+        pthread_create(&tidProducers[i], NULL, producer, &execTimes[i]);
+    }
 
-	pthread_t tidConsumer;
-	pthread_create(&tidConsumer, NULL, consumer, NULL);
+    pthread_t tidConsumer;
+    pthread_create(&tidConsumer, NULL, consumer, NULL);
 
-	for (int i = 0; i < nProducer; ++i)
-	{
-		pthread_join(tidProducers[i], NULL);
-	}
-	pthread_join(tidConsumer, NULL);
+    for (int i = 0; i < nProducer; ++i)
+    {
+        pthread_join(tidProducers[i], NULL);
+    }
+    pthread_join(tidConsumer, NULL);
 
-	for (int i = 0; i < nProducer; ++i)
-	{
-		printf("producer %d run %d times\n", i, execTimes[i]);
-	}
+    for (int i = 0; i < nProducer; ++i)
+    {
+        printf("producer %d run %d times\n", i, execTimes[i]);
+    }
 
-	exit(0);
+    exit(0);
 }
 
 void* producer(void *arg)
 {
-	for (;;)
-	{
-		pthread_mutex_lock(&gShared.producerMutex);
-		if (gShared.nputval >= gItems)
-		{
-			pthread_mutex_unlock(&gShared.producerMutex);
-			return NULL;
-		}
-		gShared.buff[gShared.nput++%N] = gShared.nputval++;
-		pthread_mutex_unlock(&gShared.producerMutex);
+    for (;;)
+    {
+        pthread_mutex_lock(&gShared.producerMutex);
+        if (gShared.nputval >= gItems)
+        {
+            pthread_mutex_unlock(&gShared.producerMutex);
+            return NULL;
+        }
+        gShared.buff[gShared.nput++%N] = gShared.nputval++;
+        pthread_mutex_unlock(&gShared.producerMutex);
 
-		pthread_mutex_lock(&gShared.readyMutex);
-		++gShared.nReady;
-		pthread_mutex_unlock(&gShared.readyMutex);
+        pthread_mutex_lock(&gShared.readyMutex);
+        ++gShared.nReady;
+        pthread_mutex_unlock(&gShared.readyMutex);
 
-		if (1 == gShared.nReady)  // 唤醒消费线程
-			pthread_cond_signal(&gShared.cond);
+        if (1 == gShared.nReady)  // 唤醒消费线程
+            pthread_cond_signal(&gShared.cond);
 
-		(*((int *)arg))++;
-	}
-	return NULL;
+        (*((int *)arg))++;
+    }
+    return NULL;
 }
 
 void* consumer(void *arg)
 {
-	for (int i = 0; i < gItems; ++i)
-	{
-		pthread_mutex_lock(&gShared.readyMutex);
-		while (gShared.nReady <= 0)
-		{
-			pthread_cond_wait(&gShared.cond, &gShared.readyMutex);
-		}
+    for (int i = 0; i < gItems; ++i)
+    {
+        pthread_mutex_lock(&gShared.readyMutex);
+        while (gShared.nReady <= 0)
+        {
+            pthread_cond_wait(&gShared.cond, &gShared.readyMutex);
+        }
 
-		--gShared.nReady;
-		if (gShared.buff[i%N] != i)
-		{
-			printf("conflict! index=%d curval=%d legalval=%d\n", i%N, gShared.buff[i%N], i);
-		}
+        --gShared.nReady;
+        if (gShared.buff[i%N] != i)
+        {
+            printf("conflict! index=%d curval=%d legalval=%d\n", i%N, gShared.buff[i%N], i);
+        }
 
-		pthread_mutex_unlock(&gShared.readyMutex);
-	}
-	return NULL;
+        pthread_mutex_unlock(&gShared.readyMutex);
+    }
+    return NULL;
 }
 ```
 
@@ -283,106 +283,106 @@ void* consumer(void *arg);
 
 int main(int argc, char *argv[])
 {
-	if (argc > 1)
-		gItems = min(atoi(argv[1]), N);
+    if (argc > 1)
+        gItems = min(atoi(argv[1]), N);
 
-	int nProducer = MAX_THREAD;
-	if (argc > 2)
-		nProducer = min(atoi(argv[2]), MAX_THREAD);
-	int nConsumer = MAX_THREAD;
-	if (argc > 3)
-		nProducer = min(atoi(argv[3]), MAX_THREAD);
+    int nProducer = MAX_THREAD;
+    if (argc > 2)
+        nProducer = min(atoi(argv[2]), MAX_THREAD);
+    int nConsumer = MAX_THREAD;
+    if (argc > 3)
+        nProducer = min(atoi(argv[3]), MAX_THREAD);
 
-	pthread_t tidProducers[MAX_THREAD];
-	int execTimesOfProducer[MAX_THREAD];
-	for (int i = 0; i < nProducer; ++i)
-	{
-		execTimesOfProducer[i] = 0;
-		pthread_create(&tidProducers[i], NULL, producer, &execTimesOfProducer[i]);
-	}
+    pthread_t tidProducers[MAX_THREAD];
+    int execTimesOfProducer[MAX_THREAD];
+    for (int i = 0; i < nProducer; ++i)
+    {
+        execTimesOfProducer[i] = 0;
+        pthread_create(&tidProducers[i], NULL, producer, &execTimesOfProducer[i]);
+    }
 
-	pthread_t tidConsumers[MAX_THREAD];
-	int execTimesOfConsumer[MAX_THREAD];
-	for (int i = 0; i < nConsumer; ++i)
-	{
-		execTimesOfConsumer[i] = 0;
-		pthread_create(&tidConsumers[i], NULL, consumer, &execTimesOfConsumer[i]);
-	}
+    pthread_t tidConsumers[MAX_THREAD];
+    int execTimesOfConsumer[MAX_THREAD];
+    for (int i = 0; i < nConsumer; ++i)
+    {
+        execTimesOfConsumer[i] = 0;
+        pthread_create(&tidConsumers[i], NULL, consumer, &execTimesOfConsumer[i]);
+    }
 
-	for (int i = 0; i < nProducer; ++i)
-	{
-		pthread_join(tidProducers[i], NULL);
-	}
+    for (int i = 0; i < nProducer; ++i)
+    {
+        pthread_join(tidProducers[i], NULL);
+    }
 
-	for (int i = 0; i < nConsumer; ++i)
-	{
-		pthread_join(tidConsumers[i], NULL);
-	}
+    for (int i = 0; i < nConsumer; ++i)
+    {
+        pthread_join(tidConsumers[i], NULL);
+    }
 
-	for (int i = 0; i < nProducer; ++i)
-	{
-		printf("producer %d run %d times\n", i, execTimesOfProducer[i]);
-	}
-	for (int i = 0; i < nConsumer; ++i)
-	{
-		printf("consumer %d run %d times\n", i, execTimesOfConsumer[i]);
-	}
+    for (int i = 0; i < nProducer; ++i)
+    {
+        printf("producer %d run %d times\n", i, execTimesOfProducer[i]);
+    }
+    for (int i = 0; i < nConsumer; ++i)
+    {
+        printf("consumer %d run %d times\n", i, execTimesOfConsumer[i]);
+    }
 
-	exit(0);
+    exit(0);
 }
 
 void* producer(void *arg)
 {
-	for (;;)
-	{
-		pthread_mutex_lock(&gShared.producerMutex);
-		if (gShared.nputval >= gItems)
-		{
-			pthread_mutex_unlock(&gShared.producerMutex);
-			return NULL;
-		}
-		gShared.buff[gShared.nput++] = gShared.nputval++;
-		pthread_mutex_unlock(&gShared.producerMutex);
+    for (;;)
+    {
+        pthread_mutex_lock(&gShared.producerMutex);
+        if (gShared.nputval >= gItems)
+        {
+            pthread_mutex_unlock(&gShared.producerMutex);
+            return NULL;
+        }
+        gShared.buff[gShared.nput++] = gShared.nputval++;
+        pthread_mutex_unlock(&gShared.producerMutex);
 
-		pthread_mutex_lock(&gShared.readyMutex);
-		++gShared.nReady;
-		pthread_mutex_unlock(&gShared.readyMutex);
+        pthread_mutex_lock(&gShared.readyMutex);
+        ++gShared.nReady;
+        pthread_mutex_unlock(&gShared.readyMutex);
 
-		if (1 == gShared.nReady)
-			pthread_cond_broadcast(&gShared.cond);
+        if (1 == gShared.nReady)
+            pthread_cond_broadcast(&gShared.cond);
 
-		(*((int *)arg))++;
-	}
-	return NULL;
+        (*((int *)arg))++;
+    }
+    return NULL;
 }
 
 void* consumer(void *arg)
 {
-	for (;;)
-	{
-		pthread_mutex_lock(&gShared.readyMutex);
-		while (gShared.nReady <= 0 && gShared.ngetval < gItems)
-		{
-			pthread_cond_wait(&gShared.cond, &gShared.readyMutex);
-		}
-		if (gShared.ngetval >= gItems)
-		{
-			pthread_mutex_unlock(&gShared.readyMutex);
-			return NULL;
-		}
+    for (;;)
+    {
+        pthread_mutex_lock(&gShared.readyMutex);
+        while (gShared.nReady <= 0 && gShared.ngetval < gItems)
+        {
+            pthread_cond_wait(&gShared.cond, &gShared.readyMutex);
+        }
+        if (gShared.ngetval >= gItems)
+        {
+            pthread_mutex_unlock(&gShared.readyMutex);
+            return NULL;
+        }
 
-		--gShared.nReady;
-		if (gShared.buff[gShared.nget] != gShared.ngetval)
-		{
-			printf("conflict! index=%d curval=%d legalval=%d\n", gShared.nget, gShared.buff[gShared.nget], gShared.ngetval);
-		}
-		++gShared.nget;
-		++gShared.ngetval;
+        --gShared.nReady;
+        if (gShared.buff[gShared.nget] != gShared.ngetval)
+        {
+            printf("conflict! index=%d curval=%d legalval=%d\n", gShared.nget, gShared.buff[gShared.nget], gShared.ngetval);
+        }
+        ++gShared.nget;
+        ++gShared.ngetval;
 
-		pthread_mutex_unlock(&gShared.readyMutex);
+        pthread_mutex_unlock(&gShared.readyMutex);
 
-		(*((int *)arg))++;
-	}
-	return NULL;
+        (*((int *)arg))++;
+    }
+    return NULL;
 }
 ```

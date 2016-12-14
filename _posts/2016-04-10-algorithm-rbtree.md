@@ -38,23 +38,23 @@ tags: []
 ``` c++
 inline Node* grandParent(Node *n) const
 {
-	return n->parent->parent;
+    return n->parent->parent;
 }
 
 inline Node* uncle(Node *n) const
 {
-	if (grandParent(n)->left == n->parent)
-		return grandParent(n)->right;
-	else
-		return grandParent(n)->left;
+    if (grandParent(n)->left == n->parent)
+        return grandParent(n)->right;
+    else
+        return grandParent(n)->left;
 }
 
 inline Node* sibling(Node *n) const
 {
-	if (n->parent->left == n)
-		return n->parent->right;
-	else
-		return n->parent->left;
+    if (n->parent->left == n)
+        return n->parent->right;
+    else
+        return n->parent->left;
 }
 ```
 
@@ -66,10 +66,10 @@ inline Node* sibling(Node *n) const
 ``` c++
 void insertCase1(NodeType *n)
 {
-	if (n->parent == NULL)
-		n->color = RBTree_Black;
-	else
-		insertCase2(n);
+    if (n->parent == NULL)
+        n->color = RBTree_Black;
+    else
+        insertCase2(n);
 }
 ```
 
@@ -83,10 +83,10 @@ void insertCase1(NodeType *n)
 ``` c++
 void insertCase2(NodeType *n)
 {
-	if (n->parent->color == RBTree_Black)
-		return;
-	else
-		insertCase3(n);
+    if (n->parent->color == RBTree_Black)
+        return;
+    else
+        insertCase3(n);
 }
 ```
 
@@ -105,17 +105,17 @@ void insertCase2(NodeType *n)
 ``` c++
 void insertCase3(NodeType *n)
 {
-	if (uncle(n) && uncle(n)->color == RBTree_Red)
-	{
-		grandParent(n)->color = RBTree_Red;
-		uncle(n)->color = RBTree_Black;
-		n->parent->color = RBTree_Black;
-		insertCase1(grandParent(n));
-	}
-	else
-	{
-		insertCase4(n);
-	}
+    if (uncle(n) && uncle(n)->color == RBTree_Red)
+    {
+        grandParent(n)->color = RBTree_Red;
+        uncle(n)->color = RBTree_Black;
+        n->parent->color = RBTree_Black;
+        insertCase1(grandParent(n));
+    }
+    else
+    {
+        insertCase4(n);
+    }
 }
 ```
 
@@ -131,18 +131,18 @@ void insertCase3(NodeType *n)
 ``` c++
 void insertCase4(NodeType *n)
 {
-	NodeType *x = n;
-	if (grandParent(n)->left == n->parent && n->parent->right == n)
-	{
-		rotateLeft(n->parent);
-		x = n->left;
-	}
-	else if (grandParent(n)->right == n->parent && n->parent->left == n)
-	{
-		rotateRight(n->parent);
-		x = n->right;
-	}
-	insertCase5(x);
+    NodeType *x = n;
+    if (grandParent(n)->left == n->parent && n->parent->right == n)
+    {
+        rotateLeft(n->parent);
+        x = n->left;
+    }
+    else if (grandParent(n)->right == n->parent && n->parent->left == n)
+    {
+        rotateRight(n->parent);
+        x = n->right;
+    }
+    insertCase5(x);
 }
 ```
 
@@ -161,17 +161,17 @@ void insertCase4(NodeType *n)
 ``` c++
 void insertCase5(NodeType *n)
 {
-	grandParent(n)->color = RBTree_Red;
-	n->parent->color = RBTree_Black;
+    grandParent(n)->color = RBTree_Red;
+    n->parent->color = RBTree_Black;
 
-	if (grandParent(n)->left == n->parent)
-	{
-		rotateRight(grandParent(n));
-	}
-	else
-	{
-		rotateLeft(grandParent(n));
-	}
+    if (grandParent(n)->left == n->parent)
+    {
+        rotateRight(grandParent(n));
+    }
+    else
+    {
+        rotateLeft(grandParent(n));
+    }
 }
 ```
 
@@ -203,8 +203,8 @@ N是新的根。在这种情形下，我们就做完了。我们从所有路径�
 ``` c++
 void deleteCase1(NodeType *n)
 {
-	if (n != mRoot)
-		deleteCase2(n);
+    if (n != mRoot)
+        deleteCase2(n);
 }
 ```
 
@@ -220,17 +220,17 @@ S是红色。在这种情形下我们在N的父亲上做左旋转，把红色兄
 ``` c++
 void deleteCase2(NodeType *n)
 {
-	NodeType* s = sibling(n);
-	if (s->color == RBTree_Red)
-	{
-		n->parent->color = RBTree_Red;
-		s->color = RBTree_Black;
-		if (s->parent->left == s)
-			rotateRight(n->parent);
-		else
-			rotateLeft(n->parent);
-	}
-	deleteCase3(n);
+    NodeType* s = sibling(n);
+    if (s->color == RBTree_Red)
+    {
+        n->parent->color = RBTree_Red;
+        s->color = RBTree_Black;
+        if (s->parent->left == s)
+            rotateRight(n->parent);
+        else
+            rotateLeft(n->parent);
+    }
+    deleteCase3(n);
 }
 ```
 
@@ -247,19 +247,19 @@ N的父亲、S和S的儿子都是黑色的。在这种情形下，我们简单�
 ``` c++
 void deleteCase3(NodeType *n)
 {
-	NodeType *s = sibling(n);
-	if (s->color == RBTree_Black &&
-		(s->left == NULL || s->left->color == RBTree_Black) &&
-		(s->right == NULL || s->right->color == RBTree_Black) &&
-		n->parent->color == RBTree_Black)
-	{
-		s->color = RBTree_Red;
-		deleteCase1(n->parent);
-	}
-	else
-	{
-		deleteCase4(n);
-	}
+    NodeType *s = sibling(n);
+    if (s->color == RBTree_Black &&
+        (s->left == NULL || s->left->color == RBTree_Black) &&
+        (s->right == NULL || s->right->color == RBTree_Black) &&
+        n->parent->color == RBTree_Black)
+    {
+        s->color = RBTree_Red;
+        deleteCase1(n->parent);
+    }
+    else
+    {
+        deleteCase4(n);
+    }
 }
 ```
 
@@ -273,19 +273,19 @@ S和S的儿子都是黑色，但是N的父亲是红色。在这种情形下，�
 ``` c++
 void deleteCase4(NodeType *n)
 {
-	NodeType *s = sibling(n);
-	if (s->color == RBTree_Black &&
-		(s->left == NULL || s->left->color == RBTree_Black) &&
-		(s->right == NULL || s->right->color == RBTree_Black) &&
-		n->parent->color == RBTree_Red)
-	{
-		n->parent->color = RBTree_Black;
-		s->color = RBTree_Red;
-	}
-	else
-	{
-		deleteCase5(n);
-	}
+    NodeType *s = sibling(n);
+    if (s->color == RBTree_Black &&
+        (s->left == NULL || s->left->color == RBTree_Black) &&
+        (s->right == NULL || s->right->color == RBTree_Black) &&
+        n->parent->color == RBTree_Red)
+    {
+        n->parent->color = RBTree_Black;
+        s->color = RBTree_Red;
+    }
+    else
+    {
+        deleteCase5(n);
+    }
 }
 ```
 
@@ -302,26 +302,26 @@ N和它的父亲都不受这个变换的影响。
 ``` c++
 void deleteCase5(NodeType *n)
 {
-	NodeType *s = sibling(n);
-	if ((n->parent->left == n) &&
-		(s->color == RBTree_Black &&
-		 (s->right == NULL || s->right->color == RBTree_Black) &&
-		 (s->left && s->left->color == RBTree_Red)))
-	{
-		s->color = RBTree_Red;
-		s->left->color = RBTree_Black;
-		rotateRight(s);
-	}
-	else if ((n->parent->right == n) &&
-			 (s->color == RBTree_Black &&
-			  (s->left == NULL || s->left->color == RBTree_Black) &&
-			  (s->right && s->right->color == RBTree_Red)))
-	{
-		s->color = RBTree_Red;
-		s->right->color = RBTree_Black;
-		rotateLeft(s);
-	}
-	deleteCase6(n);
+    NodeType *s = sibling(n);
+    if ((n->parent->left == n) &&
+        (s->color == RBTree_Black &&
+         (s->right == NULL || s->right->color == RBTree_Black) &&
+         (s->left && s->left->color == RBTree_Red)))
+    {
+        s->color = RBTree_Red;
+        s->left->color = RBTree_Black;
+        rotateRight(s);
+    }
+    else if ((n->parent->right == n) &&
+             (s->color == RBTree_Black &&
+              (s->left == NULL || s->left->color == RBTree_Black) &&
+              (s->right && s->right->color == RBTree_Red)))
+    {
+        s->color = RBTree_Red;
+        s->right->color = RBTree_Black;
+        rotateLeft(s);
+    }
+    deleteCase6(n);
 }
 ```
 
@@ -339,20 +339,20 @@ S是黑色，S的右儿子是红色，而N是它父亲的左儿子。
 ``` c++
 void deleteCase6(NodeType *n)
 {
-	NodeType *s = sibling(n);
-	s->color = n->parent->color;
-	n->parent->color = RBTree_Black;
+    NodeType *s = sibling(n);
+    s->color = n->parent->color;
+    n->parent->color = RBTree_Black;
 
-	if (n->parent->left == n)
-	{
-		s->right->color = RBTree_Black;
-		rotateLeft(n->parent);
-	}
-	else
-	{
-		s->left->color = RBTree_Black;
-		rotateRight(n->parent);
-	}
+    if (n->parent->left == n)
+    {
+        s->right->color = RBTree_Black;
+        rotateLeft(n->parent);
+    }
+    else
+    {
+        s->left->color = RBTree_Black;
+        rotateRight(n->parent);
+    }
 }
 ```
 

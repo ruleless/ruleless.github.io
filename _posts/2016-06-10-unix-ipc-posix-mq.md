@@ -47,10 +47,10 @@ int mq_unlink(const char *name);
 
 struct mq_attr
 {
-	long mq_flags; // 消息队列标志
-	long mq_maxmsg; // 消息队列中的最大消息数
-	long mq_msgsize; // 最大消息长度
-	long mq_curmsgs; // 当前消息队列中的消息数
+    long mq_flags; // 消息队列标志
+    long mq_maxmsg; // 消息队列中的最大消息数
+    long mq_msgsize; // 最大消息长度
+    long mq_curmsgs; // 当前消息队列中的消息数
 }；
 
 // 成功返回0，失败返回-1
@@ -97,17 +97,17 @@ Posix消息队列允许异步事件通知，以告知何时有一个消息放置
 
 union sigval
 {
-	int sival_int;
-	void *sival_ptr;
+    int sival_int;
+    void *sival_ptr;
 };
 
 struct sigevent
 {
-	int sigev_notify; // 通知的实现方式(SIGEV_NONE;SIGEV_SIGNAL;SIGEV_THREAD)
-	int sigev_signo; // 当sigev_notify为SIGEV_SIGNAL时有效
-	union sigval sigev_value; // 传递给信号处理函数或线程函数的参数
-	void (*sigev_notify_funciton)(union sigval);  // 线程函数
-	pthread_attr_t *sigev_notify_attributes; // 线程属性
+    int sigev_notify; // 通知的实现方式(SIGEV_NONE;SIGEV_SIGNAL;SIGEV_THREAD)
+    int sigev_signo; // 当sigev_notify为SIGEV_SIGNAL时有效
+    union sigval sigev_value; // 传递给信号处理函数或线程函数的参数
+    void (*sigev_notify_funciton)(union sigval);  // 线程函数
+    pthread_attr_t *sigev_notify_attributes; // 线程属性
 };
 
 int mq_notify(mqd_t mqdes, cosnt struct sigevent *notification); // 成功返回0，失败返回-1
@@ -119,7 +119,7 @@ int mq_notify(mqd_t mqdes, cosnt struct sigevent *notification); // 成功返回
   2. 任意时刻只有一个进程可以被注册为接收某个给定队列的通知
   3. 当有一个消息到达某个先前为空的队列，而且已有一个进程被注册为接收该队列的通知时，
      只有在没有任何线程阻塞在该队列的mq_receive调用中的前提下，通知才会发出。
-	 这就是说，在mq_receive调用中的阻塞比任何通知的注册都优先
+     这就是说，在mq_receive调用中的阻塞比任何通知的注册都优先
   4. 当该通知被发送给它的注册进程时，其注册即被撤销。该进程必须再次调用mq_notify以重新注册
 
 ## 示例程序
@@ -153,24 +153,24 @@ struct mq_attr attr;
 
 int main(int argc, char *argv[])
 {
-	int maxMsg = 0;
-	int msgSize = 0;
+    int maxMsg = 0;
+    int msgSize = 0;
 
-	if (argc > 1)
-		maxMsg = atoi(argv[1]);
-	if (argc > 2)
-		msgSize = atoi(argv[2]);
+    if (argc > 1)
+        maxMsg = atoi(argv[1]);
+    if (argc > 2)
+        msgSize = atoi(argv[2]);
 
-	attr.mq_maxmsg = maxMsg;
-	attr.mq_msgsize = msgSize;
+    attr.mq_maxmsg = maxMsg;
+    attr.mq_msgsize = msgSize;
 
-	mqd_t mqdes = mq_open(MQNAME, O_RDWR|O_CREAT|O_EXCL, 0644, attr.mq_maxmsg ? &attr : NULL);
-	if (mqdes < 0)
-		errQuit("create MQ failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDWR|O_CREAT|O_EXCL, 0644, attr.mq_maxmsg ? &attr : NULL);
+    if (mqdes < 0)
+        errQuit("create MQ failed.");
 
-	printf("create mq:%s success.\n", MQNAME);
-	mq_close(mqdes);
-	exit(0);
+    printf("create mq:%s success.\n", MQNAME);
+    mq_close(mqdes);
+    exit(0);
 }
 ```
 
@@ -181,11 +181,11 @@ mqunlink.cpp
 
 int main(int argc, char *argv[])
 {
-	int res = mq_unlink(MQNAME);
-	if (res < 0)
-		errQuit("unlink mq failed.");
-	printf("unlink %s success.\n", MQNAME);
-	exit(0);
+    int res = mq_unlink(MQNAME);
+    if (res < 0)
+        errQuit("unlink mq failed.");
+    printf("unlink %s success.\n", MQNAME);
+    exit(0);
 }
 ```
 
@@ -196,19 +196,19 @@ mqgetattr.cpp
 
 int main(int argc, char *argv[])
 {
-	mqd_t mqdes = mq_open(MQNAME, O_RDONLY);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDONLY);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	struct mq_attr attr;
-	if (mq_getattr(mqdes, &attr) < 0)
-		errQuit("get mq attr failed.");
+    struct mq_attr attr;
+    if (mq_getattr(mqdes, &attr) < 0)
+        errQuit("get mq attr failed.");
 
-	PRINT_INTVAL(attr.mq_maxmsg);
-	PRINT_INTVAL(attr.mq_msgsize);
-	PRINT_INTVAL(attr.mq_curmsgs);
+    PRINT_INTVAL(attr.mq_maxmsg);
+    PRINT_INTVAL(attr.mq_msgsize);
+    PRINT_INTVAL(attr.mq_curmsgs);
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -219,24 +219,24 @@ mqsend.cpp
 
 int main(int argc, char *argv[])
 {
-	mqd_t mqdes = mq_open(MQNAME, O_WRONLY);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_WRONLY);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	struct mq_attr mqattr;
-	if (mq_getattr(mqdes, &mqattr) < 0)
-		errQuit("get mq attr failed.");
+    struct mq_attr mqattr;
+    if (mq_getattr(mqdes, &mqattr) < 0)
+        errQuit("get mq attr failed.");
 
-	char *buff = new char[mqattr.mq_msgsize];
-	for (int i = 1; i < argc; ++i)
-	{
-		snprintf(buff, mqattr.mq_msgsize, "%s", argv[i]);
-		mq_send(mqdes, buff, strlen(buff), 0);
-		printf("mq_send:%s\n", buff);
-	}
+    char *buff = new char[mqattr.mq_msgsize];
+    for (int i = 1; i < argc; ++i)
+    {
+        snprintf(buff, mqattr.mq_msgsize, "%s", argv[i]);
+        mq_send(mqdes, buff, strlen(buff), 0);
+        printf("mq_send:%s\n", buff);
+    }
 
-	mq_close(mqdes);
-	exit(0);
+    mq_close(mqdes);
+    exit(0);
 }
 ```
 
@@ -247,31 +247,31 @@ mqrecv.cpp
 
 int main(int argc, char *argv[])
 {
-	mqd_t mqdes = mq_open(MQNAME, O_RDONLY);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDONLY);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	struct mq_attr attr;
-	if (mq_getattr(mqdes, &attr) < 0)
-		errQuit("get mq attr faield.");
+    struct mq_attr attr;
+    if (mq_getattr(mqdes, &attr) < 0)
+        errQuit("get mq attr faield.");
 
-	int msgCount = 0;
-	char *buff = new char [attr.mq_msgsize];
-	for (;;)
-	{
-		unsigned int prio = 0;
-		memset(buff, 0, sizeof(char)*attr.mq_msgsize);
-		int len = mq_receive(mqdes, buff, attr.mq_msgsize, &prio);
-		if (len < 0)
-		{
-			break;
-		}
+    int msgCount = 0;
+    char *buff = new char [attr.mq_msgsize];
+    for (;;)
+    {
+        unsigned int prio = 0;
+        memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+        int len = mq_receive(mqdes, buff, attr.mq_msgsize, &prio);
+        if (len < 0)
+        {
+            break;
+        }
 
-		printf("recv %d(prio=%d msglen=%d):%s\n", ++msgCount, prio, len, buff);
-	}
+        printf("recv %d(prio=%d msglen=%d):%s\n", ++msgCount, prio, len, buff);
+    }
 
-	mq_close(mqdes);
-	exit(0);
+    mq_close(mqdes);
+    exit(0);
 }
 ```
 
@@ -283,75 +283,75 @@ mqrecv1.cpp
 static bool gSigFlag = false;
 static void sigUsr1(int signo)
 {
-	gSigFlag = true;
+    gSigFlag = true;
 }
 
 int main(int argc, char *argv[])
 {
-	mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	// 设置信号处理程序
-	struct sigaction newSa, oldSa;
-	newSa.sa_handler = sigUsr1;
-	newSa.sa_flags = 0;
-	sigemptyset(&newSa.sa_mask);
+    // 设置信号处理程序
+    struct sigaction newSa, oldSa;
+    newSa.sa_handler = sigUsr1;
+    newSa.sa_flags = 0;
+    sigemptyset(&newSa.sa_mask);
 
-	if (sigaction(SIGUSR1, &newSa, &oldSa) < 0)
-		errQuit("sigaction failed.");
+    if (sigaction(SIGUSR1, &newSa, &oldSa) < 0)
+        errQuit("sigaction failed.");
 
-	// 为本进程注册消息队列非空的通知
-	struct sigevent ev;
-	ev.sigev_notify = SIGEV_SIGNAL;
-	ev.sigev_signo = SIGUSR1;
+    // 为本进程注册消息队列非空的通知
+    struct sigevent ev;
+    ev.sigev_notify = SIGEV_SIGNAL;
+    ev.sigev_signo = SIGUSR1;
 
-	mq_notify(mqdes, &ev);
+    mq_notify(mqdes, &ev);
 
-	// 接收缓冲区
-	struct mq_attr attr;
-	mq_getattr(mqdes, &attr);
-	char *buff = new char [attr.mq_msgsize];
-	unsigned int prio = 0;
-	int msgCount = 0;
-	memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+    // 接收缓冲区
+    struct mq_attr attr;
+    mq_getattr(mqdes, &attr);
+    char *buff = new char [attr.mq_msgsize];
+    unsigned int prio = 0;
+    int msgCount = 0;
+    memset(buff, 0, sizeof(char)*attr.mq_msgsize);
 
-	sigset_t newMask, oldMask, zeroMask;
-	sigemptyset(&newMask);
-	sigaddset(&newMask, SIGUSR1);
-	sigemptyset(&zeroMask);
-	for (;;)
-	{
-		sigprocmask(SIG_BLOCK, &newMask, &oldMask);
-		while (!gSigFlag)
-		{
-			printf("suspend.\n");
-			sigsuspend(&zeroMask);
-		}
-		printf("comming.\n");
+    sigset_t newMask, oldMask, zeroMask;
+    sigemptyset(&newMask);
+    sigaddset(&newMask, SIGUSR1);
+    sigemptyset(&zeroMask);
+    for (;;)
+    {
+        sigprocmask(SIG_BLOCK, &newMask, &oldMask);
+        while (!gSigFlag)
+        {
+            printf("suspend.\n");
+            sigsuspend(&zeroMask);
+        }
+        printf("comming.\n");
 
-		mq_notify(mqdes, &ev);
-		int n = 0;
-		while((n=mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
-		{
-			printf("recv %d (msglen=%d prio=%d): %s\n", ++msgCount, n, prio, buff);
-			memset(buff, 0, sizeof(char)*attr.mq_msgsize);
-		}
+        mq_notify(mqdes, &ev);
+        int n = 0;
+        while((n=mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
+        {
+            printf("recv %d (msglen=%d prio=%d): %s\n", ++msgCount, n, prio, buff);
+            memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+        }
 
-		if (errno != EAGAIN)
-		{
-			errQuit("recv err.");
-		}
-		gSigFlag = false;
+        if (errno != EAGAIN)
+        {
+            errQuit("recv err.");
+        }
+        gSigFlag = false;
 
-		printf("end reading.\n");
-		sigprocmask(SIG_SETMASK, &oldMask, NULL);
-	}
+        printf("end reading.\n");
+        sigprocmask(SIG_SETMASK, &oldMask, NULL);
+    }
 
-	delete []buff;
+    delete []buff;
 
-	sigaction(SIGUSR1, &oldSa, NULL);
-	exit(0);
+    sigaction(SIGUSR1, &oldSa, NULL);
+    exit(0);
 }
 ```
 
@@ -364,58 +364,58 @@ static void sigUsr1(int signo) {}
 
 int main(int argc, char *argv[])
 {
-	mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	struct sigaction newSa, oldSa;
-	newSa.sa_handler = sigUsr1;
-	newSa.sa_flags = 0;
-	sigemptyset(&newSa.sa_mask);
-	sigaction(SIGUSR1, &newSa, &oldSa);
+    struct sigaction newSa, oldSa;
+    newSa.sa_handler = sigUsr1;
+    newSa.sa_flags = 0;
+    sigemptyset(&newSa.sa_mask);
+    sigaction(SIGUSR1, &newSa, &oldSa);
 
-	sigset_t maskSig;
-	sigemptyset(&maskSig);
-	sigaddset(&maskSig, SIGUSR1);
-	sigprocmask(SIG_BLOCK, &maskSig, NULL);
+    sigset_t maskSig;
+    sigemptyset(&maskSig);
+    sigaddset(&maskSig, SIGUSR1);
+    sigprocmask(SIG_BLOCK, &maskSig, NULL);
 
-	struct sigevent ev;
-	ev.sigev_notify = SIGEV_SIGNAL;
-	ev.sigev_signo = SIGUSR1;
+    struct sigevent ev;
+    ev.sigev_notify = SIGEV_SIGNAL;
+    ev.sigev_signo = SIGUSR1;
 
-	mq_notify(mqdes, &ev);
+    mq_notify(mqdes, &ev);
 
-	struct mq_attr attr;
-	int msgCount = 0;
-	mq_getattr(mqdes, &attr);
-	char *buff = new char [attr.mq_msgsize];
-	memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+    struct mq_attr attr;
+    int msgCount = 0;
+    mq_getattr(mqdes, &attr);
+    char *buff = new char [attr.mq_msgsize];
+    memset(buff, 0, sizeof(char)*attr.mq_msgsize);
 
-	for (;;)
-	{
-		int signo;
-		sigwait(&maskSig, &signo);
-		if (signo == SIGUSR1)
-		{
-			mq_notify(mqdes, &ev);
+    for (;;)
+    {
+        int signo;
+        sigwait(&maskSig, &signo);
+        if (signo == SIGUSR1)
+        {
+            mq_notify(mqdes, &ev);
 
-			unsigned int prio = 0;
-			int n = 0;
-			while ((n = mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
-			{
-				printf("recv %d (msglen=%d  prio=%d): %s\n", ++msgCount, n, prio, buff);
-				memset(buff, 0, sizeof(char)*attr.mq_msgsize);
-			}
+            unsigned int prio = 0;
+            int n = 0;
+            while ((n = mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
+            {
+                printf("recv %d (msglen=%d  prio=%d): %s\n", ++msgCount, n, prio, buff);
+                memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+            }
 
-			if (errno != EAGAIN)
-				errQuit("recv err.");
-		}
-	}
+            if (errno != EAGAIN)
+                errQuit("recv err.");
+        }
+    }
 
-	delete []buff;
-	buff = NULL;
+    delete []buff;
+    buff = NULL;
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -427,67 +427,67 @@ mqrecv3.cpp
 static int gFds[2];
 static void sigUsr1(int signo)
 {
-	write(gFds[1], " ", 1);
+    write(gFds[1], " ", 1);
 }
 
 int main(int argc, char *argv[])
 {
-	pipe(gFds);
+    pipe(gFds);
 
-	fd_set rset;
-	FD_ZERO(&rset);
-	FD_SET(gFds[0], &rset);
+    fd_set rset;
+    FD_ZERO(&rset);
+    FD_SET(gFds[0], &rset);
 
-	struct sigaction sa;
-	sa.sa_handler = sigUsr1;
-	sa.sa_flags = 0;
-	sigemptyset(&sa.sa_mask);
-	if (sigaction(SIGUSR1, &sa, NULL) < 0)
-		errQuit("set up signal failed.");
+    struct sigaction sa;
+    sa.sa_handler = sigUsr1;
+    sa.sa_flags = 0;
+    sigemptyset(&sa.sa_mask);
+    if (sigaction(SIGUSR1, &sa, NULL) < 0)
+        errQuit("set up signal failed.");
 
-	mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	struct mq_attr attr;
-	mq_getattr(mqdes, &attr);
+    struct mq_attr attr;
+    mq_getattr(mqdes, &attr);
 
-	int msgCount = 0;
-	char *buff = new char [attr.mq_msgsize];
-	memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+    int msgCount = 0;
+    char *buff = new char [attr.mq_msgsize];
+    memset(buff, 0, sizeof(char)*attr.mq_msgsize);
 
-	struct sigevent ev;
-	ev.sigev_notify = SIGEV_SIGNAL;
-	ev.sigev_signo = SIGUSR1;
-	mq_notify(mqdes, &ev);
+    struct sigevent ev;
+    ev.sigev_notify = SIGEV_SIGNAL;
+    ev.sigev_signo = SIGUSR1;
+    mq_notify(mqdes, &ev);
 
-	for (;;)
-	{
-		fd_set testSet = rset;
-		int nready = select(gFds[0]+1, &testSet, NULL, NULL, NULL);
+    for (;;)
+    {
+        fd_set testSet = rset;
+        int nready = select(gFds[0]+1, &testSet, NULL, NULL, NULL);
 
-		if (nready < 0 && errno != EINTR)
-			errQuit("select err.");
+        if (nready < 0 && errno != EINTR)
+            errQuit("select err.");
 
-		if (FD_ISSET(gFds[0], &testSet))
-		{
-			char c;
-			read(gFds[0], &c, 1);
-			unsigned int prio = 0;
-			int n = 0;
-			mq_notify(mqdes, &ev);
-			while ((n = mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
-			{
-				printf("recv %d (msglen=%d prio=%d):%s\n", ++msgCount, n, prio, buff);
-				memset(buff, 0, sizeof(char)*attr.mq_msgsize);
-			}
+        if (FD_ISSET(gFds[0], &testSet))
+        {
+            char c;
+            read(gFds[0], &c, 1);
+            unsigned int prio = 0;
+            int n = 0;
+            mq_notify(mqdes, &ev);
+            while ((n = mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
+            {
+                printf("recv %d (msglen=%d prio=%d):%s\n", ++msgCount, n, prio, buff);
+                memset(buff, 0, sizeof(char)*attr.mq_msgsize);
+            }
 
-			if (n < 0 && errno != EAGAIN)
-				errQuit("recv err.");
-		}
-	}
+            if (n < 0 && errno != EAGAIN)
+                errQuit("recv err.");
+        }
+    }
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -501,40 +501,40 @@ static int gMsgCount = 0;
 
 int main(int argc, char *argv[])
 {
-	mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
-	if (mqdes < 0)
-		errQuit("open mq failed.");
+    mqd_t mqdes = mq_open(MQNAME, O_RDONLY|O_NONBLOCK);
+    if (mqdes < 0)
+        errQuit("open mq failed.");
 
-	struct sigevent ev;
-	ev.sigev_notify = SIGEV_THREAD;
-	ev.sigev_value.sival_int = mqdes;
-	ev.sigev_notify_function = &threadFunc;
-	ev.sigev_notify_attributes = NULL;
-	if (mq_notify(mqdes, &ev) < 0)
-		errQuit("set notify failed.");
+    struct sigevent ev;
+    ev.sigev_notify = SIGEV_THREAD;
+    ev.sigev_value.sival_int = mqdes;
+    ev.sigev_notify_function = &threadFunc;
+    ev.sigev_notify_attributes = NULL;
+    if (mq_notify(mqdes, &ev) < 0)
+        errQuit("set notify failed.");
 
-	for (;;)
-		pause();
+    for (;;)
+        pause();
 
-	exit(0);
+    exit(0);
 }
 
 static void threadFunc(sigval_t val)
 {
-	int mqdes = val.sival_int;
-	struct mq_attr attr;
-	mq_getattr(mqdes, &attr);
+    int mqdes = val.sival_int;
+    struct mq_attr attr;
+    mq_getattr(mqdes, &attr);
 
-	char *buff = new char [attr.mq_msgsize];
-	unsigned int prio = 0;
-	int n = 0;
-	while ((n = mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
-	{
-		printf("recv %d (msglen=%d prio=%d):%s\n", ++gMsgCount, n, prio, buff);
-	}
+    char *buff = new char [attr.mq_msgsize];
+    unsigned int prio = 0;
+    int n = 0;
+    while ((n = mq_receive(mqdes, buff, attr.mq_msgsize, &prio)) >= 0)
+    {
+        printf("recv %d (msglen=%d prio=%d):%s\n", ++gMsgCount, n, prio, buff);
+    }
 
-	if (n < 0 && errno != EAGAIN)
-		errQuit("recv err.");
+    if (n < 0 && errno != EAGAIN)
+        errQuit("recv err.");
 }
 ```
 

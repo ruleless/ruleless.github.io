@@ -16,17 +16,17 @@ System V共享内存区在概念上类似于Posix共享内存区。
 
 struct shmid_ds
 {
-	struct ipc_perm     shm_perm;      /* operation perms */
-	int                 shm_segsz;     /* size of segment (bytes) */
-	__kernel_time_t     shm_atime;     /* last attach time */
-	__kernel_time_t     shm_dtime;     /* last detach time */
-	__kernel_time_t     shm_ctime;     /* last change time */
-	__kernel_ipc_pid_t  shm_cpid;      /* pid of creator */
-	__kernel_ipc_pid_t  shm_lpid;      /* pid of last operator */
-	unsigned short      shm_nattch;    /* no. of current attaches */
-	unsigned short      shm_unused;    /* compatibility */
-	void               *shm_unused2;   /* ditto - used by DIPC */
-	void               *shm_unused3;   /* unused */
+    struct ipc_perm     shm_perm;      /* operation perms */
+    int                 shm_segsz;     /* size of segment (bytes) */
+    __kernel_time_t     shm_atime;     /* last attach time */
+    __kernel_time_t     shm_dtime;     /* last detach time */
+    __kernel_time_t     shm_ctime;     /* last change time */
+    __kernel_ipc_pid_t  shm_cpid;      /* pid of creator */
+    __kernel_ipc_pid_t  shm_lpid;      /* pid of last operator */
+    unsigned short      shm_nattch;    /* no. of current attaches */
+    unsigned short      shm_unused;    /* compatibility */
+    void               *shm_unused2;   /* ditto - used by DIPC */
+    void               *shm_unused3;   /* unused */
 };
 ```
 
@@ -74,8 +74,8 @@ shmat返回的映射区地址由以下规则确定：
   + 如果参数addr是一个空指针，那么由系统替调用者选择地址。这也是可移植性最好的方法；
   + 如果参数addr是一个非空指针，那么返回地址取决于调用者是否给flag参数指定了SHM_RND值：
     - 如果没有指定SHM_RND，那么相应的共享区附接到由addr参数指定的地址；
-	- 如果指定了SHM_RND，那么相应的共享内存区附接到由addr参数指定的地址向下舍入一个SHMLBA常值。
-	  LBA代表“低端边界地址(lower boundary address)”。
+    - 如果指定了SHM_RND，那么相应的共享内存区附接到由addr参数指定的地址向下舍入一个SHMLBA常值。
+      LBA代表“低端边界地址(lower boundary address)”。
 
 
 默认情况下，只要调用进程具有某个共享内存区的读写权限，它附接到该内存区后就能够同时读写该内存区。
@@ -111,19 +111,19 @@ shmget.cpp
 
 int main(int argc, char *argv[])
 {
-	int size = SHM_SIZE;
-	if (argc > 1)
-		size = atoi(argv[1]);
+    int size = SHM_SIZE;
+    if (argc > 1)
+        size = atoi(argv[1]);
 
-	key_t key = ftok(SHM_PATH, MY_SHM_ID);
-	if (key < 0)
-		errQuit("ftok err.");
+    key_t key = ftok(SHM_PATH, MY_SHM_ID);
+    if (key < 0)
+        errQuit("ftok err.");
 
-	if (shmget(key, size, IPC_CREAT|IPC_EXCL|0644) < 0)
-		errQuit("create shm failed.");
+    if (shmget(key, size, IPC_CREAT|IPC_EXCL|0644) < 0)
+        errQuit("create shm failed.");
 
-	printf("create shm success.\n");
-	exit(0);
+    printf("create shm success.\n");
+    exit(0);
 }
 ```
 
@@ -135,19 +135,19 @@ shmrm.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SHM_PATH, MY_SHM_ID);
-	if (key < 0)
-		errQuit("ftok err");
+    key_t key = ftok(SHM_PATH, MY_SHM_ID);
+    if (key < 0)
+        errQuit("ftok err");
 
-	int shmid = shmget(key, 0, 0);
-	if (shmid < 0)
-		errQuit("get shm failed.");
+    int shmid = shmget(key, 0, 0);
+    if (shmid < 0)
+        errQuit("get shm failed.");
 
-	if (shmctl(shmid, IPC_RMID, NULL) < 0)
-		errQuit("rm shm failed.");
+    if (shmctl(shmid, IPC_RMID, NULL) < 0)
+        errQuit("rm shm failed.");
 
-	printf("rm shm ok!\n");
-	exit(0);
+    printf("rm shm ok!\n");
+    exit(0);
 }
 ```
 
@@ -161,43 +161,43 @@ shmwrite.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SHM_PATH, MY_SHM_ID);
-	if (key < 0)
-		errQuit("ftok err.");
+    key_t key = ftok(SHM_PATH, MY_SHM_ID);
+    if (key < 0)
+        errQuit("ftok err.");
 
-	int shmid = shmget(key, 0, 0);
-	if (shmid < 0)
-		errQuit("open shm failed.");
+    int shmid = shmget(key, 0, 0);
+    if (shmid < 0)
+        errQuit("open shm failed.");
 
-	char *ptr = (char *)shmat(shmid, NULL, 0);
-	if (ptr < 0)
-		errQuit("attach shm err.");
+    char *ptr = (char *)shmat(shmid, NULL, 0);
+    if (ptr < 0)
+        errQuit("attach shm err.");
 
-	struct shmid_ds shmds;
-	if (shmctl(shmid, IPC_STAT, &shmds) < 0)
-		errQuit("get shm stat err.");
+    struct shmid_ds shmds;
+    if (shmctl(shmid, IPC_STAT, &shmds) < 0)
+        errQuit("get shm stat err.");
 
-	int shmSize = shmds.shm_segsz;
-	int cur = 0;
-	char buff[BUFF_SIZE];
-	int n = 0;
-	while ((n = read(STDIN_FILENO, buff, BUFF_SIZE)) > 0)
-	{
-		int cpLen = min(n, shmSize-cur);
-		if (cpLen > 0)
-		{
-			memcpy(ptr+cur, buff, cpLen);
-			cur += cpLen;
+    int shmSize = shmds.shm_segsz;
+    int cur = 0;
+    char buff[BUFF_SIZE];
+    int n = 0;
+    while ((n = read(STDIN_FILENO, buff, BUFF_SIZE)) > 0)
+    {
+        int cpLen = min(n, shmSize-cur);
+        if (cpLen > 0)
+        {
+            memcpy(ptr+cur, buff, cpLen);
+            cur += cpLen;
 
-			if (cur >= shmSize)
-				break;
-		}
-		else
-		{
-			break;
-		}
-	}
-	exit(0);
+            if (cur >= shmSize)
+                break;
+        }
+        else
+        {
+            break;
+        }
+    }
+    exit(0);
 }
 ```
 
@@ -209,22 +209,22 @@ shmread.cpp
 
 int main(int argc, char *argv[])
 {
-	key_t key = ftok(SHM_PATH, MY_SHM_ID);
-	if (key < 0)
-		errQuit("ftok err.");
+    key_t key = ftok(SHM_PATH, MY_SHM_ID);
+    if (key < 0)
+        errQuit("ftok err.");
 
-	int shmid = shmget(key, 0, 0);
-	if (shmid < 0)
-		errQuit("open shm err.");
+    int shmid = shmget(key, 0, 0);
+    if (shmid < 0)
+        errQuit("open shm err.");
 
-	void *ptr = shmat(shmid, NULL, 0);
-	if (ptr < 0)
-		errQuit("attach shm err.");
+    void *ptr = shmat(shmid, NULL, 0);
+    if (ptr < 0)
+        errQuit("attach shm err.");
 
-	struct shmid_ds shmds;
-	shmctl(shmid, IPC_STAT, &shmds);
-	write(STDOUT_FILENO, ptr, shmds.shm_segsz);
+    struct shmid_ds shmds;
+    shmctl(shmid, IPC_STAT, &shmds);
+    write(STDOUT_FILENO, ptr, shmds.shm_segsz);
 
-	exit(0);
+    exit(0);
 }
 ```

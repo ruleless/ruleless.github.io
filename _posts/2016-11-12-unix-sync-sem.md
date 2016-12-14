@@ -83,7 +83,7 @@ P(s)用代码可表述为：
 s.value = s.value – 1;
 if (s.value < 0)
 {
-	W(s.queue);
+    W(s.queue);
 }
 ```
 
@@ -93,7 +93,7 @@ V(s)可表述为：
 s.value = s.value + 1;
 if (s.value <= 0)
 {
-	R(s.queue);
+    R(s.queue);
 }
 ```
 
@@ -191,19 +191,19 @@ semcreate.cpp
 
 int main(int argc, char *argv[])
 {
-	int semval = 1;
-	if (argc > 1)
-	{
-		semval = atoi(argv[1]);
-	}
+    int semval = 1;
+    if (argc > 1)
+    {
+        semval = atoi(argv[1]);
+    }
 
-	if (sem_open(SEM_NAME, O_RDWR|O_CREAT|O_EXCL, 0664, semval) == SEM_FAILED)
-	{
-		errQuit("open sem failed.");
-	}
+    if (sem_open(SEM_NAME, O_RDWR|O_CREAT|O_EXCL, 0664, semval) == SEM_FAILED)
+    {
+        errQuit("open sem failed.");
+    }
 
-	printf("create sem %s ok!\n", SEM_NAME);
-	exit(0);
+    printf("create sem %s ok!\n", SEM_NAME);
+    exit(0);
 }
 ```
 
@@ -214,10 +214,10 @@ semunlink.cpp
 
 int main(int argc, char *argv[])
 {
-	if (sem_unlink(SEM_NAME) == -1)
-		errQuit("delete failed!");
-	printf("delete sem %s ok!\n", SEM_NAME);
-	exit(0);
+    if (sem_unlink(SEM_NAME) == -1)
+        errQuit("delete failed!");
+    printf("delete sem %s ok!\n", SEM_NAME);
+    exit(0);
 }
 ```
 
@@ -228,17 +228,17 @@ semgetval.cpp
 
 int main(int argc, char *argv[])
 {
-	sem_t *s = sem_open(SEM_NAME, 0);
-	if (s == SEM_FAILED)
-		errQuit("open sem failed.");
+    sem_t *s = sem_open(SEM_NAME, 0);
+    if (s == SEM_FAILED)
+        errQuit("open sem failed.");
 
-	int semval = 0;
-	sem_getvalue(s, &semval);
-	printf("semval=%d\n", semval);
+    int semval = 0;
+    sem_getvalue(s, &semval);
+    printf("semval=%d\n", semval);
 
-	sem_close(s);
+    sem_close(s);
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -249,34 +249,34 @@ semwait.cpp
 
 void sigInt(int signo)
 {
-	printf("got SIGINT\n");
-	exit(1);
+    printf("got SIGINT\n");
+    exit(1);
 }
 
 int main(int argc, char *argv[])
 {
-	sem_t *s = sem_open(SEM_NAME, 0);
-	if (s == SEM_FAILED)
-		errQuit("open sem failed.");
+    sem_t *s = sem_open(SEM_NAME, 0);
+    if (s == SEM_FAILED)
+        errQuit("open sem failed.");
 
-	struct sigaction newAct, oldAct;
-	newAct.sa_handler = sigInt;
-	sigemptyset(&newAct.sa_mask);
-	newAct.sa_flags = 0;
+    struct sigaction newAct, oldAct;
+    newAct.sa_handler = sigInt;
+    sigemptyset(&newAct.sa_mask);
+    newAct.sa_flags = 0;
 
-	if (sigaction(SIGINT, &newAct, &newAct) != 0)
-	{
-		errQuit("setup sigint failed.");
-	}
+    if (sigaction(SIGINT, &newAct, &newAct) != 0)
+    {
+        errQuit("setup sigint failed.");
+    }
 
-	if (-1 == sem_wait(s))
-		errQuit("sem wait failed.");
-	printf("P\n");
+    if (-1 == sem_wait(s))
+        errQuit("sem wait failed.");
+    printf("P\n");
 
-	sigaction(SIGINT, &oldAct, NULL);
+    sigaction(SIGINT, &oldAct, NULL);
 
-	sem_close(s);
-	exit(0);
+    sem_close(s);
+    exit(0);
 }
 ```
 
@@ -287,12 +287,12 @@ sempost.cpp
 
 int main(int argc, char *argv[])
 {
-	sem_t *s = sem_open(SEM_NAME, 0);
-	if (SEM_FAILED == s)
-		errQuit("open sem failed.");
+    sem_t *s = sem_open(SEM_NAME, 0);
+    if (SEM_FAILED == s)
+        errQuit("open sem failed.");
 
-	sem_post(s);
-	exit(0);
+    sem_post(s);
+    exit(0);
 }
 ```
 
@@ -315,8 +315,8 @@ int main(int argc, char *argv[])
 int gItems = 0;
 struct
 {
-	int buff[N];
-	sem_t nEmpty, nStored, mutex;
+    int buff[N];
+    sem_t nEmpty, nStored, mutex;
 } gShared;
 
 void* producer(void *arg);
@@ -324,66 +324,66 @@ void* consumer(void *arg);
 
 int main(int argc, char *argv[])
 {
-	if (argc < 2)
-	{
-		errQuit("please assign items!", false);
-	}
+    if (argc < 2)
+    {
+        errQuit("please assign items!", false);
+    }
 
-	gItems = atoi(argv[1]);
-	for (int i = 0; i < N; ++i)
-	{
-		gShared.buff[i] = -1;
-	}
+    gItems = atoi(argv[1]);
+    for (int i = 0; i < N; ++i)
+    {
+        gShared.buff[i] = -1;
+    }
 
-	sem_init(&gShared.nEmpty, 0, N);
-	sem_init(&gShared.nStored, 0, 0);
-	sem_init(&gShared.mutex, 0, 1);
+    sem_init(&gShared.nEmpty, 0, N);
+    sem_init(&gShared.nStored, 0, 0);
+    sem_init(&gShared.mutex, 0, 1);
 
-	pthread_t tidP;
-	pthread_t tidC;
-	pthread_create(&tidP, NULL, producer, NULL);
-	pthread_create(&tidC, NULL, consumer, NULL);
+    pthread_t tidP;
+    pthread_t tidC;
+    pthread_create(&tidP, NULL, producer, NULL);
+    pthread_create(&tidC, NULL, consumer, NULL);
 
-	pthread_join(tidP, NULL);
-	pthread_join(tidC, NULL);
+    pthread_join(tidP, NULL);
+    pthread_join(tidC, NULL);
 
-	sem_destroy(&gShared.nEmpty);
-	sem_destroy(&gShared.nStored);
-	sem_destroy(&gShared.mutex);
-	exit(0);
+    sem_destroy(&gShared.nEmpty);
+    sem_destroy(&gShared.nStored);
+    sem_destroy(&gShared.mutex);
+    exit(0);
 }
 
 void* producer(void *arg)
 {
-	for (int i = 0; i < gItems; ++i)
-	{
-		sem_wait(&gShared.nEmpty);
-		// sem_wait(&gShared.mutex);
+    for (int i = 0; i < gItems; ++i)
+    {
+        sem_wait(&gShared.nEmpty);
+        // sem_wait(&gShared.mutex);
 
-		gShared.buff[i % N] = i;
+        gShared.buff[i % N] = i;
 
-		// sem_post(&gShared.mutex);
-		sem_post(&gShared.nStored);
-	}
-	return NULL;
+        // sem_post(&gShared.mutex);
+        sem_post(&gShared.nStored);
+    }
+    return NULL;
 }
 
 void* consumer(void *arg)
 {
-	for (int i = 0; i < gItems; ++i)
-	{
-		sem_wait(&gShared.nStored);
-		// sem_wait(&gShared.mutex);
+    for (int i = 0; i < gItems; ++i)
+    {
+        sem_wait(&gShared.nStored);
+        // sem_wait(&gShared.mutex);
 
-		if (gShared.buff[i % N] != i)
-		{
-			printf("error! %dth item access conflict, index=%d, curval=%d!\n", i, i%N, gShared.buff[i % N]);
-		}
+        if (gShared.buff[i % N] != i)
+        {
+            printf("error! %dth item access conflict, index=%d, curval=%d!\n", i, i%N, gShared.buff[i % N]);
+        }
 
-		// sem_post(&gShared.mutex);
-		sem_post(&gShared.nEmpty);
-	}
-	return NULL;
+        // sem_post(&gShared.mutex);
+        sem_post(&gShared.nEmpty);
+    }
+    return NULL;
 }
 ```
 
@@ -404,18 +404,18 @@ void* consumer(void *arg)
 
 struct Shared
 {
-	int buff[N];
-	int nput;
-	int nputval;
+    int buff[N];
+    int nput;
+    int nputval;
 
-	sem_t nEmpty, nStored, mutex;
+    sem_t nEmpty, nStored, mutex;
 
-	Shared()
-	{
-		memset(buff, -1, sizeof(buff));
-		nput = 0;
-		nputval = 0;
-	}
+    Shared()
+    {
+        memset(buff, -1, sizeof(buff));
+        nput = 0;
+        nputval = 0;
+    }
 };
 
 static int gItems = N;
@@ -426,89 +426,89 @@ void* consumer(void *arg);
 
 int main(int argc, char *argv[])
 {
-	if (argc > 1)
-		gItems = atoi(argv[1]);
-	int nProducer = MAX_THREAD;
-	if (argc > 2)
-		nProducer = min(nProducer, atoi(argv[2]));
+    if (argc > 1)
+        gItems = atoi(argv[1]);
+    int nProducer = MAX_THREAD;
+    if (argc > 2)
+        nProducer = min(nProducer, atoi(argv[2]));
 
-	// 初始化信号量
-	sem_init(&gShared.nEmpty, 0, N);
-	sem_init(&gShared.nStored, 0, 0);
-	sem_init(&gShared.mutex, 0, 1);
+    // 初始化信号量
+    sem_init(&gShared.nEmpty, 0, N);
+    sem_init(&gShared.nStored, 0, 0);
+    sem_init(&gShared.mutex, 0, 1);
 
-	// 创建生产者和消费者线程
-	pthread_t tidProducer[MAX_THREAD];
-	int execTimesOfProducer[MAX_THREAD];
-	memset(execTimesOfProducer, 0, sizeof(execTimesOfProducer));
-	for (int i = 0; i < nProducer; ++i)
-	{
-		pthread_create(&tidProducer[i], NULL, producer, &execTimesOfProducer[i]);
-	}
+    // 创建生产者和消费者线程
+    pthread_t tidProducer[MAX_THREAD];
+    int execTimesOfProducer[MAX_THREAD];
+    memset(execTimesOfProducer, 0, sizeof(execTimesOfProducer));
+    for (int i = 0; i < nProducer; ++i)
+    {
+        pthread_create(&tidProducer[i], NULL, producer, &execTimesOfProducer[i]);
+    }
 
-	pthread_t tidConsumer;
-	pthread_create(&tidConsumer, NULL, consumer, NULL);
+    pthread_t tidConsumer;
+    pthread_create(&tidConsumer, NULL, consumer, NULL);
 
-	// 等待线程结束
-	for (int i = 0; i < nProducer; ++i)
-	{
-		pthread_join(tidProducer[i], NULL);
-	}
-	pthread_join(tidConsumer, NULL);
+    // 等待线程结束
+    for (int i = 0; i < nProducer; ++i)
+    {
+        pthread_join(tidProducer[i], NULL);
+    }
+    pthread_join(tidConsumer, NULL);
 
-	int totalExecTimes = 0;
-	for (int i = 0; i < nProducer; ++i)
-	{
-		totalExecTimes += execTimesOfProducer[i];
-		printf("thread %d exec %d times\n", i, execTimesOfProducer[i]);
-	}
-	PRINT_INTVAL(totalExecTimes);
+    int totalExecTimes = 0;
+    for (int i = 0; i < nProducer; ++i)
+    {
+        totalExecTimes += execTimesOfProducer[i];
+        printf("thread %d exec %d times\n", i, execTimesOfProducer[i]);
+    }
+    PRINT_INTVAL(totalExecTimes);
 
-	// 销毁信号量
-	sem_destroy(&gShared.nEmpty);
-	sem_destroy(&gShared.nStored);
-	sem_destroy(&gShared.mutex);
+    // 销毁信号量
+    sem_destroy(&gShared.nEmpty);
+    sem_destroy(&gShared.nStored);
+    sem_destroy(&gShared.mutex);
 
-	exit(0);
+    exit(0);
 }
 
 void* producer(void *arg)
 {
-	for (;;)
-	{
-		sem_wait(&gShared.nEmpty);
-		sem_wait(&gShared.mutex);
+    for (;;)
+    {
+        sem_wait(&gShared.nEmpty);
+        sem_wait(&gShared.mutex);
 
-		if (gShared.nputval >= gItems)
-		{
-			sem_post(&gShared.nEmpty);
-			sem_post(&gShared.mutex);
-			return NULL;
-		}
+        if (gShared.nputval >= gItems)
+        {
+            sem_post(&gShared.nEmpty);
+            sem_post(&gShared.mutex);
+            return NULL;
+        }
 
-		gShared.buff[gShared.nput++%N] = gShared.nputval++;
-		(*(int *)arg)++;
+        gShared.buff[gShared.nput++%N] = gShared.nputval++;
+        (*(int *)arg)++;
 
-		sem_post(&gShared.mutex);
-		sem_post(&gShared.nStored);
-	}
+        sem_post(&gShared.mutex);
+        sem_post(&gShared.nStored);
+    }
 
-	return NULL;
+    return NULL;
 }
 
 void* consumer(void *arg)
 {
-	for (int i = 0; i < gItems; ++i)
-	{
-		sem_wait(&gShared.nStored);
-		if (gShared.buff[i%N] != i)
-		{
-			printf("conflict! index=%d  val=%d  legal val=%d\n", i%N, gShared.buff[i%N], i);
-		}
-		sem_post(&gShared.nEmpty);
-	}
+    for (int i = 0; i < gItems; ++i)
+    {
+        sem_wait(&gShared.nStored);
+        if (gShared.buff[i%N] != i)
+        {
+            printf("conflict! index=%d  val=%d  legal val=%d\n", i%N, gShared.buff[i%N], i);
+        }
+        sem_post(&gShared.nEmpty);
+    }
 
-	return NULL;
+    return NULL;
 }
 ```
 
@@ -529,20 +529,20 @@ void* consumer(void *arg)
 
 struct Shared
 {
-	int buff[N];
-	int nput;
-	int nputval;
-	int nget;
-	int ngetval;
+    int buff[N];
+    int nput;
+    int nputval;
+    int nget;
+    int ngetval;
 
-	sem_t nEmpty, nStored, producerMutex, consumerMutex;
+    sem_t nEmpty, nStored, producerMutex, consumerMutex;
 
-	Shared()
-	{
-		memset(buff, -1, sizeof(buff));
-		nput = nputval = 0;
-		nget = ngetval = 0;
-	}
+    Shared()
+    {
+        memset(buff, -1, sizeof(buff));
+        nput = nputval = 0;
+        nget = ngetval = 0;
+    }
 };
 
 int gItems = 0;
@@ -553,124 +553,124 @@ void* consumer(void *arg);
 
 int main(int argc, char *argv[])
 {
-	int nProducer = MAX_THREAD;
-	int nConsumer = MAX_THREAD;
-	gItems = N;
+    int nProducer = MAX_THREAD;
+    int nConsumer = MAX_THREAD;
+    gItems = N;
 
-	// 参数设置
-	if (argc > 1)
-		gItems = atoi(argv[1]);
-	if (argc > 2)
-		nProducer = atoi(argv[2]);
-	if (argc > 3)
-		nConsumer = atoi(argv[3]);
-	nProducer = min(nProducer, MAX_THREAD);
-	nConsumer = min(nConsumer, MAX_THREAD);
+    // 参数设置
+    if (argc > 1)
+        gItems = atoi(argv[1]);
+    if (argc > 2)
+        nProducer = atoi(argv[2]);
+    if (argc > 3)
+        nConsumer = atoi(argv[3]);
+    nProducer = min(nProducer, MAX_THREAD);
+    nConsumer = min(nConsumer, MAX_THREAD);
 
-	// 信号量初始化
-	sem_init(&gShared.nEmpty, 0, N);
-	sem_init(&gShared.nStored, 0, 0);
-	sem_init(&gShared.producerMutex, 0, 1);
-	sem_init(&gShared.consumerMutex, 0, 1);
+    // 信号量初始化
+    sem_init(&gShared.nEmpty, 0, N);
+    sem_init(&gShared.nStored, 0, 0);
+    sem_init(&gShared.producerMutex, 0, 1);
+    sem_init(&gShared.consumerMutex, 0, 1);
 
-	// 创建生产者线程
-	pthread_t tidProducer[MAX_THREAD];
-	int execTimesOfProducer[MAX_THREAD];
-	memset(execTimesOfProducer, 0, sizeof(execTimesOfProducer));
-	for (int i = 0; i < nProducer; ++i)
-	{
-		pthread_create(&tidProducer[i], NULL, producer, &execTimesOfProducer[i]);
-	}
+    // 创建生产者线程
+    pthread_t tidProducer[MAX_THREAD];
+    int execTimesOfProducer[MAX_THREAD];
+    memset(execTimesOfProducer, 0, sizeof(execTimesOfProducer));
+    for (int i = 0; i < nProducer; ++i)
+    {
+        pthread_create(&tidProducer[i], NULL, producer, &execTimesOfProducer[i]);
+    }
 
-	// 创建消费者线程
-	pthread_t tidConsumer[MAX_THREAD];
-	int execTimesOfConsumer[MAX_THREAD];
-	memset(execTimesOfConsumer, 0, sizeof(execTimesOfConsumer));
-	for (int i = 0; i < nConsumer; ++i)
-	{
-		pthread_create(&tidConsumer[i], NULL, consumer, &execTimesOfConsumer[i]);
-	}
+    // 创建消费者线程
+    pthread_t tidConsumer[MAX_THREAD];
+    int execTimesOfConsumer[MAX_THREAD];
+    memset(execTimesOfConsumer, 0, sizeof(execTimesOfConsumer));
+    for (int i = 0; i < nConsumer; ++i)
+    {
+        pthread_create(&tidConsumer[i], NULL, consumer, &execTimesOfConsumer[i]);
+    }
 
-	// 等待线程终止
-	for (int i = 0; i < nProducer; ++i)
-	{
-		pthread_join(tidProducer[i], NULL);
-	}
-	for (int i = 0; i < nConsumer; ++i)
-	{
-		pthread_join(tidConsumer[i], NULL);
-	}
+    // 等待线程终止
+    for (int i = 0; i < nProducer; ++i)
+    {
+        pthread_join(tidProducer[i], NULL);
+    }
+    for (int i = 0; i < nConsumer; ++i)
+    {
+        pthread_join(tidConsumer[i], NULL);
+    }
 
-	// 信号量销毁
-	sem_destroy(&gShared.nEmpty);
-	sem_destroy(&gShared.nStored);
-	sem_destroy(&gShared.producerMutex);
-	sem_destroy(&gShared.consumerMutex);
+    // 信号量销毁
+    sem_destroy(&gShared.nEmpty);
+    sem_destroy(&gShared.nStored);
+    sem_destroy(&gShared.producerMutex);
+    sem_destroy(&gShared.consumerMutex);
 
-	for (int i = 0; i < nProducer; ++i)
-	{
-		printf("producer %d run %d times.\n", i, execTimesOfProducer[i]);
-	}
-	for (int i = 0; i < nConsumer; ++i)
-	{
-		printf("consumr %d run %d times.\n", i, execTimesOfConsumer[i]);
-	}
+    for (int i = 0; i < nProducer; ++i)
+    {
+        printf("producer %d run %d times.\n", i, execTimesOfProducer[i]);
+    }
+    for (int i = 0; i < nConsumer; ++i)
+    {
+        printf("consumr %d run %d times.\n", i, execTimesOfConsumer[i]);
+    }
 
-	exit(0);
+    exit(0);
 }
 
 void* producer(void *arg)
 {
-	for(;;)
-	{
-		sem_wait(&gShared.nEmpty);
-		sem_wait(&gShared.producerMutex);
+    for(;;)
+    {
+        sem_wait(&gShared.nEmpty);
+        sem_wait(&gShared.producerMutex);
 
-		if (gShared.nputval >= gItems)
-		{
-			sem_post(&gShared.nEmpty);
-			sem_post(&gShared.producerMutex);
-			return NULL;
-		}
+        if (gShared.nputval >= gItems)
+        {
+            sem_post(&gShared.nEmpty);
+            sem_post(&gShared.producerMutex);
+            return NULL;
+        }
 
-		gShared.buff[gShared.nput++%N] = gShared.nputval++;
-		(*((int *)arg))++;
+        gShared.buff[gShared.nput++%N] = gShared.nputval++;
+        (*((int *)arg))++;
 
-		sem_post(&gShared.producerMutex);
-		sem_post(&gShared.nStored);
-	}
-	return NULL;
+        sem_post(&gShared.producerMutex);
+        sem_post(&gShared.nStored);
+    }
+    return NULL;
 }
 
 void* consumer(void *arg)
 {
-	for (;;)
-	{
-		// 检查是否已消费完
-		sem_wait(&gShared.consumerMutex);
-		if (gShared.ngetval >= gItems)
-		{
-			sem_post(&gShared.consumerMutex);
-			return NULL;
-		}
+    for (;;)
+    {
+        // 检查是否已消费完
+        sem_wait(&gShared.consumerMutex);
+        if (gShared.ngetval >= gItems)
+        {
+            sem_post(&gShared.consumerMutex);
+            return NULL;
+        }
 
-		// 完成一次消费
-		sem_wait(&gShared.nStored);
+        // 完成一次消费
+        sem_wait(&gShared.nStored);
 
-		if (gShared.buff[gShared.nget%N] != gShared.ngetval)
-		{
-			printf("confilict! index=%d  curval=%d  legalval=%d\n",
-				   gShared.nget%N, gShared.buff[gShared.nget%N], gShared.nget);
-		}
+        if (gShared.buff[gShared.nget%N] != gShared.ngetval)
+        {
+            printf("confilict! index=%d  curval=%d  legalval=%d\n",
+                   gShared.nget%N, gShared.buff[gShared.nget%N], gShared.nget);
+        }
 
-		gShared.nget++;
-		gShared.ngetval++;
-		(*((int *)arg))++;
+        gShared.nget++;
+        gShared.ngetval++;
+        (*((int *)arg))++;
 
-		sem_post(&gShared.nEmpty);
-		sem_post(&gShared.consumerMutex);
-	}
-	return NULL;
+        sem_post(&gShared.nEmpty);
+        sem_post(&gShared.consumerMutex);
+    }
+    return NULL;
 }
 ```
 
@@ -695,16 +695,16 @@ struct Shared
 {
      struct
      {
-		 char buff[BUFF_SIZE];
-		 int n;
+         char buff[BUFF_SIZE];
+         int n;
      } que[QSIZE];
 
-	sem_t nEmpty, nStored;
+    sem_t nEmpty, nStored;
 
-	Shared()
-	{
-		memset(que, 0, sizeof(que));
-	}
+    Shared()
+    {
+        memset(que, 0, sizeof(que));
+    }
 };
 struct Shared gShared;
 
@@ -713,75 +713,75 @@ void* consumer(void *arg);
 
 int main(int argc, char *argv[])
 {
-	sem_init(&gShared.nEmpty, 0, QSIZE);
-	sem_init(&gShared.nStored, 0, 0);
+    sem_init(&gShared.nEmpty, 0, QSIZE);
+    sem_init(&gShared.nStored, 0, 0);
 
-	pthread_t tidProducer;
-	int execTimesOfProducer = 0;
-	pthread_create(&tidProducer, NULL, producer, &execTimesOfProducer);
+    pthread_t tidProducer;
+    int execTimesOfProducer = 0;
+    pthread_create(&tidProducer, NULL, producer, &execTimesOfProducer);
 
-	pthread_t tidConsumer;
-	int execTimesOfConsumer = 0;
-	pthread_create(&tidConsumer, NULL, consumer, &execTimesOfConsumer);
+    pthread_t tidConsumer;
+    int execTimesOfConsumer = 0;
+    pthread_create(&tidConsumer, NULL, consumer, &execTimesOfConsumer);
 
-	pthread_join(tidProducer, NULL);
-	pthread_join(tidConsumer, NULL);
+    pthread_join(tidProducer, NULL);
+    pthread_join(tidConsumer, NULL);
 
-	printf("producer exec %d times\n", execTimesOfProducer);
-	printf("consumer exec %d times\n", execTimesOfConsumer);
+    printf("producer exec %d times\n", execTimesOfProducer);
+    printf("consumer exec %d times\n", execTimesOfConsumer);
 
-	sem_destroy(&gShared.nEmpty);
-	sem_destroy(&gShared.nStored);
+    sem_destroy(&gShared.nEmpty);
+    sem_destroy(&gShared.nStored);
 
-	exit(0);
+    exit(0);
 }
 
 void* producer(void *arg)
 {
-	int i = 0;
-	for (;;)
-	{
-		sem_wait(&gShared.nEmpty);
+    int i = 0;
+    for (;;)
+    {
+        sem_wait(&gShared.nEmpty);
 
-		gShared.que[i].n = read(STDIN_FILENO, gShared.que[i].buff, BUFF_SIZE);
-		if (gShared.que[i].n < 0)
-		{
-			errQuit("read error!");
-		}
-		if (gShared.que[i].n == 0)
-		{
-			sem_post(&gShared.nStored);
-			return NULL;
-		}
+        gShared.que[i].n = read(STDIN_FILENO, gShared.que[i].buff, BUFF_SIZE);
+        if (gShared.que[i].n < 0)
+        {
+            errQuit("read error!");
+        }
+        if (gShared.que[i].n == 0)
+        {
+            sem_post(&gShared.nStored);
+            return NULL;
+        }
 
-		i = (i+1)%QSIZE;
-		(*((int *)arg))++;
+        i = (i+1)%QSIZE;
+        (*((int *)arg))++;
 
-		sem_post(&gShared.nStored);
-	}
-	return NULL;
+        sem_post(&gShared.nStored);
+    }
+    return NULL;
 }
 
 void* consumer(void *arg)
 {
-	int i = 0;
-	for (;;)
-	{
-		sem_wait(&gShared.nStored);
+    int i = 0;
+    for (;;)
+    {
+        sem_wait(&gShared.nStored);
 
-		if (0 == gShared.que[i].n)
-		{
-			return NULL;
-		}
-		if (write(STDOUT_FILENO, gShared.que[i].buff, gShared.que[i].n) != gShared.que[i].n)
-		{
-			errQuit("write error!");
-		}
-		i = (i+1)%QSIZE;
-		(*((int *)arg))++;
+        if (0 == gShared.que[i].n)
+        {
+            return NULL;
+        }
+        if (write(STDOUT_FILENO, gShared.que[i].buff, gShared.que[i].n) != gShared.que[i].n)
+        {
+            errQuit("write error!");
+        }
+        i = (i+1)%QSIZE;
+        (*((int *)arg))++;
 
-		sem_post(&gShared.nEmpty);
-	}
-	return NULL;
+        sem_post(&gShared.nEmpty);
+    }
+    return NULL;
 }
 ```

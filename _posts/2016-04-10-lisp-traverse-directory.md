@@ -31,15 +31,15 @@ lisp下遍历目录的代码：
 
 (defun pathname-as-directory (name)
   (let ((pathname (pathname name)))
-	(when (wild-pathname-p pathname)
-	  (error "Can't reliably convert wild pathnames."))
-	(if (not (directory-pathname-p name))
+    (when (wild-pathname-p pathname)
+      (error "Can't reliably convert wild pathnames."))
+    (if (not (directory-pathname-p name))
         (make-pathname
          :directory (append (or (pathname-directory pathname) (list :relative)) (list (file-namestring pathname)))
          :name nil
          :type nil
          :defaults pathname)
-	  pathname)))
+      pathname)))
 
 (defun directory-wildcard (dirname)
   (make-pathname
@@ -49,34 +49,34 @@ lisp下遍历目录的代码：
 
 (defun list-directory (dirname)
   (when (wild-pathname-p dirname)
-	(error "Can only list concret directory names."))
+    (error "Can only list concret directory names."))
   (let ((wildcard (directory-wildcard dirname)))
-	#+(or sbcl cmu lispworks)
-	(directory wildcard)
-	#+openmcl
-	(directory wildcard :directories t)
-	#+allegro
-	(directory wildcard :directory-are-files nil)
-	#+clisp
-	(nconc
-	 (directory wildcard)
-	 (directory (clisp-subdirectories-wildcard wildcard)))
-	#-(or sbcl cmu lispworks openmcl allegro clisp)
-	(error "list-directory not implemented")))
+    #+(or sbcl cmu lispworks)
+    (directory wildcard)
+    #+openmcl
+    (directory wildcard :directories t)
+    #+allegro
+    (directory wildcard :directory-are-files nil)
+    #+clisp
+    (nconc
+     (directory wildcard)
+     (directory (clisp-subdirectories-wildcard wildcard)))
+    #-(or sbcl cmu lispworks openmcl allegro clisp)
+    (error "list-directory not implemented")))
 
 (defun list-directory-tree (dirname)
   (let ((ret (cons "" nil)))
-	(tool-list-directory-tree dirname ret)
-	(setf ret (rest ret))))
+    (tool-list-directory-tree dirname ret)
+    (setf ret (rest ret))))
 
 (defun tool-list-directory-tree (dirname ret)
   (let ((filelist (list-directory dirname)))
-	(dolist (file filelist)
-	  (If (not ret)
+    (dolist (file filelist)
+      (If (not ret)
           (setf ret (cons (namestring file) nil))
           (setf (cdr (last ret)) (cons (namestring file) nil)))
-	  (when (directory-pathname-p file)
-		(tool-list-directory-tree file ret)))))
+      (when (directory-pathname-p file)
+        (tool-list-directory-tree file ret)))))
 
 #+clisp
 (defun clisp-subdirectories-wildcard (wildcard)
@@ -92,35 +92,35 @@ lisp下遍历目录的代码：
 ``` lisp
 (defun read-c++-source (source-path)
   (let ((file-list (cons "" nil)))
-	(with-open-file (in source-path)
-					(do ((line (read-line in nil) (read-line in nil)))
-						((not line))
-					  (setf (cdr (last file-list)) (cons line nil))))
-	(setf file-list (rest file-list))
-	file-list))
+    (with-open-file (in source-path)
+                    (do ((line (read-line in nil) (read-line in nil)))
+                        ((not line))
+                      (setf (cdr (last file-list)) (cons line nil))))
+    (setf file-list (rest file-list))
+    file-list))
 
 
 ;;count the lines of C++ source or C++ comment
 (defun is-line-comment (line)
   (let ((new-line (remove #\Space line)))
-	(if (= 0 (length new-line))
+    (if (= 0 (length new-line))
         nil
-	  (if (or (char= (elt new-line 0) #\*) (char= (elt new-line 0) #\/))
-		  t
-		nil))))
+      (if (or (char= (elt new-line 0) #\*) (char= (elt new-line 0) #\/))
+          t
+        nil))))
 
 (defun is-line-empty (line)
   (let ((new-line (remove-if #'(lambda (x) (or (char= x #\Space) (char= x #\Tab) (char= x #\Return) (char= x #\Newline))) line)))
-	(if (= 0 (length new-line))
+    (if (= 0 (length new-line))
         t
-	  nil)))
+      nil)))
 
 (defun count-lines (source-path compare-func)
   (let ((ret 0) (file-list (read-c++-source source-path)))
-	(dolist (line file-list)
-	  (when (funcall compare-func line)
+    (dolist (line file-list)
+      (when (funcall compare-func line)
         (incf ret)))
-	ret))
+    ret))
 
 (defun count-source-lines(source-path)
   (count-lines source-path #'(lambda (line) (and (not (is-line-empty line)) (not (is-line-comment line))))))
@@ -130,14 +130,14 @@ lisp下遍历目录的代码：
 
 (defun is-file-source-file (filename)
   (let ((reverse-filename (reverse filename)))
-	(if (or (eql 0 (search "ppc." reverse-filename)) (eql 0 (search "c." reverse-filename)) (eql 0 (search "h." reverse-filename)))
+    (if (or (eql 0 (search "ppc." reverse-filename)) (eql 0 (search "c." reverse-filename)) (eql 0 (search "h." reverse-filename)))
         t
-	  nil)))
+      nil)))
 
 (defun count-source-lines-of-dir (dirname)
   (let ((filelist (list-directory-tree dirname)))
-	(dolist (filename filelist)
-	  (when (is-file-source-file filename)
+    (dolist (filename filelist)
+      (when (is-file-source-file filename)
         (format t "~a    source-lines:~a comment lines:~a~%" filename (count-source-lines filename) (count-comment-lines filename))))))
 ```
 

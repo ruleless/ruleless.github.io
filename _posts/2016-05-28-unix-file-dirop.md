@@ -14,8 +14,8 @@ tags: [unix文件]
 
 struct dirent
 {
-	ino_t d_ino; // i节点号
-	char d_name[256]; // 文件名
+    ino_t d_ino; // i节点号
+    char d_name[256]; // 文件名
 };
 
 DIR *opendir(const char *pathname); // 打开目录，失败返回空指针
@@ -71,52 +71,52 @@ char* getcwd(char *buf, size_t size); // 获取当前工作目录的绝对路径
 typedef bool (*FileHandler)(const char *pathname);
 int traverseDir(const char *pathname, FileHandler handler)
 {
-	struct stat fileStat;
-	if (lstat(pathname, &fileStat) < 0)
-	{
-		return -1;
-	}
+    struct stat fileStat;
+    if (lstat(pathname, &fileStat) < 0)
+    {
+        return -1;
+    }
 
-	if (!handler(pathname))
-	{
-		return 0;
-	}
-	if (!S_ISDIR(fileStat.st_mode))
-	{
-		return 0;
-	}
+    if (!handler(pathname))
+    {
+        return 0;
+    }
+    if (!S_ISDIR(fileStat.st_mode))
+    {
+        return 0;
+    }
 
-	DIR *dir = opendir(pathname);
-	if (dir != NULL)
-	{
-		char subpath[NAME_PATH+1];
-		memset(subpath, 0, sizeof(subpath));
-		strncpy(subpath, pathname, NAME_PATH);
-		char *ptr = subpath;
-		ptr += strlen(subpath);
-		if (ptr > subpath && *(ptr-1) != '/')
-		{
-			*ptr++ = '/';
-		}
+    DIR *dir = opendir(pathname);
+    if (dir != NULL)
+    {
+        char subpath[NAME_PATH+1];
+        memset(subpath, 0, sizeof(subpath));
+        strncpy(subpath, pathname, NAME_PATH);
+        char *ptr = subpath;
+        ptr += strlen(subpath);
+        if (ptr > subpath && *(ptr-1) != '/')
+        {
+            *ptr++ = '/';
+        }
 
-		struct dirent *ent = readdir(dir);
-		while (ent != NULL)
-		{
-			if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
-			{
-				ent = readdir(dir);
-				continue;
-			}
+        struct dirent *ent = readdir(dir);
+        while (ent != NULL)
+        {
+            if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+            {
+                ent = readdir(dir);
+                continue;
+            }
 
-			strncpy(ptr, ent->d_name, NAME_PATH-(int)ptr+(int)subpath);
-			*(ptr+strlen(ent->d_name)) = '\0';
-			traverseDir(subpath, handler);
+            strncpy(ptr, ent->d_name, NAME_PATH-(int)ptr+(int)subpath);
+            *(ptr+strlen(ent->d_name)) = '\0';
+            traverseDir(subpath, handler);
 
-			ent = readdir(dir);
-		}
-		closedir(dir);
-	}
+            ent = readdir(dir);
+        }
+        closedir(dir);
+    }
 
-	return 0;
+    return 0;
 }
 ```

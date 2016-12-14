@@ -40,8 +40,8 @@ signal(SIG_INT, sig_int);
 ...
 void sig_int()
 {
-	signal(SIG_INT, sig_int);
-	...;
+    signal(SIG_INT, sig_int);
+    ...;
 }
 ```
 
@@ -126,11 +126,11 @@ int sigismember(const sigset* set, int signo); // 若signo是set成员则返回1
 #include <signal.h>
 
 struct sigaction {
-	void (*sa_handler)(int signo); // 信号处理函数
-	int sa_mask; // 进入信号处理函数时的信号屏蔽字，返回时会恢复
+    void (*sa_handler)(int signo); // 信号处理函数
+    int sa_mask; // 进入信号处理函数时的信号屏蔽字，返回时会恢复
 
-	int sa_flags;
-	void (*sa_sigaction)(int signo, siginfo_t *info, void *context);
+    int sa_flags;
+    void (*sa_sigaction)(int signo, siginfo_t *info, void *context);
 };
 
 int sigaction(int signo, const struct sigaction *newact, struct sigaction *oldact); // 成功返回0，失败返回-1

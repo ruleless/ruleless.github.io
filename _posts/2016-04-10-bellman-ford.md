@@ -28,14 +28,14 @@ Bellman-ford算法求单源最短路径算法的基本思路是：
 
 for (i = 1, n-1)
 {
-	for (every edge in G)
-	{
-		if (dist[edge.u] + edge.w < dist[edge.v])
-		{
-			dist[edge.v] = dist[edge.u] + edge.w;
-		}
-	}
-	若此次没有更新操作，则表示成功找到所有点到 s 的最短路径;
+    for (every edge in G)
+    {
+        if (dist[edge.u] + edge.w < dist[edge.v])
+        {
+            dist[edge.v] = dist[edge.u] + edge.w;
+        }
+    }
+    若此次没有更新操作，则表示成功找到所有点到 s 的最短路径;
 }
 
 若任意边仍可进行松弛更新操作，则表示存在负权回路;
@@ -56,82 +56,82 @@ int Graph[N][N], gNodeCnt;
 
 bool bellman_ford(int edge[N][N], int n, int s, int dist[])
 {
-	for (int u=1; u <= n; ++u)
-		dist[u] = Inf;
-	dist[s] = 0;
+    for (int u=1; u <= n; ++u)
+        dist[u] = Inf;
+    dist[s] = 0;
 
-	for (int k = 1; k <= n-1; ++k)
-	{
-		bool flag = true;
-		for (int u = 1; u <= n; ++u)
-		{
-			for (int v = 1; v <= n; ++v)
-			{
-				if (edge[u][v] < Inf && dist[u]+edge[u][v] < dist[v])
-				{
-					dist[v] = dist[u]+edge[u][v];
-					flag = false;
-				}
-			}
-		}
+    for (int k = 1; k <= n-1; ++k)
+    {
+        bool flag = true;
+        for (int u = 1; u <= n; ++u)
+        {
+            for (int v = 1; v <= n; ++v)
+            {
+                if (edge[u][v] < Inf && dist[u]+edge[u][v] < dist[v])
+                {
+                    dist[v] = dist[u]+edge[u][v];
+                    flag = false;
+                }
+            }
+        }
 
-		if (flag)
-			return true;
-	}
-	for (int u = 1; u <= n; ++u)
-	{
-		for (int v = 1; v <= n; ++v)
-		{
-			if (edge[u][v] < Inf && dist[u]+edge[u][v] < dist[v])
-				return false;
-		}
-	}
-	return true;
+        if (flag)
+            return true;
+    }
+    for (int u = 1; u <= n; ++u)
+    {
+        for (int v = 1; v <= n; ++v)
+        {
+            if (edge[u][v] < Inf && dist[u]+edge[u][v] < dist[v])
+                return false;
+        }
+    }
+    return true;
 }
 
 int main()
 {
-	// freopen("in.txt", "r", stdin);
+    // freopen("in.txt", "r", stdin);
 
-	int F;
-	scanf("%d", &F);
-	while (F--)
-	{
-		int M, W;
-		scanf("%d%d%d", &gNodeCnt, &M, &W);
+    int F;
+    scanf("%d", &F);
+    while (F--)
+    {
+        int M, W;
+        scanf("%d%d%d", &gNodeCnt, &M, &W);
 
-		for (int i = 1; i <= gNodeCnt; ++i)
-		{
-			for (int j = i; j <= gNodeCnt; ++j)
-			{
-				Graph[i][j] = Graph[j][i] = (i == j ? 0 : Inf);
-			}
-		}
-		while (M--)
-		{
-			int s, t, w;
-			scanf("%d%d%d", &s, &t, &w);
-			if (w < Graph[s][t])
-			{
-				Graph[t][s] = w;
-				Graph[s][t] = w;
-			}
-		}
-		while (W--)
-		{
-			int s, t, w;
-			scanf("%d%d%d", &s, &t, &w);
-			w = -w;
-			if (w < Graph[s][t])
-				Graph[s][t] = w;
-		}
+        for (int i = 1; i <= gNodeCnt; ++i)
+        {
+            for (int j = i; j <= gNodeCnt; ++j)
+            {
+                Graph[i][j] = Graph[j][i] = (i == j ? 0 : Inf);
+            }
+        }
+        while (M--)
+        {
+            int s, t, w;
+            scanf("%d%d%d", &s, &t, &w);
+            if (w < Graph[s][t])
+            {
+                Graph[t][s] = w;
+                Graph[s][t] = w;
+            }
+        }
+        while (W--)
+        {
+            int s, t, w;
+            scanf("%d%d%d", &s, &t, &w);
+            w = -w;
+            if (w < Graph[s][t])
+                Graph[s][t] = w;
+        }
 
-		int dist[N];
-		if (bellman_ford(Graph, gNodeCnt, 1, dist))
-			printf("NO\n");
-		else
-			printf("YES\n");
-	}
-	return 0;
+        int dist[N];
+        if (bellman_ford(Graph, gNodeCnt, 1, dist))
+            printf("NO\n");
+        else
+            printf("YES\n");
+    }
+    return 0;
 }
 ```

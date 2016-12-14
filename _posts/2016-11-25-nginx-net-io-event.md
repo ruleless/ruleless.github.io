@@ -25,7 +25,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
 {
     ngx_uint_t           i, n;
 
-	// ...
+    // ...
 
     n = old_cycle->listening.nelts ? old_cycle->listening.nelts : 10;
 
@@ -40,13 +40,13 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
     cycle->listening.nalloc = n;
     cycle->listening.pool = pool;
 
-	// ...
+    // ...
 
     if (ngx_open_listening_sockets(cycle) != NGX_OK) {
         goto failed;
     }
 
-	// ...
+    // ...
 
     return NULL;
 }
@@ -84,7 +84,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
 {
     ngx_uint_t           i, n;
 
-	// ...
+    // ...
 
     for (i = 0; cycle->modules[i]; i++) {
         if (cycle->modules[i]->type != NGX_CORE_MODULE) {
@@ -103,7 +103,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
         }
     }
 
-	// ...
+    // ...
 
     for (i = 0; cycle->modules[i]; i++) {
         if (cycle->modules[i]->type != NGX_CORE_MODULE) {
@@ -336,7 +336,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
     ngx_int_t         n;
     ngx_uint_t        i;
 
-	// ...
+    // ...
 
     for (i = 0; cycle->modules[i]; i++) {
         if (cycle->modules[i]->init_process) {
@@ -347,7 +347,7 @@ ngx_worker_process_init(ngx_cycle_t *cycle, ngx_int_t worker)
         }
     }
 
-	// ...
+    // ...
 }
 ```
 
@@ -404,7 +404,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
         break;
     }
 
-	// ...
+    // ...
 
     cycle->connections =
         ngx_alloc(sizeof(ngx_connection_t) * cycle->connection_n, cycle->log);
@@ -691,7 +691,7 @@ ngx_epoll_process_events(ngx_cycle_t *cycle, ngx_msec_t timer, ngx_uint_t flags)
 
     events = epoll_wait(ep, event_list, (int) nevents, timer);
 
-	// ...
+    // ...
 
     if (events == 0) {
         if (timer != NGX_TIMER_INFINITE) {

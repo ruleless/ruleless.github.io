@@ -28,8 +28,8 @@ ssize_t write(int fd, const void *buff, size_t len);
 
 struct iovec
 {
-	void  *iov_base;
-	size_t  iov_len;
+    void  *iov_base;
+    size_t  iov_len;
 };
 
 ssize_t readv(int fd, const struct iovec *iov, int iovlen);
@@ -72,13 +72,13 @@ ssize_t send(int fd, const void *buff, size_t len, int flags);
 
 struct msghdr
 {
-	void *msg_name; // 协议地址
-	socklen_t msg_namelen; // 协议地址长度
-	struct iovec *msg_iov; // 缓存数组
-	int msg_iovlen; // 缓存数组大小
-	void *msg_control; //  辅助数据
-	socklen_t msg_controllen; // 辅助数据大小
-	int msg_flags; // 内核通过该值向recvmsg返回标记
+    void *msg_name; // 协议地址
+    socklen_t msg_namelen; // 协议地址长度
+    struct iovec *msg_iov; // 缓存数组
+    int msg_iovlen; // 缓存数组大小
+    void *msg_control; //  辅助数据
+    socklen_t msg_controllen; // 辅助数据大小
+    int msg_flags; // 内核通过该值向recvmsg返回标记
 };
 
 ssize_t recvmsg(int fd, struct msghdr *msg, int flags);
@@ -98,83 +98,83 @@ msg_flags可用常值定义如下：
   + `MSG_DONTROUT`
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：是
-	+ 是否可由内核返回：否
+    + 是否支持send系列函数：是
+    + 是否可由内核返回：否
 
   + `MSG_DONTWAIT`
 
-	+ 是否支持recv系列函数：是
-	+ 是否支持send系列函数：是
-	+ 是否可由内核返回：否
+    + 是否支持recv系列函数：是
+    + 是否支持send系列函数：是
+    + 是否可由内核返回：否
 
   + `MSG_PEEK`
 
     + 是否支持recv系列函数：是
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：否
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：否
 
   + `MSG_WAITALL`
 
     + 是否支持recv系列函数：是
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：否
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：否
 
   + `MSG_EOR`
 
     本标志的返回条件是返回数据结束一个逻辑记录，TCP不使用本标志，因为它是一个字节流协议。
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：是
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：是
+    + 是否可由内核返回：是
 
   + `MSG_OOB`
 
     本标志绝不为TCP带外数据返回。它适用于OSI之类的其他协议族。
 
     + 是否支持recv系列函数：是
-	+ 是否支持send系列函数：是
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：是
+    + 是否可由内核返回：是
 
   + `MSG_BCAST`
 
     本标志随BSD/OS引入，相对较新。它的返回条件是本数据报作为链路层广播收取或者其目的IP地址是一个广播地址。
-	与IP_RECVDSTADDR套接字选项相比，本标志是用于判定一个UDP数据报是否发往某个广播地址的更好的方法。
+    与IP_RECVDSTADDR套接字选项相比，本标志是用于判定一个UDP数据报是否发往某个广播地址的更好的方法。
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：是
 
   + `MSG_MCAST`
 
     本标志随BSD/OS引入，相对较新。返回条件：本数据报作为链路层多播收取。
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：是
 
   + `MSG_TRUNC`
 
     返回条件：本数据报被截断。也就是说，内核预备返回的数据超过进程事先分配的空间(所有iov_len成员之和)。
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：是
 
   + `MSG_CTRUNC`
 
     返回条件：辅助数据被截断。也就是说，内核预备返回的辅助数据超过了进程事先分配的空间(msg_controllen)。
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：是
 
   + `MSG_NOTIFICATION`
 
     本标志由SCTP接收者返回，指示读入的消息是一个事件通知，而不是数据消息。
 
     + 是否支持recv系列函数：否
-	+ 是否支持send系列函数：否
-	+ 是否可由内核返回：是
+    + 是否支持send系列函数：否
+    + 是否可由内核返回：是
 
 ### 辅助数据
 
@@ -186,10 +186,10 @@ msg_flags可用常值定义如下：
 
 struct cmsghdr
 {
-	socklen_t cmsg_len; // 辅助数据长度
-	int cmsg_level; // 协议
-	int cmsg_type; // 类型
-	...            // cmsg_data
+    socklen_t cmsg_len; // 辅助数据长度
+    int cmsg_level; // 协议
+    int cmsg_type; // 类型
+    ...            // cmsg_data
 };
 ```
 
@@ -231,24 +231,24 @@ unsigned int CMSG_SPACE(int length);
 
     cmsg_type取值区间：
 
-	+ `IP_RECVDSTADDR` 随UDP数据报接收目的地址
-	+ `IP_RECVIF` 随UDP数据报接收接口索引
+    + `IP_RECVDSTADDR` 随UDP数据报接收目的地址
+    + `IP_RECVIF` 随UDP数据报接收接口索引
 
   + protocol:IPv6 cmsg_level:OPPROTO_OPV6
 
     cmsg_type取值区间：
 
-	+ `IPV6_DSTOPTS` 指定/接收目的地选项
-	+ `IPV6_HOLIMIT` 指定/接收跳限
-	+ `IPV6_HOPOPTS` 指定/接收步跳选项
-	+ `IPV6_NEXTHOP` 指定下一跳地址
-	+ `IPV6_PKTINFO` 指定/接收分组信息
-	+ `IPV6_THDR` 指定/接收路由首部
-	+ `IPV6_TCLASS` 指定/接收分组流通类别
+    + `IPV6_DSTOPTS` 指定/接收目的地选项
+    + `IPV6_HOLIMIT` 指定/接收跳限
+    + `IPV6_HOPOPTS` 指定/接收步跳选项
+    + `IPV6_NEXTHOP` 指定下一跳地址
+    + `IPV6_PKTINFO` 指定/接收分组信息
+    + `IPV6_THDR` 指定/接收路由首部
+    + `IPV6_TCLASS` 指定/接收分组流通类别
 
   + protocol:Unix域 cmsg_level:SOL_SOCKET
 
     cmsg_type取值区间：
 
-	+ `SCM_RIGHTS` 发送/接收描述符
-	+ `SCM_CREDS` 发送/接收用户凭证
+    + `SCM_RIGHTS` 发送/接收描述符
+    + `SCM_CREDS` 发送/接收用户凭证

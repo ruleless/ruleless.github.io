@@ -93,16 +93,16 @@ char buff[s_buffSize];
 
 int main(int argc, char* argv[])
 {
-	int n = 0;
-	while ((n=read(STDIN_FILENO, buff, s_buffSize)) > 0)
-	{
-		if (write(STDOUT_FILENO, buff, n) != n)
-		{
-			printf("write error! pid=%d\n", getpid());
-			exit(1);
-		}
-	}
-	exit(0);
+    int n = 0;
+    while ((n=read(STDIN_FILENO, buff, s_buffSize)) > 0)
+    {
+        if (write(STDOUT_FILENO, buff, n) != n)
+        {
+            printf("write error! pid=%d\n", getpid());
+            exit(1);
+        }
+    }
+    exit(0);
 }
 ```
 
@@ -118,20 +118,20 @@ static const int s_maxChildP = 10;
 
 int main(int argc, char *argvp[])
 {
-	pid_t childPid = -1;
-	if ((childPid = fork()) < 0)
-	{
-		printf("fork error!\n");
-		abort();
-	}
-	else if (childPid == 0) // 子进程
-	{
-		execlp("./cat", "cat", NULL);
-	}
+    pid_t childPid = -1;
+    if ((childPid = fork()) < 0)
+    {
+        printf("fork error!\n");
+        abort();
+    }
+    else if (childPid == 0) // 子进程
+    {
+        execlp("./cat", "cat", NULL);
+    }
 
-	waitpid(childPid, NULL, 0);
+    waitpid(childPid, NULL, 0);
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -154,28 +154,28 @@ int main(int argc, char *argvp[])
 
 int main(int argc, char *argv[])
 {
-	int pid = -1;
-	if ((pid = fork()) < 0)
-	{
-		printf("fork error.\n");
-		abort();
-	}
-	else if(pid == 0)
-	{
-		if ((pid = fork()) < 0)
-		{
-			printf("fork error.\n");
-		}
-		else if(pid > 0)
-			exit(0);
+    int pid = -1;
+    if ((pid = fork()) < 0)
+    {
+        printf("fork error.\n");
+        abort();
+    }
+    else if(pid == 0)
+    {
+        if ((pid = fork()) < 0)
+        {
+            printf("fork error.\n");
+        }
+        else if(pid > 0)
+            exit(0);
 
-		sleep(2);
-		printf("child process. pid=%d  ppid=%d\n", getpid(), getppid());
-		exit(0);
-	}
+        sleep(2);
+        printf("child process. pid=%d  ppid=%d\n", getpid(), getppid());
+        exit(0);
+    }
 
-	printf("parent process. pid=%d\n", getpid());
+    printf("parent process. pid=%d\n", getpid());
 
-	exit(0);
+    exit(0);
 }
 ```

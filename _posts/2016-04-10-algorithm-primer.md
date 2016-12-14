@@ -44,23 +44,23 @@ bool isprimer[N];
 
 void get_primer()
 {
-	int i = 0, j = 0;
-	for (i = 0; i < N; ++i)
-	{
-		isprimer[i] = true;
-	}
-	isprimer[0] = false;
-	isprimer[1] = false;
-	for (i = 2; i < N; ++i)
-	{
-		if (isprimer[i])
-		{
-			for (j = 2; i * j < N; ++j)
-			{
-				isprimer[i * j] = false;
-			}
-		}
-	}
+    int i = 0, j = 0;
+    for (i = 0; i < N; ++i)
+    {
+        isprimer[i] = true;
+    }
+    isprimer[0] = false;
+    isprimer[1] = false;
+    for (i = 2; i < N; ++i)
+    {
+        if (isprimer[i])
+        {
+            for (j = 2; i * j < N; ++j)
+            {
+                isprimer[i * j] = false;
+            }
+        }
+    }
 }
 ```
 

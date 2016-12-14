@@ -20,30 +20,30 @@ class Obj
 {
   public:
     Obj(const char *desc)
-	{
-		strncpy(mDesc, desc, 256);
-		printf("default construct %p \"%s\"\n", (void *)this, mDesc);
-	}
+    {
+        strncpy(mDesc, desc, 256);
+        printf("default construct %p \"%s\"\n", (void *)this, mDesc);
+    }
 
-	Obj(const Obj &o)
-	{
-		strncpy(mDesc, o.mDesc, 256);
-		printf("copy construct %p \"%s\"\n", (void *)this, mDesc);
-	}
+    Obj(const Obj &o)
+    {
+        strncpy(mDesc, o.mDesc, 256);
+        printf("copy construct %p \"%s\"\n", (void *)this, mDesc);
+    }
 
-	Obj& operator= (const Obj &o)
-	{
-		strncpy(mDesc, o.mDesc, 256);
-		printf("operator= %p \"%s\"\n", (void *)this, mDesc);
-		return *this;
-	}
+    Obj& operator= (const Obj &o)
+    {
+        strncpy(mDesc, o.mDesc, 256);
+        printf("operator= %p \"%s\"\n", (void *)this, mDesc);
+        return *this;
+    }
 
     virtual ~Obj()
-	{
-		printf("~ destruct %p \"%s\"\n", (void *)this, mDesc);
-	}
+    {
+        printf("~ destruct %p \"%s\"\n", (void *)this, mDesc);
+    }
   private:
-	char mDesc[256];
+    char mDesc[256];
 };
 ```
 
@@ -97,13 +97,13 @@ copy construct 0x7fff20933ee8 "situation 2"
 ``` c++
 Obj testFunc1()
 {
-	Obj o("test1");
-	return o;
+    Obj o("test1");
+    return o;
 }
 
 Obj testFunc2()
 {
-	return Obj("test2"); // it's called RVO(Return Value Optimization)
+    return Obj("test2"); // it's called RVO(Return Value Optimization)
 }
 ```
 

@@ -107,9 +107,9 @@ Linux slab 分配器使用了这种思想和其他一些思想来构建一个在
 ``` c++
 struct kmem_cache *
 kmem_cache_create( const char *name, size_t size, size_t align,
-				   unsigned long flags;
-				   void (*ctor)(void*, struct kmem_cache *, unsigned long),
-				   void (*dtor)(void*, struct kmem_cache *, unsigned long));
+                   unsigned long flags;
+                   void (*ctor)(void*, struct kmem_cache *, unsigned long),
+                   void (*dtor)(void*, struct kmem_cache *, unsigned long));
 ```
 
   - `name` 参数定义了缓存名称，`proc 文件系统`（在 `/proc/slabinfo` 中）使用它标识这个缓存。
@@ -168,7 +168,7 @@ kmem_cache_create( const char *name, size_t size, size_t align,
 内核中最常用的内存管理函数是 `kmalloc` 和 `kfree` 函数。这两个函数的原型如下：
 
     void* kmalloc( size_t size, int flags );
-	void kfree( const void *objp );
+    void kfree( const void *objp );
 
 注意在 `kmalloc` 中，两个参数是要分配的对象的大小和一组标志。
 但是 `kmalloc` 和 `kfree` 使用了类似于前面定义的函数的 `slab` 缓存。
@@ -186,8 +186,8 @@ kmem_cache_create( const char *name, size_t size, size_t align,
 注意这个操作（称为回收）是由内核定期自动执行的（通过 `kswapd`）。
 
     unsigned int kmem_cache_size( struct kmem_cache *cachep );
-	const char *kmem_cache_name( struct kmem_cache *cachep );
-	int kmem_cache_shrink( struct kmem_cache *cachep );
+    const char *kmem_cache_name( struct kmem_cache *cachep );
+    int kmem_cache_shrink( struct kmem_cache *cachep );
 
 ## slab 缓存的示例用法
 
@@ -201,14 +201,14 @@ static struct kmem_cache *my_cachep;
 static void init_my_cache( void )
 {
 
-	my_cachep = kmem_cache_create(
-		"my_cache",            /* Name */
-		32,                    /* Object Size */
-		0,                     /* Alignment */
-		SLAB_HWCACHE_ALIGN,    /* Flags */
-		NULL, NULL );          /* Constructor/Deconstructor */
+    my_cachep = kmem_cache_create(
+        "my_cache",            /* Name */
+        32,                    /* Object Size */
+        0,                     /* Alignment */
+        SLAB_HWCACHE_ALIGN,    /* Flags */
+        NULL, NULL );          /* Constructor/Deconstructor */
 
-	return;
+    return;
 }
 ```
 
@@ -218,18 +218,18 @@ static void init_my_cache( void )
 ``` c++
 int slab_test( void )
 {
-	void *object;
+    void *object;
 
-	printk( "Cache name is %s\n", kmem_cache_name( my_cachep ) );
-	printk( "Cache object size is %d\n", kmem_cache_size( my_cachep ) );
+    printk( "Cache name is %s\n", kmem_cache_name( my_cachep ) );
+    printk( "Cache object size is %d\n", kmem_cache_size( my_cachep ) );
 
-	object = kmem_cache_alloc( my_cachep, GFP_KERNEL );
+    object = kmem_cache_alloc( my_cachep, GFP_KERNEL );
 
-	if (object) {
-		kmem_cache_free( my_cachep, object );
-	}
+    if (object) {
+        kmem_cache_free( my_cachep, object );
+    }
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -238,8 +238,8 @@ int slab_test( void )
 ``` c++
 static void remove_my_cache( void )
 {
-	if (my_cachep) kmem_cache_destroy( my_cachep );
-	return;
+    if (my_cachep) kmem_cache_destroy( my_cachep );
+    return;
 }
 ```
 

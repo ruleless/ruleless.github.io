@@ -41,11 +41,11 @@ fcntl函数有5种功能：
 
   1. 复制一个现有的描述符(F_DUPFD)
 
-	 `dup(fd)` 等价于 `fcntl(fd, F_DUPFD, 0);`
+     `dup(fd)` 等价于 `fcntl(fd, F_DUPFD, 0);`
 
-	 `dup2(fd, newfd)` 等价于 `close(newfd); fcntl(fd, F_DUPFD, newfd);`
+     `dup2(fd, newfd)` 等价于 `close(newfd); fcntl(fd, F_DUPFD, newfd);`
 
-	 若成功返回新复制的文件描述符
+     若成功返回新复制的文件描述符
 
   2. 获得/设置文件描述符标记(F_GETFD、F_SETFD)
 
@@ -55,7 +55,7 @@ fcntl函数有5种功能：
 
      `F_GETFL` 返回当前的文件状态标志
 
-	 `F_SETFL` 设置文件状态标志，可设置的状态标志包括：O_APPEND、O_NONBLOCK、O_SYNC、O_DSYNC ...
+     `F_SETFL` 设置文件状态标志，可设置的状态标志包括：O_APPEND、O_NONBLOCK、O_SYNC、O_DSYNC ...
 
   4. 获得/设置异步I/O所有权(F_GETOWN、F_SETOWN)
 
@@ -70,11 +70,11 @@ fcntl函数有5种功能：
 
 struct flock
 {
-	short l_type; // 可设置为：F_RDLCK、F_WRLCK、F_UNLCK
-	off_t l_start; // 相对于l_whence的起始偏移
-	short l_whence; // 可设置为：SEEK_SET、SEEK_CUR、SEEK_END
-	off_t l_len; // 加锁或解锁区的长度
-	pid_t l_pid; // 需获取锁时，返回持有锁的进程ID
+    short l_type; // 可设置为：F_RDLCK、F_WRLCK、F_UNLCK
+    off_t l_start; // 相对于l_whence的起始偏移
+    short l_whence; // 可设置为：SEEK_SET、SEEK_CUR、SEEK_END
+    off_t l_len; // 加锁或解锁区的长度
+    pid_t l_pid; // 需获取锁时，返回持有锁的进程ID
 };
 ```
 
@@ -83,32 +83,32 @@ struct flock
 ``` c++
 int regRecLock(int fd, int cmd, int type, off_t offset, int whence, off_t len)
 {
-	struct flock lock;
-	lock.l_type = type;
-	lock.l_start = offset;
-	lock.l_whence = whence;
-	lock.l_len = len;
-	lock.l_pid = 0;
-	return fcntl(fd, cmd, &lock);
+    struct flock lock;
+    lock.l_type = type;
+    lock.l_start = offset;
+    lock.l_whence = whence;
+    lock.l_len = len;
+    lock.l_pid = 0;
+    return fcntl(fd, cmd, &lock);
 }
 
 /* 给指定区域加读锁(不阻塞)
  */
 #define regReadRecLock(fd, offset, whence, len) \
-	regRecLock(fd, F_SETLK, F_RDLCK, offset, whence, len)
+    regRecLock(fd, F_SETLK, F_RDLCK, offset, whence, len)
 
 /* 给指定区域加读锁(阻塞)
  */
 #define regReadWRecLock(fd, offset, whence, len) \
-	regRecLock(fd, F_SETLKW, F_RDLCK, offset, whence, len)
+    regRecLock(fd, F_SETLKW, F_RDLCK, offset, whence, len)
 
 /* 给指定区域加写锁(不阻塞)
  */
 #define regWriteRecLock(fd, offset, whence, len) \
-	regRecLock(fd, F_SETLK, F_WRLCK, offset, whence, len)
+    regRecLock(fd, F_SETLK, F_WRLCK, offset, whence, len)
 
 /* 给指定区域加写锁(阻塞)
  */
 #define regWriteWRecLock(fd, offset, whence, len) \
-	regRecLock(fd, F_SETLKW, offset, whence, len)
+    regRecLock(fd, F_SETLKW, offset, whence, len)
 ```

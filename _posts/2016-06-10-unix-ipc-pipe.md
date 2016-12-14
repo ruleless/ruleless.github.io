@@ -89,48 +89,48 @@ int mkfifo(const char *pathname, mode_t mode); // 成功返回0，失败返回-1
     - 现有打开操作：FIFO打开来写
 
       * 阻塞模式：成功返回
-	  * 非阻塞模式：成功返回
+      * 非阻塞模式：成功返回
 
-	- 现有打开操作：FIFO不是打开来写
+    - 现有打开操作：FIFO不是打开来写
 
-	  * 阻塞模式：阻塞到FIFO打开来写为止
-	  * 非阻塞模式：成功返回
+      * 阻塞模式：阻塞到FIFO打开来写为止
+      * 非阻塞模式：成功返回
 
   + 当前操作：open FIFO(只写)
 
     - FIFO打开来读
 
-	  * 阻塞模式：成功返回
-	  * 非阻塞模式：成功返回
+      * 阻塞模式：成功返回
+      * 非阻塞模式：成功返回
 
-	- FIFO不是打开来读
+    - FIFO不是打开来读
 
-	  * 阻塞模式：阻塞到FIFO打开来读为止
-	  * 非阻塞模式：返回ENXIO
+      * 阻塞模式：阻塞到FIFO打开来读为止
+      * 非阻塞模式：返回ENXIO
 
   + 当前操作：从空管道或空FIFO read
 
     - 管道或FIFO打开来写
 
-	  * 阻塞模式：阻塞到管道或FIFO中有数据或者管道或FIFO不再为写打开着为止
-	  * 非阻塞模式：返回EAGAIN
+      * 阻塞模式：阻塞到管道或FIFO中有数据或者管道或FIFO不再为写打开着为止
+      * 非阻塞模式：返回EAGAIN
 
-	- 管道或FIFO不是打开来写
+    - 管道或FIFO不是打开来写
 
-	  * 阻塞模式：read返回0（文件结束符）
-	  * 非阻塞模式：read返回0（文件结束符）
+      * 阻塞模式：read返回0（文件结束符）
+      * 非阻塞模式：read返回0（文件结束符）
 
   + 当前操作：往管道或FIFO write
 
-	- 管道或FIFO打开来读
+    - 管道或FIFO打开来读
 
-	  * 阻塞模式：（见下面描述）
-	  * 非阻塞模式：（见下面描述）
+      * 阻塞模式：（见下面描述）
+      * 非阻塞模式：（见下面描述）
 
-	- 管道或FIFO不是打开来读
+    - 管道或FIFO不是打开来读
 
-	  * 阻塞模式：给线程产生SIGPIPE信号
-	  * 非阻塞模式：给线程产生SIGPIPE信号
+      * 阻塞模式：给线程产生SIGPIPE信号
+      * 非阻塞模式：给线程产生SIGPIPE信号
 
 关于管道或FIFO的读出与写入操作的若干规则描述如下：
 
@@ -138,22 +138,22 @@ int mkfifo(const char *pathname, mode_t mode); // 成功返回0，失败返回-1
 
   + 如果请求写入的数据量小于或等于PIPE_BUF，那么write操作将保证是原子的。
     这意味着，如果有两个不同的进程差不多同时往一个管道或FIFO写数据，
-	那么，或者先写入来自第一个进程的所有数据，然后再写入来自第二个进程的所有数据；
-	或者颠倒过来。系统不会相互混杂来自这两个进程的数据。
-	但是，如果请求写入的数据大于PIPE_BUF，那么write操作将不能保证是原子的。
+    那么，或者先写入来自第一个进程的所有数据，然后再写入来自第二个进程的所有数据；
+    或者颠倒过来。系统不会相互混杂来自这两个进程的数据。
+    但是，如果请求写入的数据大于PIPE_BUF，那么write操作将不能保证是原子的。
 
     O_NONBLOCK标志的设置对write操作的原子性没有影响（原子性由且仅由所请求写入的字节数是否<=PIPE_BUF所决定）。
-	然而，当一个管道或FIFO设置成非阻塞时，write的返回值取决于待写入的数据以及该管道或FIFO当前的可用空间大小。
+    然而，当一个管道或FIFO设置成非阻塞时，write的返回值取决于待写入的数据以及该管道或FIFO当前的可用空间大小。
 
     - 如果待写的数据<=PIPE_BUF：
 
-	  * 如果待写入字节数<=当前管道或FIFO可用空间大小，那么所有数据写入；
-	  * 如果待写入字节数>当前管道或FIFO可用空间大小，那么立即返回EAGAIN错误。
+      * 如果待写入字节数<=当前管道或FIFO可用空间大小，那么所有数据写入；
+      * 如果待写入字节数>当前管道或FIFO可用空间大小，那么立即返回EAGAIN错误。
 
     - 如果待写的数据>PIPE_BUF：
 
-	  * 如果该管道或FIFO至少有1字节空间，那么内核写入该管道或FIFO能容纳的最大数目的字节，该数目同时作为write的返回值；
-	  * 如果该管道或FIFO已满，则返回EAGAIN错误。
+      * 如果该管道或FIFO至少有1字节空间，那么内核写入该管道或FIFO能容纳的最大数目的字节，该数目同时作为write的返回值；
+      * 如果该管道或FIFO已满，则返回EAGAIN错误。
 
 ## 示例程序(并发模式下的回射程序)
 
@@ -189,8 +189,8 @@ common.cpp
 
 void errQuit()
 {
-	printf("%s\n", strerror(errno));
-	exit(1);
+    printf("%s\n", strerror(errno));
+    exit(1);
 }
 ```
 
@@ -201,50 +201,50 @@ client.cpp
 
 int main(int argc, char *argv[])
 {
-	char echoRPath[MAX_BUF];
-	char echoWPath[MAX_BUF];
-	snprintf(echoRPath, MAX_BUF, "%s%dr", FIFO_ECHO, (int)getpid());
-	snprintf(echoWPath, MAX_BUF, "%s%dw", FIFO_ECHO, (int)getpid());
+    char echoRPath[MAX_BUF];
+    char echoWPath[MAX_BUF];
+    snprintf(echoRPath, MAX_BUF, "%s%dr", FIFO_ECHO, (int)getpid());
+    snprintf(echoWPath, MAX_BUF, "%s%dw", FIFO_ECHO, (int)getpid());
 
-	if (mkfifo(echoRPath, 0644) < 0 && errno != EEXIST)
-		errQuit();
-	if (mkfifo(echoWPath, 0644) < 0 && errno != EEXIST)
-		errQuit();
+    if (mkfifo(echoRPath, 0644) < 0 && errno != EEXIST)
+        errQuit();
+    if (mkfifo(echoWPath, 0644) < 0 && errno != EEXIST)
+        errQuit();
 
-	int servFd = open(FIFO_PATH, O_WRONLY);
-	if (servFd < 0)
-		errQuit();
+    int servFd = open(FIFO_PATH, O_WRONLY);
+    if (servFd < 0)
+        errQuit();
 
-	char buf[MAX_BUF];
-	snprintf(buf, MAX_BUF, "%10d", (int)getpid());
-	write(servFd, buf, 10);
+    char buf[MAX_BUF];
+    snprintf(buf, MAX_BUF, "%10d", (int)getpid());
+    write(servFd, buf, 10);
 
-	int readFd = open(echoRPath, O_RDONLY);
-	if (readFd < 0)
-		errQuit();
+    int readFd = open(echoRPath, O_RDONLY);
+    if (readFd < 0)
+        errQuit();
 
-	int n = read(readFd, buf, 2);
-	if (n != 2 || buf[0] != 'o' || buf[1] != 'k')
-		errQuit();
+    int n = read(readFd, buf, 2);
+    if (n != 2 || buf[0] != 'o' || buf[1] != 'k')
+        errQuit();
 
-	int writeFd = open(echoWPath, O_WRONLY);
-	if (writeFd < 0)
-		errQuit();
+    int writeFd = open(echoWPath, O_WRONLY);
+    if (writeFd < 0)
+        errQuit();
 
-	while (fgets(buf, MAX_BUF, stdin) != NULL)
-	{
-		int len = strlen(buf);
-		write(writeFd, buf, len);
+    while (fgets(buf, MAX_BUF, stdin) != NULL)
+    {
+        int len = strlen(buf);
+        write(writeFd, buf, len);
 
-		n = read(readFd, buf, MAX_BUF-1);
-		if (n > 0)
-		{
-			buf[n] = '\0';
-			printf("server ret:%s", buf);
-		}
-	}
+        n = read(readFd, buf, MAX_BUF-1);
+        if (n > 0)
+        {
+            buf[n] = '\0';
+            printf("server ret:%s", buf);
+        }
+    }
 
-	exit(0);
+    exit(0);
 }
 ```
 
@@ -255,61 +255,61 @@ server.cpp
 
 int main(int argc, char *argv[])
 {
-	if (mkfifo(FIFO_PATH, 0644) < 0 && errno != EEXIST)
-		errQuit();
+    if (mkfifo(FIFO_PATH, 0644) < 0 && errno != EEXIST)
+        errQuit();
 
-	int servFd = open(FIFO_PATH, O_RDONLY);
-	if (servFd < 0)
-		errQuit();
+    int servFd = open(FIFO_PATH, O_RDONLY);
+    if (servFd < 0)
+        errQuit();
 
-	int dummyfd = open(FIFO_PATH, O_WRONLY);
-	if (dummyfd < 0)
-		errQuit();
+    int dummyfd = open(FIFO_PATH, O_WRONLY);
+    if (dummyfd < 0)
+        errQuit();
 
-	char buf[11] = {0};
-	int n = 0;
-	memset(buf, 0, sizeof(buf));
-	while ((n = read(servFd, buf, 10)) > 0)
-	{
-		if (n != 10)
-		{
-			printf("client write len illegal len = %d\n", n);
-			continue;
-		}
+    char buf[11] = {0};
+    int n = 0;
+    memset(buf, 0, sizeof(buf));
+    while ((n = read(servFd, buf, 10)) > 0)
+    {
+        if (n != 10)
+        {
+            printf("client write len illegal len = %d\n", n);
+            continue;
+        }
 
-		int clientpid = atoi(buf);
-		if (clientpid > 0)
-		{
-			if (fork() == 0)
-			{
-				char echoRPath[MAX_BUF];
-				char echoWPath[MAX_BUF];
-				snprintf(echoRPath, MAX_BUF, "%s%dw", FIFO_ECHO, clientpid);
-				snprintf(echoWPath, MAX_BUF, "%s%dr", FIFO_ECHO, clientpid);
+        int clientpid = atoi(buf);
+        if (clientpid > 0)
+        {
+            if (fork() == 0)
+            {
+                char echoRPath[MAX_BUF];
+                char echoWPath[MAX_BUF];
+                snprintf(echoRPath, MAX_BUF, "%s%dw", FIFO_ECHO, clientpid);
+                snprintf(echoWPath, MAX_BUF, "%s%dr", FIFO_ECHO, clientpid);
 
-				int writeFd = open(echoWPath, O_WRONLY);
-				if (writeFd < 0)
-					errQuit();
-				write(writeFd, "ok", 2);
+                int writeFd = open(echoWPath, O_WRONLY);
+                if (writeFd < 0)
+                    errQuit();
+                write(writeFd, "ok", 2);
 
-				int readFd = open(echoRPath, O_RDONLY);
-				if (readFd < 0)
-					errQuit();
+                int readFd = open(echoRPath, O_RDONLY);
+                if (readFd < 0)
+                    errQuit();
 
-				char echoBuf[MAX_BUF];
-				int n = 0;
-				while((n = read(readFd, echoBuf, MAX_BUF)) > 0)
-				{
-					write(writeFd, echoBuf, n);
-				}
+                char echoBuf[MAX_BUF];
+                int n = 0;
+                while((n = read(readFd, echoBuf, MAX_BUF)) > 0)
+                {
+                    write(writeFd, echoBuf, n);
+                }
 
-				printf("client %u stoped.\n");
+                printf("client %u stoped.\n");
 
-				exit(0);
-			}
-		}
-	}
+                exit(0);
+            }
+        }
+    }
 
-	exit(0);
+    exit(0);
 }
 ```

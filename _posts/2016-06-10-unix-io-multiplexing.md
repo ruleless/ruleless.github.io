@@ -29,8 +29,8 @@ I/O多路转接模型提供一种等待多个描述符就绪的方式，相比�
 #include <sys/time.h>
 
 struct timeval {
-	long tv_sec;
-	long tv_usec;
+    long tv_sec;
+    long tv_usec;
 };
 int select(int maxfdp1, fd_set *readfset, fd_set *writefset, fd_set *exceptionfset, const struct timeval *tv);
 // 成功返回就绪的描述符个数，超时返回0，出错返回-1
@@ -62,9 +62,9 @@ poll提供的功能与select类似。
 #include <poll.h>
 
 struct pollfd {
-	int fd;
-	int events;
-	int revents;
+    int fd;
+    int events;
+    int revents;
 };
 int poll(struct pollfd *fdarray, unsigned long arraysize, int timeout);
 // 成功返回就绪的描述符个数，超时返回0，出错返回-1
@@ -76,62 +76,62 @@ events和revents常值说明：
   + `POLLIN`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：普通或优先级带数据可读
+    + 是否可为revents输出：是
+    + 说明：普通或优先级带数据可读
 
   + `POLLRDNORM`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：普通数据可读
+    + 是否可为revents输出：是
+    + 说明：普通数据可读
 
   + `POLLRDBAND`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：优先级带数据可读
+    + 是否可为revents输出：是
+    + 说明：优先级带数据可读
 
   + `POLLPRI`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：高优先级数据可读
+    + 是否可为revents输出：是
+    + 说明：高优先级数据可读
 
   + `POLLOUT`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：普通数据可写
+    + 是否可为revents输出：是
+    + 说明：普通数据可写
 
   + `POLLWRNORM`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：普通数据可写
+    + 是否可为revents输出：是
+    + 说明：普通数据可写
 
   + `POLLWRBAND`
 
     + 是否可为events输入：是
-	+ 是否可为revents输出：是
-	+ 说明：优先级带数据可写
+    + 是否可为revents输出：是
+    + 说明：优先级带数据可写
 
   + `POLLERR`
 
     + 是否可为events输入：否
-	+ 是否可为revents输出：是
-	+ 说明：错误
+    + 是否可为revents输出：是
+    + 说明：错误
 
   + `POLLHUP`
 
     + 是否可为events输入：否
-	+ 是否可为revents输出：是
-	+ 说明：挂起
+    + 是否可为revents输出：是
+    + 说明：挂起
 
   + `POLLNVAL`
 
     + 是否可为events输入：否
-	+ 是否可为revents输出：是
-	+ 说明：描述符不是一个打开的文件
+    + 是否可为revents输出：是
+    + 说明：描述符不是一个打开的文件
 
 poll识别三类数据：普通、优先级带(prioriy band)、高优先级(high priority)，这些术语出自基于流的实现。
 
@@ -186,107 +186,107 @@ howto参数：
 static void errsys(const char *msg, int nErr);
 
 int main(int argc, char *argv[]) {
-	int listenfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (listenfd < 0) {
-		errsys("create listen fd err!", errno);
-	}
+    int listenfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (listenfd < 0) {
+        errsys("create listen fd err!", errno);
+    }
 
-	struct sockaddr_in servaddr;
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-	servaddr.sin_port = htons(60000);
+    struct sockaddr_in servaddr;
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servaddr.sin_port = htons(60000);
 
-	if (bind(listenfd, (const SA*)&servaddr, sizeof(servaddr)) < 0) {
-		errsys("bind err!", errno);
-	}
+    if (bind(listenfd, (const SA*)&servaddr, sizeof(servaddr)) < 0) {
+        errsys("bind err!", errno);
+    }
 
-	if (listen(listenfd, 5) < 0) {
-		errsys("listen err!", errno);
-	}
+    if (listen(listenfd, 5) < 0) {
+        errsys("listen err!", errno);
+    }
 
-	int maxfd = listenfd;
-	fd_set allset, readset;
-	FD_ZERO(&allset);
-	FD_SET(listenfd, &allset);
-	FD_ZERO(&readset);
+    int maxfd = listenfd;
+    fd_set allset, readset;
+    FD_ZERO(&allset);
+    FD_SET(listenfd, &allset);
+    FD_ZERO(&readset);
 
-	int connfds[FD_SIZE];
-	memset(connfds, -1, sizeof(connfds));
+    int connfds[FD_SIZE];
+    memset(connfds, -1, sizeof(connfds));
 
-	static const int s_buffSize = 256;
-	char s_recvBuff[s_buffSize];
+    static const int s_buffSize = 256;
+    char s_recvBuff[s_buffSize];
 
-	for (;;) {
-		readset = allset;
-		int nready = select(maxfd+1, &readset, NULL, NULL, NULL);
-		if (nready < 0){
-			errsys("select err!", errno);
-		}
+    for (;;) {
+        readset = allset;
+        int nready = select(maxfd+1, &readset, NULL, NULL, NULL);
+        if (nready < 0){
+            errsys("select err!", errno);
+        }
 
-		if (FD_ISSET(listenfd, &readset)) {     // 有新客户连入服务器
-			int fd = accept(listenfd, NULL, NULL);
-			printf("new clients! fd:%d\n", fd);
-			if (fd >= 0) {
-				int i = 0;
-				for (; i < FD_SIZE; ++i) {
-					if (connfds[i] < 0) {
-						connfds[i] = fd;
-						FD_SET(fd, &allset);
-						if (fd > maxfd) {
-							maxfd = fd;
-						}
-						break;
-					}
-				}
-				if (i == FD_SIZE) {
-					printf("too many clients!\n");
-					close(fd);
-				}
-			}
+        if (FD_ISSET(listenfd, &readset)) {     // 有新客户连入服务器
+            int fd = accept(listenfd, NULL, NULL);
+            printf("new clients! fd:%d\n", fd);
+            if (fd >= 0) {
+                int i = 0;
+                for (; i < FD_SIZE; ++i) {
+                    if (connfds[i] < 0) {
+                        connfds[i] = fd;
+                        FD_SET(fd, &allset);
+                        if (fd > maxfd) {
+                            maxfd = fd;
+                        }
+                        break;
+                    }
+                }
+                if (i == FD_SIZE) {
+                    printf("too many clients!\n");
+                    close(fd);
+                }
+            }
 
-			if (--nready <= 0) {
-				continue;
-			}
-		}
+            if (--nready <= 0) {
+                continue;
+            }
+        }
 
-		// 处理连接套接字
-		for (int i = 0; i < FD_SIZE; ++i) {
-			int fd = connfds[i];
-			if (fd >= 0 && FD_ISSET(fd, &readset)) {
-				int n = read(fd, s_recvBuff, s_buffSize);
-				if (n == 0) {  // 客户端发送FIN
-					connfds[i] = -1;
-					FD_CLR(fd, &allset);
-					if (maxfd == fd) {
-						--maxfd;
-					}
-				}
-				else if (n > 0) {  // 回写
-					int writen = write(fd, s_recvBuff, n);
-					if (writen != n) {
-						printf("write sockfd %d err!write len:%d\n", fd, writen);
-					}
-				}
-				else {     // 此情况不应出现
-					errsys("read err!", errno);
-				}
+        // 处理连接套接字
+        for (int i = 0; i < FD_SIZE; ++i) {
+            int fd = connfds[i];
+            if (fd >= 0 && FD_ISSET(fd, &readset)) {
+                int n = read(fd, s_recvBuff, s_buffSize);
+                if (n == 0) {  // 客户端发送FIN
+                    connfds[i] = -1;
+                    FD_CLR(fd, &allset);
+                    if (maxfd == fd) {
+                        --maxfd;
+                    }
+                }
+                else if (n > 0) {  // 回写
+                    int writen = write(fd, s_recvBuff, n);
+                    if (writen != n) {
+                        printf("write sockfd %d err!write len:%d\n", fd, writen);
+                    }
+                }
+                else {     // 此情况不应出现
+                    errsys("read err!", errno);
+                }
 
-				if (--nready <= 0)
-					break;
-			}
-		}
-	}
+                if (--nready <= 0)
+                    break;
+            }
+        }
+    }
 
-	exit(0);
+    exit(0);
 }
 
 static void errsys(const char *msg, int nErr) {
-	const char *s_err = strerror(nErr);
-	if (NULL == s_err) {
-		s_err = "";
-	}
-	printf("%s %s\n", msg, s_err);
-	exit(1);
+    const char *s_err = strerror(nErr);
+    if (NULL == s_err) {
+        s_err = "";
+    }
+    printf("%s %s\n", msg, s_err);
+    exit(1);
 }
 ```
 
@@ -308,102 +308,102 @@ static void errsys(const char *msg, int nErr) {
 static void errsys(const char *msg, int nErr);
 
 int main(int argc, char *argv[]) {
-	if (argc < 2) {
-		errsys("enter your server ip!", 0);
-	}
+    if (argc < 2) {
+        errsys("enter your server ip!", 0);
+    }
 
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (sockfd < 0) {
-		errsys("create sockfd err.", errno);
-	}
+    int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd < 0) {
+        errsys("create sockfd err.", errno);
+    }
 
-	struct sockaddr_in servaddr;
-	memset(&servaddr, 0, sizeof(servaddr));
-	servaddr.sin_family = AF_INET;
-	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-	servaddr.sin_port = htons(60000);
+    struct sockaddr_in servaddr;
+    memset(&servaddr, 0, sizeof(servaddr));
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    servaddr.sin_port = htons(60000);
 
-	if (connect(sockfd, (const SA *)&servaddr, sizeof(servaddr)) < 0) {
-		errsys("connect err.", errno);
-	}
+    if (connect(sockfd, (const SA *)&servaddr, sizeof(servaddr)) < 0) {
+        errsys("connect err.", errno);
+    }
 
-	fd_set allset, rset;
-	FD_ZERO(&allset);
-	FD_SET(fileno(stdin), &allset);
-	FD_SET(sockfd, &allset);
+    fd_set allset, rset;
+    FD_ZERO(&allset);
+    FD_SET(fileno(stdin), &allset);
+    FD_SET(sockfd, &allset);
 
-	int maxfd = fileno(stdin);
-	if (sockfd > maxfd) {
-		maxfd = sockfd;
-	}
+    int maxfd = fileno(stdin);
+    if (sockfd > maxfd) {
+        maxfd = sockfd;
+    }
 
-	static const int s_buffSize = 256;
-	char buff[s_buffSize] = {0};
-	bool bEof = false;
-	for (;;) {
-		rset = allset;
+    static const int s_buffSize = 256;
+    char buff[s_buffSize] = {0};
+    bool bEof = false;
+    for (;;) {
+        rset = allset;
 
-		struct timeval limTim;
-		limTim.tv_sec = 5;
-		limTim.tv_usec = 0;
-		int nReady = select(maxfd+1, &rset, NULL, NULL, &limTim);
+        struct timeval limTim;
+        limTim.tv_sec = 5;
+        limTim.tv_usec = 0;
+        int nReady = select(maxfd+1, &rset, NULL, NULL, &limTim);
 
-		if (0 == nReady) {     // timeout
-			if (bEof) {
-				printf("this situation should't hanppen. the server fucks me?");
-				break;
-			}
-			else {
-				printf("tik tok!\n");
-				continue;
-			}
-		}
+        if (0 == nReady) {     // timeout
+            if (bEof) {
+                printf("this situation should't hanppen. the server fucks me?");
+                break;
+            }
+            else {
+                printf("tik tok!\n");
+                continue;
+            }
+        }
 
-		if (FD_ISSET(fileno(stdin), &rset)) {  // 从标准输入读入数据
-			int n = read(fileno(stdin), buff, s_buffSize);
-			if (n > 0) {
-				if (write(sockfd, buff, n) != n) {
-					printf("send data err.\n");
-					exit(2);
-				}
-			}
-			else {
-				bEof = true;
-				shutdown(sockfd, SHUT_WR);
-			}
-			--nReady;
-		}
+        if (FD_ISSET(fileno(stdin), &rset)) {  // 从标准输入读入数据
+            int n = read(fileno(stdin), buff, s_buffSize);
+            if (n > 0) {
+                if (write(sockfd, buff, n) != n) {
+                    printf("send data err.\n");
+                    exit(2);
+                }
+            }
+            else {
+                bEof = true;
+                shutdown(sockfd, SHUT_WR);
+            }
+            --nReady;
+        }
 
-		if (nReady > 0 && FD_ISSET(sockfd, &rset)) {  // 收到服务器回写数据
-			int n = read(sockfd, buff, s_buffSize);
-			if (n > 0) {
-				write(fileno(stdout), buff, n);
-			}
-			else if (n < 0) {
-				errsys("server quit.\n", errno);
-			}
-			else {
-				if (bEof) {
-					printf("echo finished.\n");
-				}
-				else {
-					printf("server shutdown.\n");
-				}
-				break;
-			}
-			--nReady;
-		}
-	}
+        if (nReady > 0 && FD_ISSET(sockfd, &rset)) {  // 收到服务器回写数据
+            int n = read(sockfd, buff, s_buffSize);
+            if (n > 0) {
+                write(fileno(stdout), buff, n);
+            }
+            else if (n < 0) {
+                errsys("server quit.\n", errno);
+            }
+            else {
+                if (bEof) {
+                    printf("echo finished.\n");
+                }
+                else {
+                    printf("server shutdown.\n");
+                }
+                break;
+            }
+            --nReady;
+        }
+    }
 
-	exit(0);
+    exit(0);
 }
 
 static void errsys(const char *msg, int nErr) {
-	const char *s_err = "";
-	if (nErr != 0) {
-		s_err = strerror(nErr);
-	}
-	printf("%s %s\n", msg, s_err);
-	exit(1);
+    const char *s_err = "";
+    if (nErr != 0) {
+        s_err = strerror(nErr);
+    }
+    printf("%s %s\n", msg, s_err);
+    exit(1);
 }
 ```
