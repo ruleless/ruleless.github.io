@@ -2,7 +2,7 @@
 layout: post
 title: "C++临时对象"
 description: ""
-category: C++
+category: C/C++
 tags: []
 ---
 {% include JB/setup %}
