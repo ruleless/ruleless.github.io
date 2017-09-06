@@ -20,11 +20,11 @@ tags: [linux]
   + `ps` 显示进程快照
   + `ln` 创建文件链接
     - `ln target hardlink` 创建硬链接
-	- `ln -s target symbollink` 创建符号链接
+    - `ln -s target symbollink` 创建符号链接
   + `history` 显示历史命令
   + `tar` 打包工具
     - `tar -cvf target.tar file1 file2` 将file1和file2归档到target.tar
-	- `tar -xvf target.tar` 文件解包
+    - `tar -xvf target.tar` 文件解包
   + `unzip` 解压缩zip文件
   + `zip` 压缩zip文件
   + `alias` 创建命令别名
@@ -59,8 +59,8 @@ tags: [linux]
   + `ss` 查看当前网络活动，旧的 `netstat` 不再使用。例：`ss -anl` 查看系统当前TCP监听端口
   + `route` 路由表管理命令。
     - `route -n` 显示路由表
-	- `route del -net 0.0.0.0` 删除默认路由
-	- `route add -net 0.0.0.0 gw 10.0.2.2 dev eth0` 添加默认路由
+    - `route del -net 0.0.0.0` 删除默认路由
+    - `route add -net 0.0.0.0 gw 10.0.2.2 dev eth0` 添加默认路由
   + `arp` ARP高速缓存管理
     - `arp -d 192.168.56.100` 删除高速缓存
   + `tcpdump` 抓包工具
@@ -85,9 +85,9 @@ tags: [linux]
 
   + `gcc/g++` GNU C/C++编译器
     - `gcc -E source.c -o target.i` 预处理：展开宏
-	- `gcc -S target.i -o target.s` 编译：将源文件编译为汇编代码
-	- `gcc -c target.s -o target.o` 汇编：将汇编代码编译为机器码(中间目标文件)
-	- `gcc target.o -o target` 链接：将目标文件链接为可执行文件
+    - `gcc -S target.i -o target.s` 编译：将源文件编译为汇编代码
+    - `gcc -c target.s -o target.o` 汇编：将汇编代码编译为机器码(中间目标文件)
+    - `gcc target.o -o target` 链接：将目标文件链接为可执行文件
   + `ar` 目标文件打包工具，可用于打包静态库
   + `make` 软件工程自动化构建工具
   + `gdb` 软件调试工具
@@ -97,8 +97,15 @@ tags: [linux]
   + `strings` 查看嵌入于二进制文件中的字符串
   + `time` 显示程序执行时间
 
-### 性能分析及程序追踪工具
+### 程序调试及调优工具
 
   + `strace` 追踪软件使用的系统调用
+    - `strace -p pid` 追踪进程号为pid的进程所执行的系统调用
+    - `strace emacs -o emacs.trace` 启动emacs并追踪其进程调用，并将信息打印到emacs.trace文件中
+    - `strace emacs > emacs.trace 2>&1` 同上述命令
+  + `lsof` 显示进程打开的文件
+    - **PID=\`pidof nginx\` && for i in $PID; do lsof -p $i; done** 打印所有nginx进程打开的文件
   + `valgrind` 应用程序调试及分析工具包
     - `valgrind --leak-check=full a.out` 内存泄漏检查
+  + `vmstat` 查看虚拟内存
+  + `mpstat` 查看CPU状态
