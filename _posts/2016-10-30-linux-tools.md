@@ -31,6 +31,7 @@ tags: [linux]
   + `su` 切换用户
   + `sudo` 临时使用管理员权限
   + `file` 查看文件类型
+  + `stat` 查看文件或文件系统状态，该命令一般用来查看文件的修改或访问时间记录
 
 ### 磁盘管理
 
@@ -109,3 +110,15 @@ tags: [linux]
     - `valgrind --leak-check=full a.out` 内存泄漏检查
   + `vmstat` 查看虚拟内存
   + `mpstat` 查看CPU状态
+
+## 系统排查工具
+
+### 追踪文件被哪个进程修改
+
+可以通过audit来追踪。
+Linux内核本身就提供审计功能，但我们如果需要将内核中的审计日志提取出来则需要通过audit工具套件。
+
+假如我们要追踪 /tmp/foo 文件被哪些进程修改或读取过，可通过如下步骤来实现：
+
+  1. auditctl -w /tmp/foo -p rwxa -k fileop
+  2. ausearch -k fileop
