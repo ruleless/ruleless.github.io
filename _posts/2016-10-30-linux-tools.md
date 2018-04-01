@@ -110,6 +110,7 @@ tags: [linux]
     - `valgrind --leak-check=full a.out` 内存泄漏检查
   + `vmstat` 查看虚拟内存
   + `mpstat` 查看CPU状态
+  + `pstack` 查看运行进程的函数堆栈
 
 ## 系统排查工具
 
