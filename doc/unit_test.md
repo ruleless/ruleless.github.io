@@ -1,12 +1,3 @@
----
-layout: post
-title: "单元测试"
-description: ""
-category:
-tags: []
----
-{% include JB/setup %}
-
 ## xtest使用介绍
 
 ### 目录结构
